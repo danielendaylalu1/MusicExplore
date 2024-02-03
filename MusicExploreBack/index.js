@@ -20,6 +20,8 @@ app.use(express.json());
 
 app.use("/songs", songRouter);
 
-app.listen("3000", (req, res) => {
-  console.log("server started on port 3000");
+const PORT = process.env.PORT;
+
+app.listen(PORT, (req, res) => {
+  console.log(`server started on port ${PORT}`);
 });
