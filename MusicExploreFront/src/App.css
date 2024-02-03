@@ -36,7 +36,9 @@
   flex: 0.1;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 4rem;
+  height: 70%;
 }
 .navbar-header {
   font-size: 1.5rem;
@@ -45,12 +47,20 @@
 }
 .nav-items {
   display: flex;
-  padding-left: 1rem;
+  /* padding-left: 1rem; */
   flex-direction: column;
   gap: 2.5rem;
 }
 .nav-link:hover {
   color: #009688;
+}
+.navbar-add-icon {
+  align-self: center;
+  font-size: 2.25rem;
+  color: #fff;
+  background-color: #009688;
+  padding: 0.45rem;
+  border-radius: 100%;
 }
 /* outlet section  */
 .outlet {
