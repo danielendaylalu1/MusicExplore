@@ -7,7 +7,7 @@ function SearchBar() {
     <div className="search-bar">
       <input type="text" className="search-input" />
       <SearchOptions />
-      <button className="search-btn">Search</button>
+      <button className="search-btn pointer">Search</button>
     </div>
   );
 }

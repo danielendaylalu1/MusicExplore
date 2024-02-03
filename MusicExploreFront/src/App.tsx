@@ -2,6 +2,9 @@ import "./App.css";
 import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import SearchBar from "./components/SearchBar";
+import DisplayHeader from "./components/DisplayHeader";
+import { PiWaveform } from "react-icons/pi";
+import DisplayDetail from "./components/DisplayDetail";
 
 function App() {
   return (
@@ -12,7 +15,13 @@ function App() {
           <SearchBar />
           <Outlet />
         </div>
-        <p className="display p-3 bg-white">display</p>
+        <div className="display p-3 bg-white">
+          <div className="display-icon-wrapper">
+            <PiWaveform className="display-top-icon" />
+          </div>
+          <DisplayHeader />
+          <DisplayDetail />
+        </div>
       </div>
     </div>
   );
