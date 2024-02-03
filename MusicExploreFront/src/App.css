@@ -37,8 +37,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   gap: 4rem;
-  height: 70%;
+  height: 100%;
 }
 .navbar-header {
   font-size: 1.5rem;
@@ -55,7 +56,7 @@
   color: #009688;
 }
 .navbar-add-icon {
-  align-self: center;
+  /* align-self: center; */
   font-size: 2.25rem;
   color: #fff;
   background-color: #009688;

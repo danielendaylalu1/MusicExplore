@@ -1,6 +1,7 @@
 // import React from "react";
 import { Link } from "react-router-dom";
 import { IoAddOutline } from "react-icons/io5";
+import { PiWaveform } from "react-icons/pi";
 
 const Navbar = () => {
   const navLinks = ["Albums", "Artists", "Genres"];
@@ -17,6 +18,7 @@ const Navbar = () => {
         ))}
       </ul>
       <IoAddOutline className="navbar-add-icon pointer" />
+      <PiWaveform className="display-top-icon" />
     </div>
   );
 };
