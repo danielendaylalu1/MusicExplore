@@ -9,6 +9,7 @@ const SongCard = () => {
         <div className="song-card-detail">
           <h3 className="song-card-title">Nat baro</h3>
           <p className="song-card-artist">Teddyafro</p>
+          <p className="song-card-type">song</p>
         </div>
       </div>
       <div className="song-card-right">

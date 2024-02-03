@@ -10,7 +10,7 @@ const Navbar = () => {
       </Link>
       <ul className="nav-items">
         {navLinks.map((link) => (
-          <Link to={link.toLowerCase()} className="nav-links">
+          <Link to={link.toLowerCase()} className="nav-link">
             {link}
           </Link>
         ))}
