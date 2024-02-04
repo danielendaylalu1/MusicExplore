@@ -19,6 +19,7 @@ const customStyles: StylesConfig<Options, false> = {
     minWidth: "120px",
     color: "black",
     outlineOffset: "none",
+    cursor: "pointer",
   }),
   option: (provided) => ({
     ...provided,
