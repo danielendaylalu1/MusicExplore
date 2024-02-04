@@ -17,7 +17,9 @@ const Navbar = () => {
           </Link>
         ))}
       </ul>
-      <IoAddOutline className="navbar-add-icon pointer" />
+      <Link to="addsong">
+        <IoAddOutline className="navbar-add-icon pointer" />
+      </Link>
       <PiWaveform className="display-top-icon" />
     </div>
   );

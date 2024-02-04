@@ -4,6 +4,7 @@ import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Songs from "./components/Songs.tsx";
+import AddSong from "./components/AddSong.tsx";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: "addsong",
-        element: <div>add</div>,
+        element: <AddSong />,
       },
     ],
   },
