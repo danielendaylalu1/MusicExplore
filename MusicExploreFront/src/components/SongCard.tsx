@@ -1,7 +1,9 @@
+import { useState } from "react";
 import speakerIcon from "../assets/speaker-icon.png";
 import { BsThreeDots } from "react-icons/bs";
 
 const SongCard = () => {
+  const [showEditor, setShowEditor] = useState(false);
   return (
     <div className="song-card">
       <div className="song-card-left">
@@ -13,11 +15,16 @@ const SongCard = () => {
         </div>
       </div>
       <div className="song-card-right">
-        <BsThreeDots className="three-dots pointer" />
-        <div className="song-card-editors">
-          <p className="song-card-edit song-card-update pointer">Edit</p>
-          <p className="song-card-edit song-card-delete pointer">Delete</p>
-        </div>
+        <BsThreeDots
+          className="three-dots pointer"
+          onClick={() => setShowEditor(!showEditor)}
+        />
+        {showEditor && (
+          <div className="song-card-editors">
+            <p className="song-card-edit song-card-update pointer">Edit</p>
+            <p className="song-card-edit song-card-delete pointer">Delete</p>
+          </div>
+        )}
       </div>
     </div>
   );

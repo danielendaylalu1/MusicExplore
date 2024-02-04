@@ -109,6 +109,7 @@ div::-webkit-scrollbar {
   border-radius: 1rem;
   max-width: 670px;
   position: relative;
+  /* z-index: 1000; */
 }
 .song-card-left {
   display: flex;
