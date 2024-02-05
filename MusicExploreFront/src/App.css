@@ -154,12 +154,15 @@ div::-webkit-scrollbar {
 }
 .song-card-edit {
   font-size: 0.9rem;
-
+  padding: 0.2rem;
   width: 100%;
-  border-bottom: 1px solid #b4b4b4;
+  /* border-bottom: 1px solid #b4b4b4; */
 }
 .song-card-update {
   color: #009688;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 .song-card-delete {
   color: #c62828;

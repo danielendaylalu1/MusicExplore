@@ -1,5 +1,6 @@
 // import React from "react";
 import { BsThreeDots } from "react-icons/bs";
+import { CiCircleList } from "react-icons/ci";
 
 import { FC } from "react";
 
@@ -25,7 +26,9 @@ const SongCardOption: FC<OptionProps> = ({ isSong }) => {
         </div>
       ) : (
         <div className="song-card-right">
-          <p className="song-card-edit song-card-delete pointer">List</p>
+          <p className="song-card-edit song-card-update pointer">
+            List <CiCircleList style={{ fontSize: "1.25rem" }} />
+          </p>
         </div>
       )}
     </>
