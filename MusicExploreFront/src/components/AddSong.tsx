@@ -14,7 +14,7 @@ const AddSong: FC<NavbarProps> = ({ showForm, setShowForm }) => {
     justifyContent: "center",
     alignItems: "center",
     gap: "4rem",
-    position: "absolute",
+    position: "fixed",
     width: "100%",
     height: "100vh",
     backgroundColor: "rgba(0,0,0,0.25)",

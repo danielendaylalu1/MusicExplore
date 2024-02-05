@@ -1,5 +1,5 @@
 const express = require("express");
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const Song = require("../models/Song");
 
 const router = express.Router();
@@ -18,20 +18,40 @@ router.get("/", async (req, res) => {
 router.get("/albums", async (req, res) => {
   try {
     let { name } = req.query;
-    if (name === undefined) {
+    console.log(name, req.query);
+    if (name === undefined && Object.keys(req.query).length > 0) {
       return res.status(400).json({
         error: "Query parametr 'name' is required",
       });
     }
     let matchingCondition = name
-      ? { $match: { album: { $regex: new RegExp(`^${name}$`, "i") } } }
+      ? {
+          $match: {
+            $or: [
+              {
+                album: {
+                  $regex: new RegExp(`^${name.replace(/\s+/g, "")}$`, "i"),
+                },
+              },
+              { album: { $regex: new RegExp(`^${name}$`, "i") } },
+            ],
+          },
+        }
       : { $match: { album: { $ne: "" } } };
     let albums = await Song.aggregate([
       matchingCondition,
       {
         $group: {
-          _id: { album: "$album", artist: "$artist" },
-          songs: { $push: "$$ROOT" },
+          _id: { name: "$album", artist: "$artist" },
+          songs: {
+            $push: {
+              id: "$_id",
+              title: "$title",
+              album: "$album",
+              artist: "$artist",
+              genre: "$genre",
+            },
+          },
         },
       },
     ]);
@@ -52,7 +72,8 @@ router.get("/albums", async (req, res) => {
 router.get("/genres", async (req, res) => {
   try {
     let { name } = req.query;
-    if (name === undefined) {
+    console.log(name);
+    if (name === undefined && Object.keys(req.query).length > 0) {
       return res.status(400).json({
         error: "Query parametr 'name' is required",
       });
@@ -62,7 +83,20 @@ router.get("/genres", async (req, res) => {
       : { $match: { genre: { $ne: "" } } };
     let genres = await Song.aggregate([
       matchingCondition,
-      { $group: { _id: "$genre", songs: { $push: "$$ROOT" } } },
+      {
+        $group: {
+          _id: "$genre",
+          songs: {
+            $push: {
+              id: "$_id",
+              title: "$title",
+              album: "$album",
+              artist: "$artist",
+              genre: "$genre",
+            },
+          },
+        },
+      },
     ]);
     genres = genres.map((genre) => ({ genre: genre._id, songs: genre.songs }));
     return res.status(200).json(genres);
@@ -75,7 +109,7 @@ router.get("/genres", async (req, res) => {
 router.get("/artists", async (req, res) => {
   try {
     let { name } = req.query;
-    if (name === undefined) {
+    if (name === undefined && Object.keys(req.query).length > 0) {
       return res.status(400).json({
         error: "Query parametr 'name' is required",
       });
@@ -86,7 +120,20 @@ router.get("/artists", async (req, res) => {
       : { $match: { artist: { $ne: "" } } };
     let artists = await Song.aggregate([
       matchingCondition,
-      { $group: { _id: "$artist", songs: { $push: "$$ROOT" } } },
+      {
+        $group: {
+          _id: "$artist",
+          songs: {
+            $push: {
+              id: "$_id",
+              title: "$title",
+              album: "$album",
+              artist: "$artist",
+              genre: "$genre",
+            },
+          },
+        },
+      },
     ]);
     artists = artists.map((artist) => ({
       artist: artist._id,
@@ -100,12 +147,14 @@ router.get("/artists", async (req, res) => {
     });
   }
 });
-router.get("/:id", async (req, res) => {
+router.get("/:name", async (req, res) => {
   try {
-    const { id } = req.params;
-    console.log(id);
+    const { name } = req.params;
+    // console.log(id);
 
-    const song = await Song.findById(id);
+    const song = await Song.find({
+      title: { $regex: new RegExp(`^${name}$`, "i") },
+    });
     console.log(song);
     return res.status(200).json(song);
   } catch (error) {

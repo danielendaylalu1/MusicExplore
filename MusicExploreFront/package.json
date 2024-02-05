@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
+    "axios": "^1.6.7",
     "chroma-js": "^2.4.2",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.3",

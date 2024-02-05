@@ -4,6 +4,9 @@ import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Songs from "./components/Songs.tsx";
+import AlbumsPage from "./components/AlbumsPage.tsx";
+import ArtistsPage from "./components/ArtistsPage.tsx";
+import GenresPage from "./components/GenresPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -16,15 +19,15 @@ const router = createBrowserRouter([
       },
       {
         path: "albums",
-        element: <div>albums</div>,
+        element: <AlbumsPage />,
       },
       {
         path: "artists",
-        element: <div>artists</div>,
+        element: <ArtistsPage />,
       },
       {
         path: "genres",
-        element: <div>genres</div>,
+        element: <GenresPage />,
       },
     ],
   },
