@@ -18,14 +18,17 @@ const Songs = () => {
     <div className="songs">
       <div className="songs-container">
         {data.map((item) => (
-          <SongCard key={item.id}>
-            <SongCardDetail
-              title={item.title}
-              section="song"
-              artist={item.artist}
-            />
-            <SongCardOption isSong={true} />
-          </SongCard>
+          <SongCard
+            key={item.id}
+            children1={
+              <SongCardDetail
+                title={item.title}
+                section="song"
+                artist={item.artist}
+              />
+            }
+            children2={<SongCardOption isSong={true} />}
+          />
         ))}
       </div>
     </div>
