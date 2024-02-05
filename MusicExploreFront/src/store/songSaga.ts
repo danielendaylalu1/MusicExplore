@@ -13,7 +13,7 @@ import {
   intializeSongsStart,
 } from "./songSlice";
 
-import { put, call, takeEvery } from "redux-saga/effects";
+import { put, call, takeEvery, all, fork } from "redux-saga/effects";
 
 function* songsGeterSaga() {
   try {
@@ -37,7 +37,7 @@ function* albumGeterSaga() {
   }
 }
 
-export function* albumSaga() {
+export function* albumsSaga() {
   yield takeEvery(intializeSongsStart.type, albumGeterSaga);
 }
 
@@ -64,4 +64,13 @@ function* genresGeterSaga() {
 
 export function* genresSaga() {
   yield takeEvery(intializeSongsStart.type, genresGeterSaga);
+}
+
+export function* rootSaga() {
+  yield all([
+    fork(songsSaga),
+    fork(albumsSaga),
+    fork(artistsSaga),
+    fork(genresSaga),
+  ]);
 }

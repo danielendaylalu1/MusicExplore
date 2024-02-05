@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useState, FC } from "react";
 import speakerIcon from "../assets/speaker-icon.png";
 import { BsThreeDots } from "react-icons/bs";
+import { Song } from "../types";
 
-const SongCard = () => {
+// export
+
+const SongCard: FC<Song> = ({ title, artist }) => {
   const [showEditor, setShowEditor] = useState(false);
   return (
     <div className="song-card">
       <div className="song-card-left">
         <img src={speakerIcon} alt="speaker icon" className="song-card-icon" />
         <div className="song-card-detail">
-          <h3 className="song-card-title item-hover pointer">Nat baro</h3>
-          <p className="song-card-artist item-hover pointer">Teddyafro</p>
+          <h3 className="song-card-title item-hover pointer">{title}</h3>
+          <p className="song-card-artist item-hover pointer">{artist}</p>
           <p className="song-card-type pointer">song</p>
         </div>
       </div>

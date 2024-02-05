@@ -2,14 +2,14 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { AllSongs, AllAlbums, AllArtists, AllGenres, Song } from "../types";
 // import { getSongs } from "../services/songService";
 
-export interface IntialState {
+export interface InitialState {
   songs: AllSongs;
   artists: AllArtists;
   albums: AllAlbums;
   genres: AllGenres;
 }
 
-const initialState: IntialState = {
+const initialState: InitialState = {
   songs: [],
   artists: [],
   albums: [],
