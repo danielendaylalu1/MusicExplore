@@ -1,13 +1,11 @@
-// import React from "react";
-
-// import { useEffect, useRef } from "react";
 import { useEffect } from "react";
 import SongCard from "./SongCard";
 import { useDispatch, useSelector } from "react-redux";
-// import { AllSongs } from "../types";
+
 import { intializeSongsStart } from "../store/songSlice";
 import { RootState } from "../store/store";
-// import { getSongs } from "../services/songService";
+import SongCardDetail from "./SongCardDetail";
+import SongCardOption from "./SongCardOption";
 
 const Songs = () => {
   const data = useSelector((state: RootState) => state.songs.songs);
@@ -20,7 +18,14 @@ const Songs = () => {
     <div className="songs">
       <div className="songs-container">
         {data.map((item) => (
-          <SongCard {...item} />
+          <SongCard key={item.id}>
+            <SongCardDetail
+              title={item.title}
+              section="song"
+              artist={item.artist}
+            />
+            <SongCardOption isSong={true} />
+          </SongCard>
         ))}
       </div>
     </div>

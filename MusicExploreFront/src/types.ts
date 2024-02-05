@@ -18,7 +18,7 @@ export interface Artist {
   songs: Song[];
 }
 export interface Genre {
-  gnre: string;
+  genre: string;
   songs: Song[];
 }
 export type AllSongs = Song[];
