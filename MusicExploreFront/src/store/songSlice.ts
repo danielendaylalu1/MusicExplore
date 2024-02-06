@@ -44,8 +44,14 @@ const songSlice = createSlice({
       state.songs = state.songs.concat(action.payload);
       return state;
     },
-    deleteSong: (state, action: PayloadAction<Song>) => {
-      state.songs = state.songs.filter((song) => song.id !== action.payload.id);
+    updateSong: (state, action: PayloadAction<Song>) => {
+      state.songs = state.songs.map((song) =>
+        song.id === action.payload.id ? action.payload : song
+      );
+      return state;
+    },
+    deleteSong: (state, action: PayloadAction<string>) => {
+      state.songs = state.songs.filter((song) => song.id !== action.payload);
       return state;
     },
   },
@@ -61,5 +67,7 @@ export const {
   intializeGenresStart,
   intializeGenres,
   createSong,
+  updateSong,
+  deleteSong,
 } = songSlice.actions;
 export default songSlice.reducer;

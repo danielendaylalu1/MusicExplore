@@ -1,5 +1,14 @@
 import axios from "axios";
-import { AllSongs, AllAlbums, AllArtists, AllGenres, Song } from "../types";
+import {
+  AllSongs,
+  AllAlbums,
+  AllArtists,
+  AllGenres,
+  Song,
+  Message,
+  songForUpdate,
+  songForCreate,
+} from "../types";
 
 const config = {
   headers: {
@@ -43,23 +52,20 @@ export const getGenres = async (name?: string): Promise<AllGenres> => {
   return genres.data;
 };
 
-export const create = async (newSong: Song) => {
+export const create = async (newSong: songForCreate): Promise<Song> => {
   const song = await axios.post(`http://localhost:3000/songs`, newSong, config);
   return song.data;
 };
 
-export const updateSong = async (
-  updatedSong: Song,
-  id: string
-): Promise<Song> => {
+export const update = async (updatedSong: songForUpdate): Promise<Song> => {
   const song = await axios.put(
-    `http://localhost:3000/songs/${id}`,
-    updatedSong,
+    `http://localhost:3000/songs/${updatedSong.id}`,
+    updatedSong.song,
     config
   );
   return song.data;
 };
-export const deleteSong = async (id: string): Promise<object> => {
+export const deleter = async (id: string): Promise<Message> => {
   const song = await axios.delete(`http://localhost:3000/songs/${id}`);
   return song.data;
 };

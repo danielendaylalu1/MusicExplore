@@ -5,6 +5,11 @@ export interface Song {
   album?: string;
   id: string;
 }
+export type songForCreate = Omit<Song, "id">;
+export interface songForUpdate {
+  song: Partial<songForCreate>;
+  id: string;
+}
 export interface AlbumDetail {
   name: string;
   artist: string;
@@ -25,3 +30,7 @@ export type AllSongs = Song[];
 export type AllAlbums = Album[];
 export type AllArtists = Artist[];
 export type AllGenres = Genre[];
+
+export interface Message {
+  message: string;
+}
