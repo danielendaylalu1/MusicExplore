@@ -3,10 +3,10 @@ import App from "./App.tsx";
 import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Songs from "./components/SongsPage.tsx";
-import AlbumsPage from "./components/AlbumsPage.tsx";
-import ArtistsPage from "./components/ArtistsPage.tsx";
-import GenresPage from "./components/GenresPage.tsx";
+import Songs from "./components/pages/SongsPage.tsx";
+import AlbumsPage from "./components/pages/AlbumsPage.tsx";
+import ArtistsPage from "./components/pages/ArtistsPage.tsx";
+import GenresPage from "./components/pages/GenresPage.tsx";
 import { Provider } from "react-redux";
 import { store } from "./store/store.ts";
 

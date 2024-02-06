@@ -1,19 +1,47 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, useState } from "react";
+import SongCardOption from "./SongCardOption";
+import SongCardDetail from "./SongCardDetail";
+import { Song } from "../types";
 
 export interface songPageProps {
-  children1: ReactNode;
-  children2: ReactNode;
-  children3?: ReactNode;
+  header: ReactNode;
+  isSong: boolean;
+  songs?: Song[];
+  showList?: boolean;
 }
 
-const SongCard: FC<songPageProps> = ({ children1, children2, children3 }) => {
+const SongCard: FC<songPageProps> = ({ header, isSong, songs }) => {
+  const [showList, setShowList] = useState(false);
+
+  const showListHandler = (showList: boolean) => {
+    setShowList(!showList);
+  };
   return (
     <div className="song-card-wrapper">
       <div className="song-card">
-        {children1}
-        {children2}
+        {header}
+        <SongCardOption
+          isSong={isSong}
+          showList={showList}
+          setShowList={showListHandler}
+        />
       </div>
-      {children3}
+      {showList && (
+        <ul className="songs-list-card">
+          {songs?.map((song) => (
+            <div key={song.id}>
+              <li className="song-list">
+                <SongCardDetail
+                  title={song.title}
+                  section="song"
+                  artist={song.artist}
+                />
+                <SongCardOption isSong={true} />
+              </li>
+            </div>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

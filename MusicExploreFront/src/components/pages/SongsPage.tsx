@@ -1,13 +1,12 @@
 import { useEffect } from "react";
-import SongCard from "./SongCard";
+import SongCard from "../SongCard";
 import { useDispatch, useSelector } from "react-redux";
 
-import { intializeSongsStart } from "../store/songSlice";
-import { RootState } from "../store/store";
-import SongCardDetail from "./SongCardDetail";
-import SongCardOption from "./SongCardOption";
+import { intializeSongsStart } from "../../store/songSlice";
+import { RootState } from "../../store/store";
+import SongCardDetail from "../SongCardDetail";
 
-const Songs = () => {
+const SongsPage = () => {
   const data = useSelector((state: RootState) => state.songs.songs);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -21,14 +20,14 @@ const Songs = () => {
         {data.map((item) => (
           <SongCard
             key={item.id}
-            children1={
+            header={
               <SongCardDetail
                 title={item.title}
-                section="song"
+                section="Genre"
                 artist={item.artist}
               />
             }
-            children2={<SongCardOption isSong={true} />}
+            isSong={true}
           />
         ))}
       </div>
@@ -36,4 +35,4 @@ const Songs = () => {
   );
 };
 
-export default Songs;
+export default SongsPage;

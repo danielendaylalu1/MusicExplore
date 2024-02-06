@@ -104,6 +104,19 @@ div::-webkit-scrollbar {
   flex-direction: column;
   gap: 2rem;
 }
+
+.song-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 1.5rem;
+  background: #fdfcfc;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 18px 25px 0px;
+  border-radius: 1rem;
+  max-width: 670px;
+  position: relative;
+  /* z-index: 1000; */
+}
 .songs-list-card {
   display: flex;
   flex-direction: column;
@@ -115,18 +128,6 @@ div::-webkit-scrollbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-.song-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.85rem 1.5rem;
-  background: #f0f0f0;
-  box-shadow: rgba(17, 12, 46, 0.15) 0px 18px 25px 0px;
-  border-radius: 1rem;
-  max-width: 670px;
-  position: relative;
-  /* z-index: 1000; */
 }
 .song-card-left {
   display: flex;
@@ -158,6 +159,7 @@ div::-webkit-scrollbar {
 }
 .three-dots {
   font-size: 1.5rem;
+  /* padding: 0.5rem; */
 }
 .song-card-editors {
   /* display: none; */
