@@ -1,19 +1,17 @@
 import { useEffect } from "react";
-import SongCard from "../SongCard";
+import SongCard from "../SongCard/SongCard";
 import { useDispatch, useSelector } from "react-redux";
-
 import { intializeSongsStart } from "../../store/songSlice";
 import { RootState } from "../../store/store";
-import SongCardDetail from "../SongCardDetail";
+import SongCardDetail from "../SongCard/SongCardDetail";
 
 const SongsPage = () => {
   const data = useSelector((state: RootState) => state.songs.songs);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(intializeSongsStart());
-    console.log("songs page runs");
   }, [dispatch]);
-  console.log("songs page runs", data);
+
   return (
     <div className="songs">
       <div className="songs-container">
@@ -23,7 +21,7 @@ const SongsPage = () => {
             header={
               <SongCardDetail
                 title={item.title}
-                section="Genre"
+                section="Song"
                 artist={item.artist}
               />
             }

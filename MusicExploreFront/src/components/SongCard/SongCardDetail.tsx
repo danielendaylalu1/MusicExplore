@@ -1,6 +1,6 @@
 // import React from "react";
 import { FC } from "react";
-import speakerIcon from "../assets/speaker-icon.png";
+import speakerIcon from "../../assets/speaker-icon.png";
 
 interface DetailProps {
   title: string;

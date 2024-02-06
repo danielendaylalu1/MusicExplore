@@ -1,7 +1,7 @@
 import { FC, ReactNode, useState } from "react";
 import SongCardOption from "./SongCardOption";
 import SongCardDetail from "./SongCardDetail";
-import { Song } from "../types";
+import { Song } from "../../types";
 
 export interface songPageProps {
   header: ReactNode;

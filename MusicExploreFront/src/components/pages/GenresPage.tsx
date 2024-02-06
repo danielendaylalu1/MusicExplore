@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import SongCard from "../SongCard";
+import SongCard from "../SongCard/SongCard";
 import { useDispatch, useSelector } from "react-redux";
 import { intializeGenresStart } from "../../store/songSlice";
 import { RootState } from "../../store/store";
-import SongCardDetail from "../SongCardDetail";
+import SongCardDetail from "../SongCard/SongCardDetail";
 
 const GenresPage = () => {
   const data = useSelector((state: RootState) => state.songs.genres);

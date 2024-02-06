@@ -60,5 +60,6 @@ export const {
   intializeArtists,
   intializeGenresStart,
   intializeGenres,
+  createSong,
 } = songSlice.actions;
 export default songSlice.reducer;

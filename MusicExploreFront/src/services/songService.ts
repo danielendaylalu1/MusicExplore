@@ -15,29 +15,35 @@ export const getSong = async (name: string): Promise<AllSongs> => {
   const song = await axios.get(`http://localhost:3000/songs/${name}`);
   return song.data;
 };
-export const getAlbums = async (name: string): Promise<AllAlbums> => {
+export const getAlbums = async (name?: string): Promise<AllAlbums> => {
   console.log("albums name", name);
   const albums = await axios.get(
-    `http://localhost:3000/songs/albums${name !== "" ? "?name=" + name : ""}`
+    `http://localhost:3000/songs/albums${
+      name !== undefined ? "?name=" + name : ""
+    }`
   );
   return albums.data;
 };
-export const getArtists = async (name: string): Promise<AllArtists> => {
+export const getArtists = async (name?: string): Promise<AllArtists> => {
   console.log("artists name", name);
   const artists = await axios.get(
-    `http://localhost:3000/songs/artists${name !== "" ? "?name=" + name : ""}`
+    `http://localhost:3000/songs/artists${
+      name !== undefined ? "?name=" + name : ""
+    }`
   );
   return artists.data;
 };
-export const getGenres = async (name: string): Promise<AllGenres> => {
+export const getGenres = async (name?: string): Promise<AllGenres> => {
   console.log("genre name", name);
   const genres = await axios.get(
-    `http://localhost:3000/songs/genres${name !== "" ? "?name=" + name : ""}`
+    `http://localhost:3000/songs/genres${
+      name !== undefined ? "?name=" + name : ""
+    }`
   );
   return genres.data;
 };
 
-export const createSong = async (newSong: Song): Promise<Song> => {
+export const create = async (newSong: Song) => {
   const song = await axios.post(`http://localhost:3000/songs`, newSong, config);
   return song.data;
 };
