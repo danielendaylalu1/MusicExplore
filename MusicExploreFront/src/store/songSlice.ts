@@ -22,22 +22,22 @@ const songSlice = createSlice({
   reducers: {
     intializeSongsStart: (state) => state,
     intializeSongs: (state, action: PayloadAction<AllSongs>) => {
-      state.songs = action.payload;
+      state = { ...state, songs: action.payload };
       return state;
     },
     intializeAlbumsStart: (state) => state,
     intializeAlbums: (state, action: PayloadAction<AllAlbums>) => {
-      state.albums = action.payload;
+      state = { ...state, albums: action.payload };
       return state;
     },
     intializeArtistsStart: (state) => state,
     intializeArtists: (state, action: PayloadAction<AllArtists>) => {
-      state.artists = action.payload;
+      state = { ...state, artists: action.payload };
       return state;
     },
     intializeGenresStart: (state) => state,
     intializeGenres: (state, action: PayloadAction<AllGenres>) => {
-      state.genres = action.payload;
+      state = { ...state, genres: action.payload };
       return state;
     },
     createSong: (state, action: PayloadAction<Song>) => {

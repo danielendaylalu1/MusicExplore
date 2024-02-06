@@ -11,6 +11,9 @@ import {
   intializeArtists,
   intializeGenres,
   intializeSongsStart,
+  intializeArtistsStart,
+  intializeAlbumsStart,
+  intializeGenresStart,
 } from "./songSlice";
 
 import { put, call, takeEvery, all, fork } from "redux-saga/effects";
@@ -18,6 +21,7 @@ import { put, call, takeEvery, all, fork } from "redux-saga/effects";
 function* songsGeterSaga() {
   try {
     const songs: AllSongs = yield call(getSongs);
+    console.log("songs data", songs);
     yield put(intializeSongs(songs));
   } catch (e) {
     console.error(e);
@@ -31,6 +35,7 @@ export function* songsSaga() {
 function* albumGeterSaga() {
   try {
     const albums: AllAlbums = yield call(() => getAlbums(""));
+    console.log("albums data", albums);
     yield put(intializeAlbums(albums));
   } catch (e) {
     console.error(e);
@@ -38,12 +43,13 @@ function* albumGeterSaga() {
 }
 
 export function* albumsSaga() {
-  yield takeEvery(intializeSongsStart.type, albumGeterSaga);
+  yield takeEvery(intializeAlbumsStart.type, albumGeterSaga);
 }
 
 function* artistsGeterSaga() {
   try {
     const artists: AllArtists = yield call(() => getArtists(""));
+    console.log("genres data", artists);
     yield put(intializeArtists(artists));
   } catch (e) {
     console.error(e);
@@ -51,11 +57,13 @@ function* artistsGeterSaga() {
 }
 
 export function* artistsSaga() {
-  yield takeEvery(intializeSongsStart.type, artistsGeterSaga);
+  yield takeEvery(intializeArtistsStart.type, artistsGeterSaga);
 }
+
 function* genresGeterSaga() {
   try {
     const genres: AllGenres = yield call(() => getGenres(""));
+    console.log("genres data", genres);
     yield put(intializeGenres(genres));
   } catch (e) {
     console.error(e);
@@ -63,7 +71,7 @@ function* genresGeterSaga() {
 }
 
 export function* genresSaga() {
-  yield takeEvery(intializeSongsStart.type, genresGeterSaga);
+  yield takeEvery(intializeGenresStart.type, genresGeterSaga);
 }
 
 export function* rootSaga() {

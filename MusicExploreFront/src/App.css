@@ -99,6 +99,23 @@ div::-webkit-scrollbar {
   flex-direction: column;
   gap: 2rem;
 }
+.song-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.songs-list-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0 4rem;
+  /* list-style-type: decimal !important; */
+}
+.song-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .song-card {
   display: flex;
   justify-content: space-between;
@@ -115,6 +132,9 @@ div::-webkit-scrollbar {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+.song-card-right {
+  position: relative;
 }
 .song-card-icon {
   width: 40px;

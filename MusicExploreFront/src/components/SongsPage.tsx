@@ -12,8 +12,9 @@ const Songs = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(intializeSongsStart());
+    console.log("songs page runs");
   }, [dispatch]);
-  console.log(data);
+  console.log("songs page runs", data);
   return (
     <div className="songs">
       <div className="songs-container">

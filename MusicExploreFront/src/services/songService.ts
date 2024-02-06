@@ -16,21 +16,21 @@ export const getSong = async (name: string): Promise<AllSongs> => {
   return song.data;
 };
 export const getAlbums = async (name: string): Promise<AllAlbums> => {
-  console.log(name);
+  console.log("albums name", name);
   const albums = await axios.get(
     `http://localhost:3000/songs/albums${name !== "" ? "?name=" + name : ""}`
   );
   return albums.data;
 };
 export const getArtists = async (name: string): Promise<AllArtists> => {
-  console.log(name !== "");
+  console.log("artists name", name);
   const artists = await axios.get(
     `http://localhost:3000/songs/artists${name !== "" ? "?name=" + name : ""}`
   );
   return artists.data;
 };
 export const getGenres = async (name: string): Promise<AllGenres> => {
-  console.log(name);
+  console.log("genre name", name);
   const genres = await axios.get(
     `http://localhost:3000/songs/genres${name !== "" ? "?name=" + name : ""}`
   );
