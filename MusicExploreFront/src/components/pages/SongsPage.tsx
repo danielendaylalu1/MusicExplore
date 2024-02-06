@@ -26,6 +26,7 @@ const SongsPage = () => {
               />
             }
             isSong={true}
+            songId={item.id}
           />
         ))}
       </div>

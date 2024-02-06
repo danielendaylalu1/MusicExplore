@@ -1,16 +1,27 @@
 // import React from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { CiCircleList } from "react-icons/ci";
+// import { RootState } from "../../store/store";
 
 import { FC, useState } from "react";
+import { useDispatch } from "react-redux";
+import { deleteSong } from "../../store/songSlice";
 
 interface OptionProps {
   isSong: boolean;
   showList?: boolean;
   setShowList?: (showList: boolean) => void;
+  songId?: string;
 }
 
-const SongCardOption: FC<OptionProps> = ({ isSong, showList, setShowList }) => {
+const SongCardOption: FC<OptionProps> = ({
+  isSong,
+  showList,
+  setShowList,
+  songId,
+}) => {
+  // const songs = useSelector((state: RootState) => state.songs);
+  const dispatch = useDispatch();
   const [showOptions, setShowOptions] = useState(false);
   return (
     <>
@@ -24,7 +35,14 @@ const SongCardOption: FC<OptionProps> = ({ isSong, showList, setShowList }) => {
           {showOptions && (
             <div className="song-card-editors">
               <p className="song-card-edit song-card-update pointer">Edit</p>
-              <p className="song-card-edit song-card-delete pointer">Delete</p>
+              <p
+                className="song-card-edit song-card-delete pointer"
+                onClick={() => {
+                  songId && dispatch(deleteSong(songId));
+                }}
+              >
+                Delete
+              </p>
             </div>
           )}
         </div>

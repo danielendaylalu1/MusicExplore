@@ -8,9 +8,10 @@ export interface songPageProps {
   isSong: boolean;
   songs?: Song[];
   showList?: boolean;
+  songId?: string;
 }
 
-const SongCard: FC<songPageProps> = ({ header, isSong, songs }) => {
+const SongCard: FC<songPageProps> = ({ header, isSong, songs, songId }) => {
   const [showList, setShowList] = useState(false);
 
   const showListHandler = (showList: boolean) => {
@@ -22,6 +23,7 @@ const SongCard: FC<songPageProps> = ({ header, isSong, songs }) => {
         {header}
         <SongCardOption
           isSong={isSong}
+          songId={songId}
           showList={showList}
           setShowList={showListHandler}
         />
@@ -36,7 +38,7 @@ const SongCard: FC<songPageProps> = ({ header, isSong, songs }) => {
                   section="song"
                   artist={song.artist}
                 />
-                <SongCardOption isSong={true} />
+                <SongCardOption isSong={true} songId={song.id} />
               </li>
             </div>
           ))}
