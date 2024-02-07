@@ -5,9 +5,9 @@ export interface Song {
   album?: string;
   id: string;
 }
-export type songForCreate = Omit<Song, "id">;
-export interface songForUpdate {
-  song: Partial<songForCreate>;
+export type SongForCreate = Omit<Song, "id">;
+export interface SongForUpdate {
+  song: SongForCreate;
   id: string;
 }
 export interface AlbumDetail {

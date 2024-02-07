@@ -6,8 +6,8 @@ import {
   AllGenres,
   Song,
   Message,
-  songForUpdate,
-  songForCreate,
+  SongForUpdate,
+  SongForCreate,
 } from "../types";
 
 const config = {
@@ -46,12 +46,12 @@ export const getGenres = async (name: string): Promise<AllGenres> => {
   return genres.data;
 };
 
-export const create = async (newSong: songForCreate): Promise<Song> => {
+export const create = async (newSong: SongForCreate): Promise<Song> => {
   const song = await axios.post(`http://localhost:3000/songs`, newSong, config);
   return song.data;
 };
 
-export const update = async (updatedSong: songForUpdate): Promise<Song> => {
+export const update = async (updatedSong: SongForUpdate): Promise<Song> => {
   const song = await axios.put(
     `http://localhost:3000/songs/${updatedSong.id}`,
     updatedSong.song,

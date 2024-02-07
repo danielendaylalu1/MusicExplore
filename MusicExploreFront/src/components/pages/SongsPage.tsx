@@ -29,7 +29,8 @@ const SongsPage = () => {
               key={item.id}
               header={<SongCardDetail song={item} section="Song" />}
               isSong={true}
-              songId={item.id}
+              songID={item.id}
+              section="song"
             />
           ))}
         />

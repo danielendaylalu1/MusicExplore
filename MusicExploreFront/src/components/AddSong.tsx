@@ -1,23 +1,22 @@
 // import React from "react";
-import { FC, useState } from "react";
+// import { useState } from "react";
 import { css } from "@emotion/react";
 import { createPortal } from "react-dom";
-import { songForCreate } from "../types";
-import { useDispatch } from "react-redux";
-import { createSongStart } from "../store/songSlice";
+// import { songForCreate } from "../types";
+import { useDispatch, useSelector } from "react-redux";
+// import { createSongStart } from "../store/songSlice";
+import { RootState } from "../store/store";
+import { setFormShow, setUpdateFormData } from "../store/uiSlice";
+import { useState } from "react";
 
-interface NavbarProps {
-  showForm: boolean;
-  setShowForm: (value: boolean) => void;
-}
-const AddSong: FC<NavbarProps> = ({ showForm, setShowForm }) => {
+const AddSong = () => {
+  const showForm = useSelector((state: RootState) => state.ui.showForm);
   const dispatch = useDispatch();
-  const [song, setSong] = useState<songForCreate>({
-    title: "",
-    album: "",
-    genre: "",
-    artist: "",
-  });
+  const updateSongFormData = useSelector(
+    (state: RootState) => state.ui.updateFormData
+  );
+  const [song, setSong] = useState(updateSongFormData.song);
+
   const addSongStyle = css({
     display: "flex",
     flexDirection: "column",
@@ -78,20 +77,27 @@ const AddSong: FC<NavbarProps> = ({ showForm, setShowForm }) => {
       <div
         css={addSongStyle}
         onClick={() => {
-          setShowForm(!showForm);
+          dispatch(setFormShow(!showForm));
+          // setShowForm(!showForm);
         }}
       ></div>
       <form
         css={addSongFormStylle}
         onSubmit={(e) => {
           e.preventDefault();
-          dispatch(createSongStart(song));
-          setSong({
-            title: "",
-            album: "",
-            genre: "",
-            artist: "",
-          });
+          console.log(updateSongFormData, song);
+          // dispatch(createSongStart(updateSongFormData.song));
+          dispatch(
+            setUpdateFormData({
+              song: {
+                title: "",
+                album: "",
+                genre: "",
+                artist: "",
+              },
+              id: "",
+            })
+          );
         }}
       >
         <h3 css={addSongHeader}>Add a Song</h3>
@@ -99,8 +105,10 @@ const AddSong: FC<NavbarProps> = ({ showForm, setShowForm }) => {
           type="text"
           placeholder="Title"
           css={formInputs}
-          value={song.title}
-          onChange={(e) => setSong({ ...song, title: e.target.value })}
+          value={song?.title}
+          onChange={(e) =>
+            setSong((prv) => ({ ...prv, title: e.target.value }))
+          }
           required
         />
         <input
@@ -108,22 +116,28 @@ const AddSong: FC<NavbarProps> = ({ showForm, setShowForm }) => {
           placeholder="Artist"
           css={formInputs}
           value={song.artist}
-          onChange={(e) => setSong({ ...song, artist: e.target.value })}
+          onChange={(e) =>
+            setSong((prv) => ({ ...prv, artist: e.target.value }))
+          }
           required
         />
         <input
           type="text"
           placeholder="Genre"
           css={formInputs}
-          onChange={(e) => setSong({ ...song, genre: e.target.value })}
           value={song.genre}
+          onChange={(e) =>
+            setSong((prv) => ({ ...prv, genre: e.target.value }))
+          }
         />
         <input
           type="text"
           placeholder="Album"
           css={formInputs}
-          onChange={(e) => setSong({ ...song, album: e.target.value })}
           value={song.album}
+          onChange={(e) =>
+            setSong((prv) => ({ ...prv, album: e.target.value }))
+          }
         />
         <button type="submit" css={formBtn}>
           Add

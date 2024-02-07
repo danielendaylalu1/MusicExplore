@@ -31,6 +31,7 @@ const GenresPage = () => {
               header={<SongCardDetail song={item.songs[0]} section={GENRE} />}
               isSong={false}
               songs={item.songs}
+              section={GENRE}
             />
           ))}
         />

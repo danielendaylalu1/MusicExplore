@@ -1,10 +1,10 @@
 // import React from "react";
 
 import { FC } from "react";
-import { songForCreate } from "../types";
+import { SongForCreate } from "../types";
 
 interface DisplayDetailProps {
-  song: songForCreate;
+  song: SongForCreate;
 }
 
 const DisplayDetail: FC<DisplayDetailProps> = ({ song }) => {

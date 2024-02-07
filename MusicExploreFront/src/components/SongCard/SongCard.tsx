@@ -8,10 +8,17 @@ export interface songPageProps {
   isSong: boolean;
   songs?: Song[];
   showList?: boolean;
-  songId?: string;
+  songID?: string;
+  section: string;
 }
 
-const SongCard: FC<songPageProps> = ({ header, isSong, songs, songId }) => {
+const SongCard: FC<songPageProps> = ({
+  header,
+  isSong,
+  songs,
+  songID,
+  section,
+}) => {
   const [showList, setShowList] = useState(false);
 
   const showListHandler = (showList: boolean) => {
@@ -23,9 +30,10 @@ const SongCard: FC<songPageProps> = ({ header, isSong, songs, songId }) => {
         {header}
         <SongCardOption
           isSong={isSong}
-          songId={songId}
+          songID={songID}
           showList={showList}
           setShowList={showListHandler}
+          section={section}
         />
       </div>
       {showList && (
@@ -34,7 +42,11 @@ const SongCard: FC<songPageProps> = ({ header, isSong, songs, songId }) => {
             <div key={song.id}>
               <li className="song-list pointer">
                 <SongCardDetail song={song} section="song" />
-                <SongCardOption isSong={true} songId={song.id} />
+                <SongCardOption
+                  isSong={true}
+                  songID={song.id}
+                  section={section}
+                />
               </li>
             </div>
           ))}

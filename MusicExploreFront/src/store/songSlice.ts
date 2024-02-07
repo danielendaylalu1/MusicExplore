@@ -5,7 +5,7 @@ import {
   AllArtists,
   AllGenres,
   Song,
-  songForCreate,
+  SongForCreate,
 } from "../types";
 // import { getSongs } from "../services/songService";
 
@@ -52,7 +52,7 @@ const songSlice = createSlice({
     },
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    createSongStart: (state, _action: PayloadAction<songForCreate>) => state,
+    createSongStart: (state, _action: PayloadAction<SongForCreate>) => state,
     createSong: (state, action: PayloadAction<Song>) => {
       state.songs = state.songs.concat(action.payload);
       return state;
@@ -68,6 +68,24 @@ const songSlice = createSlice({
     deleteSongStart: (state, _action: PayloadAction<string>) => state,
     deleteSong: (state, action: PayloadAction<string>) => {
       state.songs = state.songs.filter((song) => song.id !== action.payload);
+      // state.albums = state.albums.map((item) => {
+      //   return {
+      //     album: item.album,
+      //     songs: item.songs.filter((song) => song.id !== action.payload),
+      //   };
+      // });
+      // state.artists = state.artists.map((item) => {
+      //   return {
+      //     artist: item.artist,
+      //     songs: item.songs.filter((song) => song.id !== action.payload),
+      //   };
+      // });
+      // state.genres = state.genres.map((item) => {
+      //   return {
+      //     genre: item.genre,
+      //     songs: item.songs.filter((song) => song.id !== action.payload),
+      //   };
+      // });
       return state;
     },
   },

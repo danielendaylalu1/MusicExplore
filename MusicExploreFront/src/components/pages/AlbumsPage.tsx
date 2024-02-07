@@ -29,6 +29,7 @@ const AlbumsPage = () => {
               header={<SongCardDetail song={item.songs[0]} section={ALBUM} />}
               isSong={false}
               songs={item.songs}
+              section={ALBUM}
             />
           ))}
         />

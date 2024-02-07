@@ -15,8 +15,8 @@ import {
   AllSongs,
   Message,
   Song,
-  songForCreate,
-  songForUpdate,
+  SongForCreate,
+  SongForUpdate,
 } from "../types";
 import {
   intializeSongs,
@@ -60,7 +60,7 @@ export function* songsSaga() {
 }
 
 // songCreater saga -------- songCreater saga
-function* songCreatorSaga(action: PayloadAction<songForCreate>) {
+function* songCreatorSaga(action: PayloadAction<SongForCreate>) {
   try {
     const song: Song = yield call(() => create(action.payload));
     console.log("songs data", song);
@@ -75,7 +75,7 @@ export function* songCreateSaga() {
 }
 
 // songUpdater saga -------- songUpdater saga
-function* songUpdaterSaga(action: PayloadAction<songForUpdate>) {
+function* songUpdaterSaga(action: PayloadAction<SongForUpdate>) {
   try {
     const song: Song = yield call(() => update(action.payload));
     console.log("songs data", song);

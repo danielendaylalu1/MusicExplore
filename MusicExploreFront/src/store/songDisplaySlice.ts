@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { songForCreate } from "../types";
+import { SongForCreate } from "../types";
 
-const initialState: songForCreate = {
+const initialState: SongForCreate = {
   artist: "artist",
   album: "album",
   genre: "genre",
@@ -12,7 +12,7 @@ const songDisplaySlice = createSlice({
   name: "SongDisplay",
   initialState,
   reducers: {
-    initializeSongDisplay(state, action: PayloadAction<songForCreate>) {
+    initializeSongDisplay(state, action: PayloadAction<SongForCreate>) {
       state = action.payload;
       return state;
     },

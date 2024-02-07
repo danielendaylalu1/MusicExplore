@@ -5,20 +5,29 @@ import { CiCircleList } from "react-icons/ci";
 
 import { FC, useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleteSongStart } from "../../store/songSlice";
+import {
+  deleteSongStart,
+  intializeAlbumsStart,
+  intializeArtistsStart,
+  intializeGenresStart,
+  intializeSongsStart,
+} from "../../store/songSlice";
+import { ALBUM, ARTIST, GENRE } from "../../utils";
 
 interface OptionProps {
   isSong: boolean;
   showList?: boolean;
   setShowList?: (showList: boolean) => void;
-  songId?: string;
+  songID?: string;
+  section: string;
 }
 
 const SongCardOption: FC<OptionProps> = ({
   isSong,
   showList,
   setShowList,
-  songId,
+  songID,
+  section,
 }) => {
   // const songs = useSelector((state: RootState) => state.songs);
   const dispatch = useDispatch();
@@ -34,11 +43,25 @@ const SongCardOption: FC<OptionProps> = ({
 
           {showOptions && (
             <div className="song-card-editors">
-              <p className="song-card-edit song-card-update pointer">Edit</p>
+              <p
+                className="song-card-edit song-card-update pointer"
+                onClick={() => {}}
+              >
+                Edit
+              </p>
               <p
                 className="song-card-edit song-card-delete pointer"
                 onClick={() => {
-                  songId && dispatch(deleteSongStart(songId));
+                  songID && dispatch(deleteSongStart(songID));
+                  if (section === ARTIST) {
+                    dispatch(intializeArtistsStart(""));
+                  } else if (section === ALBUM) {
+                    dispatch(intializeAlbumsStart(""));
+                  } else if (section === GENRE) {
+                    dispatch(intializeGenresStart(""));
+                  } else {
+                    dispatch(intializeSongsStart());
+                  }
                 }}
               >
                 Delete
