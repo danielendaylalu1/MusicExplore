@@ -52,10 +52,7 @@ const songSlice = createSlice({
     },
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    createSongStart: (state, _action: PayloadAction<songForCreate>) => {
-      // console.log(action);
-      return state;
-    },
+    createSongStart: (state, _action: PayloadAction<songForCreate>) => state,
     createSong: (state, action: PayloadAction<Song>) => {
       state.songs = state.songs.concat(action.payload);
       return state;
@@ -67,7 +64,8 @@ const songSlice = createSlice({
       );
       return state;
     },
-    deleteSongStart: (state) => state,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    deleteSongStart: (state, _action: PayloadAction<string>) => state,
     deleteSong: (state, action: PayloadAction<string>) => {
       state.songs = state.songs.filter((song) => song.id !== action.payload);
       return state;

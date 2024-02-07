@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { intializeArtistsStart } from "../../store/songSlice";
 import { RootState } from "../../store/store";
 import SongCardDetail from "../SongCard/SongCardDetail";
+// import { initializeSongDisplay } from "../../store/songDisplaySlice";
 
 const ArtistsPage = () => {
   const data = useSelector((state: RootState) => state.songs.artists);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(intializeArtistsStart(""));
+    // dispatch(initializeSongDisplay(data[0]?.songs[0]));
   }, [dispatch]);
   console.log("artists page runs", data);
   return (
@@ -18,13 +20,7 @@ const ArtistsPage = () => {
         {data.map((item) => (
           <SongCard
             key={item.artist}
-            header={
-              <SongCardDetail
-                title={item.artist}
-                section="Artist"
-                artist={item.artist}
-              />
-            }
+            header={<SongCardDetail section="Artist" song={item.songs[0]} />}
             isSong={false}
             songs={item.songs}
           />

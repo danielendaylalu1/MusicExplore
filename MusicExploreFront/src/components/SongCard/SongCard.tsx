@@ -32,12 +32,8 @@ const SongCard: FC<songPageProps> = ({ header, isSong, songs, songId }) => {
         <ul className="songs-list-card">
           {songs?.map((song) => (
             <div key={song.id}>
-              <li className="song-list">
-                <SongCardDetail
-                  title={song.title}
-                  section="song"
-                  artist={song.artist}
-                />
+              <li className="song-list pointer">
+                <SongCardDetail song={song} section="song" />
                 <SongCardOption isSong={true} songId={song.id} />
               </li>
             </div>

@@ -36,6 +36,7 @@ import {
 } from "./songSlice";
 
 import { put, call, takeEvery, all, fork } from "redux-saga/effects";
+import { initializeSongDisplay } from "./songDisplaySlice";
 
 // songFetcher saga -------- songFetcher saga
 function* songsGeterSaga() {
@@ -43,6 +44,7 @@ function* songsGeterSaga() {
     const songs: AllSongs = yield call(getSongs);
     console.log("songs data", songs);
     yield put(intializeSongs(songs));
+    yield put(initializeSongDisplay(songs[0]));
   } catch (e) {
     console.error(e);
   }
@@ -53,7 +55,7 @@ export function* songsSaga() {
 }
 
 // songCreater saga -------- songCreater saga
-function* songCreaterSaga(action: PayloadAction<songForCreate>) {
+function* songCreatorSaga(action: PayloadAction<songForCreate>) {
   try {
     const song: Song = yield call(() => create(action.payload));
     console.log("songs data", song);
@@ -64,7 +66,7 @@ function* songCreaterSaga(action: PayloadAction<songForCreate>) {
 }
 
 export function* songCreateSaga() {
-  yield takeEvery(createSongStart.type, songCreaterSaga);
+  yield takeEvery(createSongStart.type, songCreatorSaga);
 }
 
 // songUpdater saga -------- songUpdater saga
@@ -83,10 +85,10 @@ export function* songUpdateSaga() {
 }
 
 // songDeleter saga -------- songDeleter saga
-function* songDeleterSaga(action: PayloadAction<string>) {
+function* songDeletorSaga(action: PayloadAction<string>) {
   try {
     const song: Message = yield call(() => deleter(action.payload));
-    console.log("songs data", song);
+    console.log("songs data", song, action.payload);
     yield put(deleteSong(action.payload));
   } catch (e) {
     console.error(e);
@@ -94,7 +96,7 @@ function* songDeleterSaga(action: PayloadAction<string>) {
 }
 
 export function* songDeleteSaga() {
-  yield takeEvery(deleteSongStart.type, songDeleterSaga);
+  yield takeEvery(deleteSongStart.type, songDeletorSaga);
 }
 
 // albumFetcher saga -------- albumFetcher saga
@@ -103,6 +105,7 @@ function* albumGeterSaga(action: PayloadAction<string>) {
     const albums: AllAlbums = yield call(() => getAlbums(action.payload));
     console.log("albums data", albums);
     yield put(intializeAlbums(albums));
+    yield put(initializeSongDisplay(albums[0].songs[0]));
   } catch (e) {
     console.error(e);
   }
@@ -118,6 +121,7 @@ function* artistsGeterSaga(action: PayloadAction<string>) {
     const artists: AllArtists = yield call(() => getArtists(action.payload));
     console.log("genres data", artists);
     yield put(intializeArtists(artists));
+    yield put(initializeSongDisplay(artists[0].songs[0]));
   } catch (e) {
     console.error(e);
   }
@@ -133,6 +137,7 @@ function* genresGeterSaga(action: PayloadAction<string>) {
     const genres: AllGenres = yield call(() => getGenres(action.payload));
     console.log("genres data", genres);
     yield put(intializeGenres(genres));
+    yield put(initializeSongDisplay(genres[0].songs[0]));
   } catch (e) {
     console.error(e);
   }

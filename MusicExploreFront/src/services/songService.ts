@@ -61,5 +61,6 @@ export const update = async (updatedSong: songForUpdate): Promise<Song> => {
 };
 export const deleter = async (id: string): Promise<Message> => {
   const song = await axios.delete(`http://localhost:3000/songs/${id}`);
+  console.log(song);
   return song.data;
 };

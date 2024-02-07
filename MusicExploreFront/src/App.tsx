@@ -7,10 +7,12 @@ import { PiWaveform } from "react-icons/pi";
 import DisplayDetail from "./components/DisplayDetail";
 import { useState } from "react";
 import AddSong from "./components/AddSong";
+import { useSelector } from "react-redux";
+import { RootState } from "./store/store";
 
 function App() {
   const [showForm, setShowForm] = useState(false);
-
+  const songDisplay = useSelector((state: RootState) => state.songDisplay);
   return (
     <div className="app">
       {showForm && <AddSong showForm={showForm} setShowForm={setShowForm} />}
@@ -25,7 +27,7 @@ function App() {
             <PiWaveform className="display-top-icon" />
           </div>
           <DisplayHeader />
-          <DisplayDetail />
+          <DisplayDetail song={songDisplay} />
         </div>
       </div>
     </div>

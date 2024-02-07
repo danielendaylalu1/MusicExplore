@@ -5,7 +5,7 @@ import { CiCircleList } from "react-icons/ci";
 
 import { FC, useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleteSong } from "../../store/songSlice";
+import { deleteSongStart } from "../../store/songSlice";
 
 interface OptionProps {
   isSong: boolean;
@@ -38,7 +38,7 @@ const SongCardOption: FC<OptionProps> = ({
               <p
                 className="song-card-edit song-card-delete pointer"
                 onClick={() => {
-                  songId && dispatch(deleteSong(songId));
+                  songId && dispatch(deleteSongStart(songId));
                 }}
               >
                 Delete

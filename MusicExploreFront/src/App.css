@@ -64,25 +64,29 @@ div::-webkit-scrollbar {
   flex: 0.7;
   display: flex;
   flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  /* justify-content: center; */
   gap: 4rem;
   overflow-y: scroll;
-  width: 100%;
+  /* width: 100%; */
 }
 .search-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 0.5rem;
+  max-width: 700px;
   width: 100%;
 }
 .search-input {
+  flex: 0.8;
   background-color: transparent;
   border: 1px solid #b4b4b4;
   padding: 0.5rem 1rem;
   outline: none;
   border-radius: 0.25rem;
   font-size: 0.9rem;
-  flex: 0.6;
   color: rgb(24, 24, 24);
 }
 .search-btn {
@@ -97,14 +101,21 @@ div::-webkit-scrollbar {
   background-color: rgb(19, 18, 18);
 }
 /* all songs page section  */
+.songs {
+  width: 100%;
+}
 .songs-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 2rem;
+  width: 100%;
 }
 .song-card-wrapper {
   display: flex;
+  width: 100%;
   flex-direction: column;
+  align-items: center;
   gap: 2rem;
 }
 
@@ -112,11 +123,13 @@ div::-webkit-scrollbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   padding: 0.85rem 1.5rem;
   background: #fdfcfc;
   box-shadow: rgba(17, 12, 46, 0.15) 0px 18px 25px 0px;
   border-radius: 1rem;
-  max-width: 670px;
+  max-width: 700px;
+  width: 100%;
   position: relative;
   /* z-index: 1000; */
 }
@@ -125,12 +138,17 @@ div::-webkit-scrollbar {
   flex-direction: column;
   gap: 1.5rem;
   padding: 0 4rem;
+  max-width: 630px;
+  width: 100%;
   /* list-style-type: decimal !important; */
 }
 .song-list {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border: 1px solid #e6e4e4;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
 }
 .song-card-left {
   display: flex;

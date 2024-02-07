@@ -86,6 +86,12 @@ const AddSong: FC<NavbarProps> = ({ showForm, setShowForm }) => {
         onSubmit={(e) => {
           e.preventDefault();
           dispatch(createSongStart(song));
+          setSong({
+            title: "",
+            album: "",
+            genre: "",
+            artist: "",
+          });
         }}
       >
         <h3 css={addSongHeader}>Add a Song</h3>

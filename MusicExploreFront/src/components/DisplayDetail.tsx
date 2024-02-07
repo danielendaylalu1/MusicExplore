@@ -1,25 +1,32 @@
 // import React from "react";
 
-const DisplayDetail = () => {
+import { FC } from "react";
+import { songForCreate } from "../types";
+
+interface DisplayDetailProps {
+  song: songForCreate;
+}
+
+const DisplayDetail: FC<DisplayDetailProps> = ({ song }) => {
   return (
     <div className="display-detail">
       <h3 className="display-detail-header">Song Deatils</h3>
       <div className="display-detail-card">
         <div className="dispaly-detail-content">
           <h3 className="detail-card-content-header">Title</h3>
-          <p className="detail-card-content-value">Nat baro</p>
+          <p className="detail-card-content-value">{song.title}</p>
         </div>
         <div className="dispaly-detail-content">
           <h3 className="detail-card-content-header">Artist</h3>
-          <p className="detail-card-content-value">Teddyafro</p>
+          <p className="detail-card-content-value">{song.artist}</p>
         </div>
         <div className="dispaly-detail-content">
           <h3 className="detail-card-content-header">Genre</h3>
-          <p className="detail-card-content-value">Pop</p>
+          <p className="detail-card-content-value">{song.genre || "--"}</p>
         </div>
         <div className="dispaly-detail-content">
           <h3 className="detail-card-content-header">Album</h3>
-          <p className="detail-card-content-value">Ethiopia</p>
+          <p className="detail-card-content-value">{song.album || "--"}</p>
         </div>
       </div>
     </div>
