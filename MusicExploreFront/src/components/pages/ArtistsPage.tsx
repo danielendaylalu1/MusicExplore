@@ -8,7 +8,12 @@ import { ARTIST } from "../../utils";
 import SongContainer from "../SongCard/SongContainer";
 
 const ArtistsPage = () => {
+  const searchValue = useSelector((state: RootState) => state.ui.searchValue);
   const data = useSelector((state: RootState) => state.songs.artists);
+
+  const filteredData = data.filter((item) =>
+    item.artist.toLowerCase().includes(searchValue)
+  );
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(intializeArtistsStart(""));
@@ -18,7 +23,7 @@ const ArtistsPage = () => {
     <div className="songs">
       <div className="songs-container">
         <SongContainer
-          songCard={data.map((item) => (
+          songCard={filteredData.map((item) => (
             <SongCard
               key={item.artist}
               header={<SongCardDetail song={item.songs[0]} section={ARTIST} />}

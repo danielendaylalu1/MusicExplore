@@ -8,17 +8,22 @@ import { ALBUM } from "../../utils";
 import SongContainer from "../SongCard/SongContainer";
 
 const AlbumsPage = () => {
+  const searchValue = useSelector((state: RootState) => state.ui.searchValue);
   const data = useSelector((state: RootState) => state.songs.albums);
+
+  const filteredData = data.filter((item) =>
+    item.album.name.toLowerCase().includes(searchValue)
+  );
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(intializeAlbumsStart(""));
   }, [dispatch]);
-  console.log("albums page runs", data);
+
   return (
     <div className="songs">
       <div className="songs-container">
         <SongContainer
-          songCard={data.map((item) => (
+          songCard={filteredData.map((item) => (
             <SongCard
               key={item.album.artist}
               header={<SongCardDetail song={item.songs[0]} section={ALBUM} />}
