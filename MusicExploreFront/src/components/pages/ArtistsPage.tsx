@@ -9,7 +9,7 @@ const ArtistsPage = () => {
   const data = useSelector((state: RootState) => state.songs.artists);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(intializeArtistsStart());
+    dispatch(intializeArtistsStart(""));
   }, [dispatch]);
   console.log("artists page runs", data);
   return (

@@ -1,13 +1,23 @@
 // import React from "react";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { css } from "@emotion/react";
 import { createPortal } from "react-dom";
+import { songForCreate } from "../types";
+import { useDispatch } from "react-redux";
+import { createSongStart } from "../store/songSlice";
 
 interface NavbarProps {
   showForm: boolean;
   setShowForm: (value: boolean) => void;
 }
 const AddSong: FC<NavbarProps> = ({ showForm, setShowForm }) => {
+  const dispatch = useDispatch();
+  const [song, setSong] = useState<songForCreate>({
+    title: "",
+    album: "",
+    genre: "",
+    artist: "",
+  });
   const addSongStyle = css({
     display: "flex",
     flexDirection: "column",
@@ -71,12 +81,44 @@ const AddSong: FC<NavbarProps> = ({ showForm, setShowForm }) => {
           setShowForm(!showForm);
         }}
       ></div>
-      <form css={addSongFormStylle}>
+      <form
+        css={addSongFormStylle}
+        onSubmit={(e) => {
+          e.preventDefault();
+          dispatch(createSongStart(song));
+        }}
+      >
         <h3 css={addSongHeader}>Add a Song</h3>
-        <input type="text" placeholder="Title" css={formInputs} />
-        <input type="text" placeholder="Artist" css={formInputs} />
-        <input type="text" placeholder="Genre" css={formInputs} />
-        <input type="text" placeholder="Album" css={formInputs} />
+        <input
+          type="text"
+          placeholder="Title"
+          css={formInputs}
+          value={song.title}
+          onChange={(e) => setSong({ ...song, title: e.target.value })}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Artist"
+          css={formInputs}
+          value={song.artist}
+          onChange={(e) => setSong({ ...song, artist: e.target.value })}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Genre"
+          css={formInputs}
+          onChange={(e) => setSong({ ...song, genre: e.target.value })}
+          value={song.genre}
+        />
+        <input
+          type="text"
+          placeholder="Album"
+          css={formInputs}
+          onChange={(e) => setSong({ ...song, album: e.target.value })}
+          value={song.album}
+        />
         <button type="submit" css={formBtn}>
           Add
         </button>

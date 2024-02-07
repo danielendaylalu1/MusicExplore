@@ -30,6 +30,9 @@ import {
   createSong,
   deleteSong,
   updateSong,
+  createSongStart,
+  updateSongStart,
+  deleteSongStart,
 } from "./songSlice";
 
 import { put, call, takeEvery, all, fork } from "redux-saga/effects";
@@ -61,7 +64,7 @@ function* songCreaterSaga(action: PayloadAction<songForCreate>) {
 }
 
 export function* songCreateSaga() {
-  yield takeEvery(intializeSongsStart.type, songCreaterSaga);
+  yield takeEvery(createSongStart.type, songCreaterSaga);
 }
 
 // songUpdater saga -------- songUpdater saga
@@ -76,7 +79,7 @@ function* songUpdaterSaga(action: PayloadAction<songForUpdate>) {
 }
 
 export function* songUpdateSaga() {
-  yield takeEvery(intializeSongsStart.type, songUpdaterSaga);
+  yield takeEvery(updateSongStart.type, songUpdaterSaga);
 }
 
 // songDeleter saga -------- songDeleter saga
@@ -91,7 +94,7 @@ function* songDeleterSaga(action: PayloadAction<string>) {
 }
 
 export function* songDeleteSaga() {
-  yield takeEvery(intializeSongsStart.type, songDeleterSaga);
+  yield takeEvery(deleteSongStart.type, songDeleterSaga);
 }
 
 // albumFetcher saga -------- albumFetcher saga

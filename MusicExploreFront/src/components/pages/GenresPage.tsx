@@ -9,7 +9,7 @@ const GenresPage = () => {
   const data = useSelector((state: RootState) => state.songs.genres);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(intializeGenresStart());
+    dispatch(intializeGenresStart(""));
   }, [dispatch]);
   console.log("genres page runs", data);
   return (
