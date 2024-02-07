@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { intializeGenresStart } from "../../store/songSlice";
 import { RootState } from "../../store/store";
 import SongCardDetail from "../SongCard/SongCardDetail";
+import { GENRE } from "../../utils";
 
 const GenresPage = () => {
   const data = useSelector((state: RootState) => state.songs.genres);
@@ -18,7 +19,7 @@ const GenresPage = () => {
         {data.map((item) => (
           <SongCard
             key={item.genre}
-            header={<SongCardDetail song={item.songs[0]} section="Genre" />}
+            header={<SongCardDetail song={item.songs[0]} section={GENRE} />}
             isSong={false}
             songs={item.songs}
           />

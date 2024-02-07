@@ -4,6 +4,7 @@ import speakerIcon from "../../assets/speaker-icon.png";
 import { useDispatch } from "react-redux";
 import { initializeSongDisplay } from "../../store/songDisplaySlice";
 import { Song } from "../../types";
+import { ARTIST, GENRE, ALBUM } from "../../utils";
 
 interface DetailProps {
   song: Song;
@@ -20,22 +21,22 @@ const SongCardDetail: FC<DetailProps> = ({ song, section }) => {
       <img src={speakerIcon} alt="speaker icon" className="song-card-icon" />
       <div className="song-card-detail">
         <h3 className="song-card-title item-hover pointer">
-          {section === "Genre"
+          {section === GENRE
             ? song.genre
-            : section === "Artist"
+            : section === ARTIST
             ? song.artist
-            : section === "Album"
+            : section === ALBUM
             ? song.album
-            : song.artist}
+            : song.title}
         </h3>
         <p className="song-card-artist item-hover pointer">
-          {section === "Genre"
+          {section === GENRE
             ? song.genre
-            : section === "Artist"
+            : section === ARTIST
             ? song.artist
-            : section === "Album"
+            : section === ALBUM
             ? song.artist
-            : song.title}
+            : song.artist}
         </p>
         <p className="song-card-type pointer">{section}</p>
       </div>
