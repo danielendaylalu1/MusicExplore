@@ -14,7 +14,9 @@ import {
 } from "../../store/songSlice";
 import { ALBUM, ARTIST, GENRE } from "../../utils";
 import { RootState } from "../../store/store";
-import { setFormShow, setUpdateFormData } from "../../store/uiSlice";
+import { setFormShow } from "../../store/uiSlice";
+// import { getSong } from "../../services/songService";
+// import { AllSongs, Song } from "../../types";
 
 interface OptionProps {
   isSong: boolean;
@@ -35,8 +37,8 @@ const SongCardOption: FC<OptionProps> = ({
   const dispatch = useDispatch();
   const [showOptions, setShowOptions] = useState(false);
   const showForm = useSelector((state: RootState) => state.ui.showForm);
-  const data = useSelector((state: RootState) => state.songs.songs);
-  const songToUpdate = data.find((song) => song.id === songID);
+  // const data = useSelector((state: RootState) => state.songs.songs);
+
   return (
     <>
       {isSong ? (
@@ -51,17 +53,17 @@ const SongCardOption: FC<OptionProps> = ({
               <p
                 className="song-card-edit song-card-update pointer"
                 onClick={() => {
-                  if (songToUpdate) {
-                    dispatch(
-                      setUpdateFormData({
-                        data: {
-                          song: songToUpdate,
-                          id: songToUpdate?.id,
-                        },
-                        type: "Update",
-                      })
-                    );
-                  }
+                  // if (songToUpdate) {
+                  //   dispatch(
+                  //     setUpdateFormData({
+                  //       data: {
+                  //         song: songToUpdate,
+                  //         id: songToUpdate?.id,
+                  //       },
+                  //       type: "Update",
+                  //     })
+                  //   );
+                  // }
                   dispatch(setFormShow(!showForm));
                 }}
               >

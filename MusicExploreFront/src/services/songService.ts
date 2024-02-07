@@ -20,8 +20,8 @@ export const getSongs = async (): Promise<AllSongs> => {
   const songs = await axios.get("http://localhost:3000/songs");
   return songs.data;
 };
-export const getSong = async (name: string): Promise<AllSongs> => {
-  const song = await axios.get(`http://localhost:3000/songs/${name}`);
+export const getSong = async (id?: string): Promise<Song> => {
+  const song = await axios.get(`http://localhost:3000/songs/${id}`);
   return song.data;
 };
 export const getAlbums = async (name: string): Promise<AllAlbums> => {

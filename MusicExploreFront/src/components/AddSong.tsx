@@ -121,7 +121,7 @@ const AddSong = () => {
             album: "",
             genre: "",
           });
-          setFormShow(!showForm);
+          dispatch(setFormShow(!showForm));
         }}
       >
         <h3 css={addSongHeader}>Add a Song</h3>

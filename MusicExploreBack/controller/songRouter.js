@@ -147,14 +147,12 @@ router.get("/artists", async (req, res) => {
     });
   }
 });
-router.get("/:name", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
-    const { name } = req.params;
+    const { id } = req.params;
     // console.log(id);
 
-    const song = await Song.find({
-      title: { $regex: new RegExp(`^${name}$`, "i") },
-    });
+    const song = await Song.findById(id);
     console.log(song);
     return res.status(200).json(song);
   } catch (error) {
