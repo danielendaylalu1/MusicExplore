@@ -4,7 +4,7 @@ import { CiCircleList } from "react-icons/ci";
 // import { RootState } from "../../store/store";
 
 import { FC, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   deleteSongStart,
   intializeAlbumsStart,
@@ -13,6 +13,8 @@ import {
   intializeSongsStart,
 } from "../../store/songSlice";
 import { ALBUM, ARTIST, GENRE } from "../../utils";
+import { RootState } from "../../store/store";
+import { setFormShow, setUpdateFormData } from "../../store/uiSlice";
 
 interface OptionProps {
   isSong: boolean;
@@ -32,6 +34,9 @@ const SongCardOption: FC<OptionProps> = ({
   // const songs = useSelector((state: RootState) => state.songs);
   const dispatch = useDispatch();
   const [showOptions, setShowOptions] = useState(false);
+  const showForm = useSelector((state: RootState) => state.ui.showForm);
+  const data = useSelector((state: RootState) => state.songs.songs);
+  const songToUpdate = data.find((song) => song.id === songID);
   return (
     <>
       {isSong ? (
@@ -45,7 +50,20 @@ const SongCardOption: FC<OptionProps> = ({
             <div className="song-card-editors">
               <p
                 className="song-card-edit song-card-update pointer"
-                onClick={() => {}}
+                onClick={() => {
+                  if (songToUpdate) {
+                    dispatch(
+                      setUpdateFormData({
+                        data: {
+                          song: songToUpdate,
+                          id: songToUpdate?.id,
+                        },
+                        type: "Update",
+                      })
+                    );
+                  }
+                  dispatch(setFormShow(!showForm));
+                }}
               >
                 Edit
               </p>

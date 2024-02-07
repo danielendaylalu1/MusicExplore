@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { setFormShow, setUpdateFormData } from "../store/uiSlice";
 import { useState } from "react";
+import { createSongStart } from "../store/songSlice";
 
 const AddSong = () => {
   const showForm = useSelector((state: RootState) => state.ui.showForm);
@@ -15,7 +16,7 @@ const AddSong = () => {
   const updateSongFormData = useSelector(
     (state: RootState) => state.ui.updateFormData
   );
-  const [song, setSong] = useState(updateSongFormData.song);
+  const [song, setSong] = useState(updateSongFormData.data.song);
 
   const addSongStyle = css({
     display: "flex",
@@ -78,6 +79,20 @@ const AddSong = () => {
         css={addSongStyle}
         onClick={() => {
           dispatch(setFormShow(!showForm));
+          dispatch(
+            setUpdateFormData({
+              data: {
+                song: {
+                  title: "",
+                  album: "",
+                  genre: "",
+                  artist: "",
+                },
+                id: "",
+              },
+              type: "Create",
+            })
+          );
           // setShowForm(!showForm);
         }}
       ></div>
@@ -85,19 +100,13 @@ const AddSong = () => {
         css={addSongFormStylle}
         onSubmit={(e) => {
           e.preventDefault();
-          console.log(updateSongFormData, song);
-          // dispatch(createSongStart(updateSongFormData.song));
-          dispatch(
-            setUpdateFormData({
-              song: {
-                title: "",
-                album: "",
-                genre: "",
-                artist: "",
-              },
-              id: "",
-            })
-          );
+          dispatch(createSongStart(song));
+          setSong({
+            title: "",
+            artist: "",
+            album: "",
+            genre: "",
+          });
         }}
       >
         <h3 css={addSongHeader}>Add a Song</h3>
@@ -140,7 +149,7 @@ const AddSong = () => {
           }
         />
         <button type="submit" css={formBtn}>
-          Add
+          {updateSongFormData.type}
         </button>
       </form>
     </div>,
