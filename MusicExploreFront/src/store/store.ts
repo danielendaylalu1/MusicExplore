@@ -3,6 +3,7 @@ import songSlice from "./songSlice";
 import createSagaMiddleware from "redux-saga";
 import { rootSaga } from "./songSaga";
 import songDisplaySlice from "./songDisplaySlice";
+import uiSlice from "./uiSlice";
 
 // ...
 
@@ -12,6 +13,7 @@ export const store = configureStore({
   reducer: {
     songs: songSlice,
     songDisplay: songDisplaySlice,
+    ui: uiSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),

@@ -37,13 +37,17 @@ import {
 
 import { put, call, takeEvery, all, fork } from "redux-saga/effects";
 import { initializeSongDisplay } from "./songDisplaySlice";
+import { loadingToggler } from "./uiSlice";
 
 // songFetcher saga -------- songFetcher saga
 function* songsGeterSaga() {
   try {
+    yield put(loadingToggler(true));
     const songs: AllSongs = yield call(getSongs);
+
     console.log("songs data", songs);
     yield put(intializeSongs(songs));
+    yield put(loadingToggler(false));
     yield put(initializeSongDisplay(songs[0]));
   } catch (e) {
     console.error(e);
@@ -102,9 +106,11 @@ export function* songDeleteSaga() {
 // albumFetcher saga -------- albumFetcher saga
 function* albumGeterSaga(action: PayloadAction<string>) {
   try {
+    yield put(loadingToggler(true));
     const albums: AllAlbums = yield call(() => getAlbums(action.payload));
     console.log("albums data", albums);
     yield put(intializeAlbums(albums));
+    yield put(loadingToggler(false));
     yield put(initializeSongDisplay(albums[0].songs[0]));
   } catch (e) {
     console.error(e);
@@ -118,9 +124,11 @@ export function* albumsSaga() {
 // artistFetcher saga -------- artistFetcher saga
 function* artistsGeterSaga(action: PayloadAction<string>) {
   try {
+    yield put(loadingToggler(true));
     const artists: AllArtists = yield call(() => getArtists(action.payload));
     console.log("genres data", artists);
     yield put(intializeArtists(artists));
+    yield put(loadingToggler(false));
     yield put(initializeSongDisplay(artists[0].songs[0]));
   } catch (e) {
     console.error(e);
@@ -134,9 +142,11 @@ export function* artistsSaga() {
 // genreFetcher saga -------- genreFetcher saga
 function* genresGeterSaga(action: PayloadAction<string>) {
   try {
+    yield put(loadingToggler(true));
     const genres: AllGenres = yield call(() => getGenres(action.payload));
     console.log("genres data", genres);
     yield put(intializeGenres(genres));
+    yield put(loadingToggler(false));
     yield put(initializeSongDisplay(genres[0].songs[0]));
   } catch (e) {
     console.error(e);

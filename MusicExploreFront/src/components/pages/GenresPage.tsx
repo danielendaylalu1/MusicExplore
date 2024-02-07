@@ -5,6 +5,7 @@ import { intializeGenresStart } from "../../store/songSlice";
 import { RootState } from "../../store/store";
 import SongCardDetail from "../SongCard/SongCardDetail";
 import { GENRE } from "../../utils";
+import SongContainer from "../SongCard/SongContainer";
 
 const GenresPage = () => {
   const data = useSelector((state: RootState) => state.songs.genres);
@@ -16,14 +17,16 @@ const GenresPage = () => {
   return (
     <div className="songs">
       <div className="songs-container">
-        {data.map((item) => (
-          <SongCard
-            key={item.genre}
-            header={<SongCardDetail song={item.songs[0]} section={GENRE} />}
-            isSong={false}
-            songs={item.songs}
-          />
-        ))}
+        <SongContainer
+          songCard={data.map((item) => (
+            <SongCard
+              key={item.genre}
+              header={<SongCardDetail song={item.songs[0]} section={GENRE} />}
+              isSong={false}
+              songs={item.songs}
+            />
+          ))}
+        />
       </div>
     </div>
   );
