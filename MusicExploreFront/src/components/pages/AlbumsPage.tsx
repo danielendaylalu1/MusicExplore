@@ -25,7 +25,7 @@ const AlbumsPage = () => {
         <SongContainer
           songCard={filteredData.map((item) => (
             <SongCard
-              key={item.album.artist}
+              key={item.songs[0].id}
               header={<SongCardDetail song={item.songs[0]} section={ALBUM} />}
               isSong={false}
               songs={item.songs}

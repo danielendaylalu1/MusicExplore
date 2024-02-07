@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { setFormShow, setUpdateFormData } from "../store/uiSlice";
 import { useState } from "react";
-import { createSongStart } from "../store/songSlice";
+import { createSongStart, updateSongStart } from "../store/songSlice";
+import Spinner from "./Spinner";
 
 const AddSong = () => {
   const showForm = useSelector((state: RootState) => state.ui.showForm);
@@ -16,7 +17,10 @@ const AddSong = () => {
   const updateSongFormData = useSelector(
     (state: RootState) => state.ui.updateFormData
   );
+  const isLoading = useSelector((state: RootState) => state.ui.isLoading);
   const [song, setSong] = useState(updateSongFormData.data.song);
+
+  console.log(updateSongFormData);
 
   const addSongStyle = css({
     display: "flex",
@@ -100,57 +104,74 @@ const AddSong = () => {
         css={addSongFormStylle}
         onSubmit={(e) => {
           e.preventDefault();
-          dispatch(createSongStart(song));
+          if (updateSongFormData.type === "Create") {
+            dispatch(createSongStart(song));
+          } else {
+            dispatch(
+              updateSongStart({
+                song: song,
+                id: updateSongFormData.data.id,
+              })
+            );
+          }
+
           setSong({
             title: "",
             artist: "",
             album: "",
             genre: "",
           });
+          setFormShow(!showForm);
         }}
       >
         <h3 css={addSongHeader}>Add a Song</h3>
-        <input
-          type="text"
-          placeholder="Title"
-          css={formInputs}
-          value={song?.title}
-          onChange={(e) =>
-            setSong((prv) => ({ ...prv, title: e.target.value }))
-          }
-          required
-        />
-        <input
-          type="text"
-          placeholder="Artist"
-          css={formInputs}
-          value={song.artist}
-          onChange={(e) =>
-            setSong((prv) => ({ ...prv, artist: e.target.value }))
-          }
-          required
-        />
-        <input
-          type="text"
-          placeholder="Genre"
-          css={formInputs}
-          value={song.genre}
-          onChange={(e) =>
-            setSong((prv) => ({ ...prv, genre: e.target.value }))
-          }
-        />
-        <input
-          type="text"
-          placeholder="Album"
-          css={formInputs}
-          value={song.album}
-          onChange={(e) =>
-            setSong((prv) => ({ ...prv, album: e.target.value }))
-          }
-        />
-        <button type="submit" css={formBtn}>
-          {updateSongFormData.type}
-        </button>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <>
+            <input
+              type="text"
+              placeholder="Title"
+              css={formInputs}
+              value={song?.title}
+              onChange={(e) =>
+                setSong((prv) => ({ ...prv, title: e.target.value }))
+              }
+              required
+            />
+            <input
+              type="text"
+              placeholder="Artist"
+              css={formInputs}
+              value={song.artist}
+              onChange={(e) =>
+                setSong((prv) => ({ ...prv, artist: e.target.value }))
+              }
+              required
+            />
+            <input
+              type="text"
+              placeholder="Genre"
+              css={formInputs}
+              value={song.genre}
+              onChange={(e) =>
+                setSong((prv) => ({ ...prv, genre: e.target.value }))
+              }
+            />
+            <input
+              type="text"
+              placeholder="Album"
+              css={formInputs}
+              value={song.album}
+              onChange={(e) =>
+                setSong((prv) => ({ ...prv, album: e.target.value }))
+              }
+            />
+            <button type="submit" css={formBtn}>
+              {updateSongFormData.type}
+            </button>
+          </>
+        )}
       </form>
     </div>,
     document.getElementById("modal") as HTMLDivElement

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import "./App.css";
 import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -12,6 +13,7 @@ import { RootState } from "./store/store";
 function App() {
   const showForm = useSelector((state: RootState) => state.ui.showForm);
   const songDisplay = useSelector((state: RootState) => state.songDisplay);
+
   return (
     <div className="app">
       {showForm && <AddSong />}

@@ -62,9 +62,11 @@ export function* songsSaga() {
 // songCreater saga -------- songCreater saga
 function* songCreatorSaga(action: PayloadAction<SongForCreate>) {
   try {
+    yield put(loadingToggler(true));
     const song: Song = yield call(() => create(action.payload));
     console.log("songs data", song);
     yield put(createSong(song));
+    yield put(loadingToggler(false));
   } catch (e) {
     console.error(e);
   }
@@ -77,9 +79,11 @@ export function* songCreateSaga() {
 // songUpdater saga -------- songUpdater saga
 function* songUpdaterSaga(action: PayloadAction<SongForUpdate>) {
   try {
+    yield put(loadingToggler(true));
     const song: Song = yield call(() => update(action.payload));
     console.log("songs data", song);
     yield put(updateSong(song));
+    yield put(loadingToggler(false));
   } catch (e) {
     console.error(e);
   }
