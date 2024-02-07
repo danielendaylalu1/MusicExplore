@@ -4,14 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { intializeAlbumsStart } from "../../store/songSlice";
 import { RootState } from "../../store/store";
 import SongCardDetail from "../SongCard/SongCardDetail";
-// import { initializeSongDisplay } from "../../store/songDisplaySlice";
 
 const ArtistsPage = () => {
   const data = useSelector((state: RootState) => state.songs.albums);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(intializeAlbumsStart(""));
-    // dispatch(initializeSongDisplay(data[0]?.songs[0]));
   }, [dispatch]);
 
   return (

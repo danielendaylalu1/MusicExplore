@@ -8,26 +8,38 @@ interface DisplayDetailProps {
 }
 
 const DisplayDetail: FC<DisplayDetailProps> = ({ song }) => {
+  const details = [
+    {
+      header: "Title",
+      detail: song.title,
+    },
+    {
+      header: "Artist",
+      detail: song.artist,
+    },
+    {
+      header: "Album",
+      detail: song.album || "--",
+    },
+    {
+      header: "Genre",
+      detail: song.genre || "--",
+    },
+  ];
+  // console.log(details);
+
   return (
     <div className="display-detail">
       <h3 className="display-detail-header">Song Deatils</h3>
       <div className="display-detail-card">
-        <div className="dispaly-detail-content">
-          <h3 className="detail-card-content-header">Title</h3>
-          <p className="detail-card-content-value">{song.title}</p>
-        </div>
-        <div className="dispaly-detail-content">
-          <h3 className="detail-card-content-header">Artist</h3>
-          <p className="detail-card-content-value">{song.artist}</p>
-        </div>
-        <div className="dispaly-detail-content">
-          <h3 className="detail-card-content-header">Genre</h3>
-          <p className="detail-card-content-value">{song.genre || "--"}</p>
-        </div>
-        <div className="dispaly-detail-content">
-          <h3 className="detail-card-content-header">Album</h3>
-          <p className="detail-card-content-value">{song.album || "--"}</p>
-        </div>
+        {details.map((song) => {
+          return (
+            <div className="dispaly-detail-content" key={song.header}>
+              <h3 className="detail-card-content-header">{song.header}</h3>
+              <p className="detail-card-content-value">{song.detail}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

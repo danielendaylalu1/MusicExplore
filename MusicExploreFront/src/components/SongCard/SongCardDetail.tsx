@@ -19,8 +19,24 @@ const SongCardDetail: FC<DetailProps> = ({ song, section }) => {
     >
       <img src={speakerIcon} alt="speaker icon" className="song-card-icon" />
       <div className="song-card-detail">
-        <h3 className="song-card-title item-hover pointer">{song.title}</h3>
-        <p className="song-card-artist item-hover pointer">{song.artist}</p>
+        <h3 className="song-card-title item-hover pointer">
+          {section === "Genre"
+            ? song.genre
+            : section === "Artist"
+            ? song.artist
+            : section === "Album"
+            ? song.album
+            : song.artist}
+        </h3>
+        <p className="song-card-artist item-hover pointer">
+          {section === "Genre"
+            ? song.genre
+            : section === "Artist"
+            ? song.artist
+            : section === "Album"
+            ? song.artist
+            : song.title}
+        </p>
         <p className="song-card-type pointer">{section}</p>
       </div>
     </div>
