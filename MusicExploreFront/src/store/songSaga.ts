@@ -40,6 +40,7 @@ import { put, call, takeEvery, all, fork } from "redux-saga/effects";
 import { initializeSongDisplay } from "./songDisplaySlice";
 import {
   loadingToggler,
+  resetUpdateFormData,
   searchValueHandler,
   setUpdateFormData,
   setUpdateFormDataStart,
@@ -94,7 +95,9 @@ function* songCreatorSaga(action: PayloadAction<SongForCreate>) {
     const song: Song = yield call(() => create(action.payload));
     console.log("songs data", song);
     yield put(createSong(song));
+
     yield put(loadingToggler(false));
+    yield put(resetUpdateFormData());
   } catch (e) {
     console.error(e);
   }
@@ -112,6 +115,7 @@ function* songUpdaterSaga(action: PayloadAction<SongForUpdate>) {
     console.log("songs data", song);
     yield put(updateSong(song));
     yield put(loadingToggler(false));
+    yield put(resetUpdateFormData());
   } catch (e) {
     console.error(e);
   }

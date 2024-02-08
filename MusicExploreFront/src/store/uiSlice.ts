@@ -47,6 +47,22 @@ const uiSlice = createSlice({
       state = { ...state, updateFormData: action.payload };
       return state;
     },
+    resetUpdateFormData(state) {
+      state = {
+        ...state,
+        updateFormData: {
+          song: {
+            title: "",
+            artist: "",
+            album: "",
+            genre: "",
+            id: "",
+          },
+          type: "Create",
+        },
+      };
+      return state;
+    },
     setFormShow(state, action: PayloadAction<boolean>) {
       state = { ...state, showForm: action.payload };
       return state;
@@ -60,6 +76,7 @@ export const {
   setFormShow,
   setUpdateFormDataStart,
   setUpdateFormData,
+  resetUpdateFormData,
 } = uiSlice.actions;
 
 export default uiSlice.reducer;
