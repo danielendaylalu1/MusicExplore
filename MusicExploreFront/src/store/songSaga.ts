@@ -57,9 +57,9 @@ function* songsGeterSaga() {
     yield put(intializeSongs(songs));
     yield put(loadingToggler(false));
     yield put(initializeSongDisplay(songs[0]));
-  } catch (e) {
+  } catch (error) {
     yield put(loadingToggler(false));
-    console.error(e);
+    console.error("error-->", error);
   }
 }
 

@@ -11,7 +11,9 @@ router.get("/", async (_req, res, next) => {
     console.log(songs);
     return res.status(200).json(songs);
   } catch (error) {
+    console.log(error);
     next(error);
+
     // res.status(500).json({
     //   error: error.message,
     // });
