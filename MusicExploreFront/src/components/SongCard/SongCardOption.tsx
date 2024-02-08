@@ -14,7 +14,7 @@ import {
 } from "../../store/songSlice";
 import { ALBUM, ARTIST, GENRE } from "../../utils";
 import { RootState } from "../../store/store";
-import { setFormShow } from "../../store/uiSlice";
+import { setFormShow, setUpdateFormDataStart } from "../../store/uiSlice";
 // import { getSong } from "../../services/songService";
 // import { AllSongs, Song } from "../../types";
 
@@ -53,17 +53,7 @@ const SongCardOption: FC<OptionProps> = ({
               <p
                 className="song-card-edit song-card-update pointer"
                 onClick={() => {
-                  // if (songToUpdate) {
-                  //   dispatch(
-                  //     setUpdateFormData({
-                  //       data: {
-                  //         song: songToUpdate,
-                  //         id: songToUpdate?.id,
-                  //       },
-                  //       type: "Update",
-                  //     })
-                  //   );
-                  // }
+                  songID && dispatch(setUpdateFormDataStart(songID));
                   dispatch(setFormShow(!showForm));
                 }}
               >

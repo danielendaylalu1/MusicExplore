@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { SongForUpdate } from "../types";
+import { Song } from "../types";
 
 interface UpdateForm {
-  data: SongForUpdate;
+  song: Song;
   type: string;
 }
 interface UiState {
@@ -16,13 +16,11 @@ const initialState: UiState = {
   searchValue: "",
   showForm: false,
   updateFormData: {
-    data: {
-      song: {
-        title: "",
-        artist: "",
-        album: "",
-        genre: "",
-      },
+    song: {
+      title: "",
+      artist: "",
+      album: "",
+      genre: "",
       id: "",
     },
     type: "Create",
@@ -38,8 +36,11 @@ const uiSlice = createSlice({
       return state;
     },
     searchValueHandler(state, action: PayloadAction<string>) {
-      console.log(action.payload);
       state = { ...state, searchValue: action.payload };
+      return state;
+    },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setUpdateFormDataStart(state, _action: PayloadAction<string>) {
       return state;
     },
     setUpdateFormData(state, action: PayloadAction<UpdateForm>) {
@@ -57,6 +58,7 @@ export const {
   loadingToggler,
   searchValueHandler,
   setFormShow,
+  setUpdateFormDataStart,
   setUpdateFormData,
 } = uiSlice.actions;
 

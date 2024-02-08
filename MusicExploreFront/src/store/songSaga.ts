@@ -5,6 +5,7 @@ import {
   getAlbums,
   getArtists,
   getGenres,
+  getSong,
   getSongs,
   update,
 } from "../services/songService";
@@ -37,7 +38,12 @@ import {
 
 import { put, call, takeEvery, all, fork } from "redux-saga/effects";
 import { initializeSongDisplay } from "./songDisplaySlice";
-import { loadingToggler, searchValueHandler } from "./uiSlice";
+import {
+  loadingToggler,
+  searchValueHandler,
+  setUpdateFormData,
+  setUpdateFormDataStart,
+} from "./uiSlice";
 
 // songFetcher saga -------- songFetcher saga
 function* songsGeterSaga() {
@@ -57,6 +63,28 @@ function* songsGeterSaga() {
 
 export function* songsSaga() {
   yield takeEvery(intializeSongsStart.type, songsGeterSaga);
+}
+
+// singlSongFetcher saga -------- songFetcher saga
+function* singleSongGeterSaga(action: PayloadAction<string>) {
+  try {
+    yield put(loadingToggler(true));
+    const song: Song = yield call(() => getSong(action.payload));
+    console.log("dipatch runs");
+    yield put(
+      setUpdateFormData({
+        song,
+        type: "Update",
+      })
+    );
+    yield put(loadingToggler(false));
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export function* singleSongSaga() {
+  yield takeEvery(setUpdateFormDataStart.type, singleSongGeterSaga);
 }
 
 // songCreater saga -------- songCreater saga
@@ -175,5 +203,6 @@ export function* rootSaga() {
     fork(songCreateSaga),
     fork(songDeleteSaga),
     fork(songUpdateSaga),
+    fork(singleSongSaga),
   ]);
 }

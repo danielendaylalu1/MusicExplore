@@ -1,13 +1,11 @@
-// import React from "react";
-// import { useState } from "react";
 import { css } from "@emotion/react";
 import { createPortal } from "react-dom";
-// import { songForCreate } from "../types";
+
 import { useDispatch, useSelector } from "react-redux";
-// import { createSongStart } from "../store/songSlice";
+
 import { RootState } from "../store/store";
 import { setFormShow, setUpdateFormData } from "../store/uiSlice";
-import { useState } from "react";
+
 import { createSongStart, updateSongStart } from "../store/songSlice";
 import Spinner from "./Spinner";
 
@@ -18,9 +16,6 @@ const AddSong = () => {
     (state: RootState) => state.ui.updateFormData
   );
   const isLoading = useSelector((state: RootState) => state.ui.isLoading);
-  const [song, setSong] = useState(updateSongFormData.data.song);
-
-  console.log(updateSongFormData);
 
   const addSongStyle = css({
     display: "flex",
@@ -77,6 +72,7 @@ const AddSong = () => {
     },
     minWidth: "90px",
   });
+
   return createPortal(
     <div css={addSongStyle}>
       <div
@@ -85,13 +81,11 @@ const AddSong = () => {
           dispatch(setFormShow(!showForm));
           dispatch(
             setUpdateFormData({
-              data: {
-                song: {
-                  title: "",
-                  album: "",
-                  genre: "",
-                  artist: "",
-                },
+              song: {
+                title: "",
+                album: "",
+                genre: "",
+                artist: "",
                 id: "",
               },
               type: "Create",
@@ -105,22 +99,46 @@ const AddSong = () => {
         onSubmit={(e) => {
           e.preventDefault();
           if (updateSongFormData.type === "Create") {
-            dispatch(createSongStart(song));
+            dispatch(
+              createSongStart({
+                title: updateSongFormData.song.title,
+                artist: updateSongFormData.song.artist,
+                album: updateSongFormData.song.album,
+                genre: updateSongFormData.song.genre,
+              })
+            );
+            dispatch(
+              setUpdateFormData({
+                song: {
+                  artist: "",
+                  album: "",
+                  genre: "",
+                  title: "",
+                  id: "",
+                },
+                type: "Create",
+              })
+            );
           } else {
             dispatch(
               updateSongStart({
-                song: song,
-                id: updateSongFormData.data.id,
+                song: updateSongFormData.song,
+                id: updateSongFormData.song.id,
               })
             );
           }
-
-          setSong({
-            title: "",
-            artist: "",
-            album: "",
-            genre: "",
-          });
+          dispatch(
+            setUpdateFormData({
+              song: {
+                artist: "",
+                album: "",
+                genre: "",
+                title: "",
+                id: "",
+              },
+              type: "Create",
+            })
+          );
           dispatch(setFormShow(!showForm));
         }}
       >
@@ -133,9 +151,20 @@ const AddSong = () => {
               type="text"
               placeholder="Title"
               css={formInputs}
-              value={song?.title}
-              onChange={(e) =>
-                setSong((prv) => ({ ...prv, title: e.target.value }))
+              value={updateSongFormData.song.title}
+              onChange={
+                (e) => {
+                  dispatch(
+                    setUpdateFormData({
+                      ...updateSongFormData,
+                      song: {
+                        ...updateSongFormData.song,
+                        title: e.target.value,
+                      },
+                    })
+                  );
+                }
+                // setSong((prv) => ({ ...prv, title: e.target.value }))
               }
               required
             />
@@ -143,9 +172,20 @@ const AddSong = () => {
               type="text"
               placeholder="Artist"
               css={formInputs}
-              value={song.artist}
-              onChange={(e) =>
-                setSong((prv) => ({ ...prv, artist: e.target.value }))
+              value={updateSongFormData.song.artist}
+              onChange={
+                (e) => {
+                  dispatch(
+                    setUpdateFormData({
+                      ...updateSongFormData,
+                      song: {
+                        ...updateSongFormData.song,
+                        artist: e.target.value,
+                      },
+                    })
+                  );
+                }
+                // setSong((prv) => ({ ...prv, title: e.target.value }))
               }
               required
             />
@@ -153,19 +193,38 @@ const AddSong = () => {
               type="text"
               placeholder="Genre"
               css={formInputs}
-              value={song.genre}
-              onChange={(e) =>
-                setSong((prv) => ({ ...prv, genre: e.target.value }))
+              value={updateSongFormData.song.genre}
+              onChange={
+                (e) => {
+                  dispatch(
+                    setUpdateFormData({
+                      ...updateSongFormData,
+                      song: {
+                        ...updateSongFormData.song,
+                        genre: e.target.value,
+                      },
+                    })
+                  );
+                }
+                // setSong((prv) => ({ ...prv, title: e.target.value }))
               }
             />
             <input
               type="text"
               placeholder="Album"
               css={formInputs}
-              value={song.album}
-              onChange={(e) =>
-                setSong((prv) => ({ ...prv, album: e.target.value }))
-              }
+              value={updateSongFormData.song.album}
+              onChange={(e) => {
+                dispatch(
+                  setUpdateFormData({
+                    ...updateSongFormData,
+                    song: {
+                      ...updateSongFormData.song,
+                      album: e.target.value,
+                    },
+                  })
+                );
+              }}
             />
             <button type="submit" css={formBtn}>
               {updateSongFormData.type}
