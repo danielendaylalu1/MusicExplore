@@ -10,11 +10,13 @@ interface UiState {
   searchValue: string;
   updateFormData: UpdateForm;
   showForm: boolean;
+  error: string;
 }
 const initialState: UiState = {
   isLoading: false,
   searchValue: "",
   showForm: false,
+  error: "",
   updateFormData: {
     song: {
       title: "",
@@ -65,6 +67,11 @@ const uiSlice = createSlice({
     },
     setFormShow(state, action: PayloadAction<boolean>) {
       state = { ...state, showForm: action.payload };
+      return state;
+    },
+    setError(state, action: PayloadAction<string>) {
+      state = { ...state, error: action.payload };
+      console.log("state-->", state, "action-->", action.payload);
       return state;
     },
   },

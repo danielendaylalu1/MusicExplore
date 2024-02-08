@@ -4,18 +4,21 @@ const Song = require("../models/Song");
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+// all songs GET api
+router.get("/", async (_req, res, next) => {
   try {
     const songs = await Song.find({});
     console.log(songs);
     return res.status(200).json(songs);
   } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
+    next(error);
+    // res.status(500).json({
+    //   error: error.message,
+    // });
   }
 });
-router.get("/albums", async (req, res) => {
+// all albums GET api
+router.get("/albums", async (req, res, next) => {
   try {
     let { name } = req.query;
     console.log(name, req.query);
@@ -63,13 +66,14 @@ router.get("/albums", async (req, res) => {
 
     return res.status(200).json(albums);
   } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
+    next(error);
+    // res.status(500).json({
+    //   error: error.message,
+    // });
   }
 });
-
-router.get("/genres", async (req, res) => {
+// all genres GET api
+router.get("/genres", async (req, res, next) => {
   try {
     let { name } = req.query;
     console.log(name);
@@ -101,12 +105,14 @@ router.get("/genres", async (req, res) => {
     genres = genres.map((genre) => ({ genre: genre._id, songs: genre.songs }));
     return res.status(200).json(genres);
   } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
+    next(error);
+    // res.status(500).json({
+    //   error: error.message,
+    // });
   }
 });
-router.get("/artists", async (req, res) => {
+// all artists GET api
+router.get("/artists", async (req, res, next) => {
   try {
     let { name } = req.query;
     if (name === undefined && Object.keys(req.query).length > 0) {
@@ -142,12 +148,14 @@ router.get("/artists", async (req, res) => {
 
     return res.status(200).json(artists);
   } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
+    next(error);
+    // res.status(500).json({
+    //   error: error.message,
+    // });
   }
 });
-router.get("/:id", async (req, res) => {
+// single songs GET api
+router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     // console.log(id);
@@ -156,13 +164,14 @@ router.get("/:id", async (req, res) => {
     console.log(song);
     return res.status(200).json(song);
   } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
+    next(error);
+    // res.status(500).json({
+    //   error: error.message,
+    // });
   }
 });
-
-router.post("/", async (req, res) => {
+// song POST api
+router.post("/", async (req, res, next) => {
   try {
     const data = req.body;
     console.log(data);
@@ -171,12 +180,14 @@ router.post("/", async (req, res) => {
     console.log(song);
     res.status(201).json(song);
   } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
+    next(error);
+    // res.status(500).json({
+    //   error: error.message,
+    // });
   }
 });
-router.put("/:id", async (req, res) => {
+// song PUT api
+router.put("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const data = req.body;
@@ -188,13 +199,14 @@ router.put("/:id", async (req, res) => {
     console.log(updatedsong);
     res.status(201).json(updatedsong);
   } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
+    next(error);
+    // res.status(500).json({
+    //   error: error.message,
+    // });
   }
 });
-
-router.delete("/:id", async (req, res) => {
+// songs delete api
+router.delete("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const song = await Song.findByIdAndDelete(id);
@@ -202,9 +214,10 @@ router.delete("/:id", async (req, res) => {
       message: "Song deleted successfully",
     });
   } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
+    next(error);
+    // res.status(500).json({
+    //   error: error.message,
+    // });
   }
 });
 

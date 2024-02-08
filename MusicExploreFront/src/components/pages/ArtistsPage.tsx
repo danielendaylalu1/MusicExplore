@@ -18,7 +18,7 @@ const ArtistsPage = () => {
   useEffect(() => {
     dispatch(intializeArtistsStart(""));
   }, [dispatch]);
-  console.log("artists page runs", data);
+  // console.log("artists page runs", data);
   return (
     <div className="songs">
       <div className="songs-container">

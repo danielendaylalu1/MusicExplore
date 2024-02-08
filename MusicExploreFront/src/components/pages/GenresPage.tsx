@@ -18,9 +18,9 @@ const GenresPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(intializeGenresStart(""));
-    console.log("genres efeccccccccccct page runs");
+    // console.log("genres efeccccccccccct page runs");
   }, [dispatch]);
-  console.log("genres page runs", data);
+  // console.log("genres page runs", data);
   return (
     <div className="songs">
       <div className="songs-container">

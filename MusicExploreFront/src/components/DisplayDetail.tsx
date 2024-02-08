@@ -26,7 +26,6 @@ const DisplayDetail: FC<DisplayDetailProps> = ({ song }) => {
       detail: song.genre || "--",
     },
   ];
-  // console.log(details);
 
   return (
     <div className="display-detail">

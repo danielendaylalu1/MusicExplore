@@ -53,11 +53,12 @@ function* songsGeterSaga() {
     yield put(loadingToggler(true));
     const songs: AllSongs = yield call(getSongs);
 
-    console.log("songs data", songs);
+    // console.log("songs data", songs);
     yield put(intializeSongs(songs));
     yield put(loadingToggler(false));
     yield put(initializeSongDisplay(songs[0]));
   } catch (e) {
+    yield put(loadingToggler(false));
     console.error(e);
   }
 }
@@ -71,7 +72,7 @@ function* singleSongGeterSaga(action: PayloadAction<string>) {
   try {
     yield put(loadingToggler(true));
     const song: Song = yield call(() => getSong(action.payload));
-    console.log("dipatch runs");
+    // console.log("dipatch runs");
     yield put(
       setUpdateFormData({
         song,
@@ -80,6 +81,7 @@ function* singleSongGeterSaga(action: PayloadAction<string>) {
     );
     yield put(loadingToggler(false));
   } catch (e) {
+    yield put(loadingToggler(false));
     console.error(e);
   }
 }
@@ -93,12 +95,13 @@ function* songCreatorSaga(action: PayloadAction<SongForCreate>) {
   try {
     yield put(loadingToggler(true));
     const song: Song = yield call(() => create(action.payload));
-    console.log("songs data", song);
+    // console.log("songs data", song);
     yield put(createSong(song));
 
     yield put(loadingToggler(false));
     yield put(resetUpdateFormData());
   } catch (e) {
+    yield put(loadingToggler(false));
     console.error(e);
   }
 }
@@ -112,11 +115,12 @@ function* songUpdaterSaga(action: PayloadAction<SongForUpdate>) {
   try {
     yield put(loadingToggler(true));
     const song: Song = yield call(() => update(action.payload));
-    console.log("songs data", song);
+    // console.log("songs data", song);
     yield put(updateSong(song));
     yield put(loadingToggler(false));
     yield put(resetUpdateFormData());
   } catch (e) {
+    yield put(loadingToggler(false));
     console.error(e);
   }
 }
@@ -128,10 +132,12 @@ export function* songUpdateSaga() {
 // songDeleter saga -------- songDeleter saga
 function* songDeletorSaga(action: PayloadAction<string>) {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const song: Message = yield call(() => deleter(action.payload));
-    console.log("songs data", song, action.payload);
+    // console.log("songs data", song, action.payload);
     yield put(deleteSong(action.payload));
   } catch (e) {
+    yield put(loadingToggler(false));
     console.error(e);
   }
 }
@@ -146,11 +152,12 @@ function* albumGeterSaga(action: PayloadAction<string>) {
     yield put(searchValueHandler(""));
     yield put(loadingToggler(true));
     const albums: AllAlbums = yield call(() => getAlbums(action.payload));
-    console.log("albums data", albums);
+    // console.log("albums data", albums);
     yield put(intializeAlbums(albums));
     yield put(loadingToggler(false));
     yield put(initializeSongDisplay(albums[0].songs[0]));
   } catch (e) {
+    yield put(loadingToggler(false));
     console.error(e);
   }
 }
@@ -165,11 +172,12 @@ function* artistsGeterSaga(action: PayloadAction<string>) {
     yield put(searchValueHandler(""));
     yield put(loadingToggler(true));
     const artists: AllArtists = yield call(() => getArtists(action.payload));
-    console.log("genres data", artists);
+    // console.log("genres data", artists);
     yield put(intializeArtists(artists));
     yield put(loadingToggler(false));
     yield put(initializeSongDisplay(artists[0].songs[0]));
   } catch (e) {
+    yield put(loadingToggler(false));
     console.error(e);
   }
 }
@@ -184,11 +192,12 @@ function* genresGeterSaga(action: PayloadAction<string>) {
     yield put(searchValueHandler(""));
     yield put(loadingToggler(true));
     const genres: AllGenres = yield call(() => getGenres(action.payload));
-    console.log("genres data", genres);
+    // console.log("genres data", genres);
     yield put(intializeGenres(genres));
     yield put(loadingToggler(false));
     yield put(initializeSongDisplay(genres[0].songs[0]));
   } catch (e) {
+    yield put(loadingToggler(false));
     console.error(e);
   }
 }

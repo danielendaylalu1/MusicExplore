@@ -25,21 +25,21 @@ export const getSong = async (id?: string): Promise<Song> => {
   return song.data;
 };
 export const getAlbums = async (name: string): Promise<AllAlbums> => {
-  console.log("albums name", name);
+  // console.log("albums name", name);
   const albums = await axios.get(
     `http://localhost:3000/songs/albums${name !== "" ? "?name=" + name : ""}`
   );
   return albums.data;
 };
 export const getArtists = async (name: string): Promise<AllArtists> => {
-  console.log("artists name", name);
+  // console.log("artists name", name);
   const artists = await axios.get(
     `http://localhost:3000/songs/artists${name !== "" ? "?name=" + name : ""}`
   );
   return artists.data;
 };
 export const getGenres = async (name: string): Promise<AllGenres> => {
-  console.log("genre name", name);
+  // console.log("genre name", name);
   const genres = await axios.get(
     `http://localhost:3000/songs/genres${name !== "" ? "?name=" + name : ""}`
   );
@@ -61,6 +61,6 @@ export const update = async (updatedSong: SongForUpdate): Promise<Song> => {
 };
 export const deleter = async (id: string): Promise<Message> => {
   const song = await axios.delete(`http://localhost:3000/songs/${id}`);
-  console.log(song);
+  // console.log(song);
   return song.data;
 };

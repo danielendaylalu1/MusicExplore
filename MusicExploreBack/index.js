@@ -8,6 +8,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const errorHandler = (err, _req, res, _next) => {
+  res.status(500).json({
+    message: "An unexpected error occurred",
+    error: err.message,
+  });
+};
+
 (async () => {
   try {
     const url = process.env.DATABASE_URL;
@@ -19,6 +26,7 @@ app.use(express.json());
 })();
 
 app.use("/songs", songRouter);
+app.use(errorHandler);
 
 const PORT = process.env.PORT;
 
