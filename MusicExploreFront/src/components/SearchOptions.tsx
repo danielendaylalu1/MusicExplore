@@ -16,7 +16,7 @@ const customStyles: StylesConfig<Options, false> = {
   control: (provided) => ({
     ...provided,
     backgroundColor: "#f5f5f5",
-    minWidth: "120px",
+    maxWidth: "120px",
     color: "black",
     outlineOffset: "none",
     cursor: "pointer",
