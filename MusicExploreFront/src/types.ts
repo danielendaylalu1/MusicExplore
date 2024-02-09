@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 export interface Song {
   title: string;
   artist: string;
@@ -34,3 +35,12 @@ export type AllGenres = Genre[];
 export interface Message {
   message: string;
 }
+
+export type AxiosErrorWithResponse = AxiosError & {
+  response: {
+    data: {
+      message: string;
+      error: string[];
+    };
+  };
+};

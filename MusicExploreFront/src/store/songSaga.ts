@@ -1,5 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { AxiosError } from "axios";
+
 import {
   create,
   deleter,
@@ -15,6 +15,7 @@ import {
   AllArtists,
   AllGenres,
   AllSongs,
+  AxiosErrorWithResponse,
   Message,
   Song,
   SongForCreate,
@@ -64,7 +65,7 @@ function* songsGeterSaga() {
     yield put(loadingToggler(false));
 
     if (typeof error === "object" && error !== null && "response" in error) {
-      const axiosError = error as AxiosError;
+      const axiosError = error as AxiosErrorWithResponse;
       if (axiosError.response) {
         switch (axiosError.response.status) {
           case 404:
@@ -90,18 +91,11 @@ function* songsGeterSaga() {
               setStatus({ error: true, message: "An unknown error occurred" })
             );
         }
-      } else {
-        // Network error
-        console.log("Network error message-->", axiosError.message);
-        yield put(
-          setStatus({ error: true, message: "A network error occurred" })
-        );
       }
     } else {
       console.log("Unexpected error-->", error);
-      yield put(
-        setStatus({ error: true, message: "An unexpected error occurred" })
-      );
+      // const message:string = error.message as string
+      yield put(setStatus({ error: true, message: "Network Error" }));
     }
   }
 }
@@ -128,7 +122,7 @@ function* singleSongGeterSaga(action: PayloadAction<string>) {
     yield put(loadingToggler(false));
 
     if (typeof error === "object" && error !== null && "response" in error) {
-      const axiosError = error as AxiosError;
+      const axiosError = error as AxiosErrorWithResponse;
       if (axiosError.response) {
         switch (axiosError.response.status) {
           case 404:
@@ -154,18 +148,10 @@ function* singleSongGeterSaga(action: PayloadAction<string>) {
               setStatus({ error: true, message: "An unknown error occurred" })
             );
         }
-      } else {
-        // Network error
-        console.log("Network error message-->", axiosError.message);
-        yield put(
-          setStatus({ error: true, message: "A network error occurred" })
-        );
       }
     } else {
       console.log("Unexpected error-->", error);
-      yield put(
-        setStatus({ error: true, message: "An unexpected error occurred" })
-      );
+      yield put(setStatus({ error: true, message: "Network Error" }));
     }
   }
 }
@@ -196,7 +182,7 @@ function* songCreatorSaga(action: PayloadAction<SongForCreate>) {
     yield put(loadingToggler(false));
 
     if (typeof error === "object" && error !== null && "response" in error) {
-      const axiosError = error as AxiosError;
+      const axiosError = error as AxiosErrorWithResponse;
       if (axiosError.response) {
         switch (axiosError.response.status) {
           case 400: {
@@ -229,18 +215,10 @@ function* songCreatorSaga(action: PayloadAction<SongForCreate>) {
               setStatus({ error: true, message: "An unknown error occurred" })
             );
         }
-      } else {
-        // Network error
-        console.log("Network error message-->", axiosError.message);
-        yield put(
-          setStatus({ error: true, message: "A network error occurred" })
-        );
       }
     } else {
       console.log("Unexpected error-->", error);
-      yield put(
-        setStatus({ error: true, message: "An unexpected error occurred" })
-      );
+      yield put(setStatus({ error: true, message: "Network Error" }));
     }
   }
 }
@@ -263,7 +241,7 @@ function* songUpdaterSaga(action: PayloadAction<SongForUpdate>) {
     yield put(loadingToggler(false));
 
     if (typeof error === "object" && error !== null && "response" in error) {
-      const axiosError = error as AxiosError;
+      const axiosError = error as AxiosErrorWithResponse;
       if (axiosError.response) {
         switch (axiosError.response.status) {
           case 400: {
@@ -296,18 +274,10 @@ function* songUpdaterSaga(action: PayloadAction<SongForUpdate>) {
               setStatus({ error: true, message: "An unknown error occurred" })
             );
         }
-      } else {
-        // Network error
-        console.log("Network error message-->", axiosError.message);
-        yield put(
-          setStatus({ error: true, message: "A network error occurred" })
-        );
       }
     } else {
       console.log("Unexpected error-->", error);
-      yield put(
-        setStatus({ error: true, message: "An unexpected error occurred" })
-      );
+      yield put(setStatus({ error: true, message: "Network Error" }));
     }
   }
 }
@@ -328,7 +298,7 @@ function* songDeletorSaga(action: PayloadAction<string>) {
     yield put(loadingToggler(false));
 
     if (typeof error === "object" && error !== null && "response" in error) {
-      const axiosError = error as AxiosError;
+      const axiosError = error as AxiosErrorWithResponse;
       if (axiosError.response) {
         switch (axiosError.response.status) {
           case 404:
@@ -353,18 +323,10 @@ function* songDeletorSaga(action: PayloadAction<string>) {
               setStatus({ error: true, message: "An unknown error occurred" })
             );
         }
-      } else {
-        // Network error
-        console.log("Network error message-->", axiosError.message);
-        yield put(
-          setStatus({ error: true, message: "A network error occurred" })
-        );
       }
     } else {
       console.log("Unexpected error-->", error);
-      yield put(
-        setStatus({ error: true, message: "An unexpected error occurred" })
-      );
+      yield put(setStatus({ error: true, message: "Network Error" }));
     }
   }
 }
@@ -388,7 +350,7 @@ function* albumGeterSaga(action: PayloadAction<string>) {
     yield put(loadingToggler(false));
 
     if (typeof error === "object" && error !== null && "response" in error) {
-      const axiosError = error as AxiosError;
+      const axiosError = error as AxiosErrorWithResponse;
       if (axiosError.response) {
         switch (axiosError.response.status) {
           case 404:
@@ -413,18 +375,10 @@ function* albumGeterSaga(action: PayloadAction<string>) {
               setStatus({ error: true, message: "An unknown error occurred" })
             );
         }
-      } else {
-        // Network error
-        console.log("Network error message-->", axiosError.message);
-        yield put(
-          setStatus({ error: true, message: "A network error occurred" })
-        );
       }
     } else {
       console.log("Unexpected error-->", error);
-      yield put(
-        setStatus({ error: true, message: "An unexpected error occurred" })
-      );
+      yield put(setStatus({ error: true, message: "Network Error" }));
     }
   }
 }
@@ -448,7 +402,7 @@ function* artistsGeterSaga(action: PayloadAction<string>) {
     yield put(loadingToggler(false));
 
     if (typeof error === "object" && error !== null && "response" in error) {
-      const axiosError = error as AxiosError;
+      const axiosError = error as AxiosErrorWithResponse;
       if (axiosError.response) {
         switch (axiosError.response.status) {
           case 404:
@@ -473,18 +427,10 @@ function* artistsGeterSaga(action: PayloadAction<string>) {
               setStatus({ error: true, message: "An unknown error occurred" })
             );
         }
-      } else {
-        // Network error
-        console.log("Network error message-->", axiosError.message);
-        yield put(
-          setStatus({ error: true, message: "A network error occurred" })
-        );
       }
     } else {
       console.log("Unexpected error-->", error);
-      yield put(
-        setStatus({ error: true, message: "An unexpected error occurred" })
-      );
+      yield put(setStatus({ error: true, message: "Network Error" }));
     }
   }
 }
@@ -508,7 +454,7 @@ function* genresGeterSaga(action: PayloadAction<string>) {
     yield put(loadingToggler(false));
 
     if (typeof error === "object" && error !== null && "response" in error) {
-      const axiosError = error as AxiosError;
+      const axiosError = error as AxiosErrorWithResponse;
       if (axiosError.response) {
         switch (axiosError.response.status) {
           case 404:
@@ -533,18 +479,10 @@ function* genresGeterSaga(action: PayloadAction<string>) {
               setStatus({ error: true, message: "An unknown error occurred" })
             );
         }
-      } else {
-        // Network error
-        console.log("Network error message-->", axiosError.message);
-        yield put(
-          setStatus({ error: true, message: "A network error occurred" })
-        );
       }
     } else {
       console.log("Unexpected error-->", error);
-      yield put(
-        setStatus({ error: true, message: "An unexpected error occurred" })
-      );
+      yield put(setStatus({ error: true, message: "Network Error" }));
     }
   }
 }
