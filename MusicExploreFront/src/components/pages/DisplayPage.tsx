@@ -9,10 +9,10 @@ import { useSelector } from "react-redux";
 const DisplayPage = () => {
   const songDisplay = useSelector((state: RootState) => state.songDisplay);
   return (
-    <div>
+    <>
       <DisplayHeader />
       <DisplayDetail song={songDisplay} />
-    </div>
+    </>
   );
 };
 

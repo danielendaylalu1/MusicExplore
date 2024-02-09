@@ -5,6 +5,7 @@ import { PiWaveform } from "react-icons/pi";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { setFormShow, setStatus } from "../store/uiSlice";
+import { CiMenuFries } from "react-icons/ci";
 
 const Navbar = () => {
   const navLinks = ["Albums", "Artists", "Genres"];
@@ -15,28 +16,31 @@ const Navbar = () => {
       <Link className="navbar-header" to="/">
         Music_Explore
       </Link>
-      <ul className="nav-items">
-        {navLinks.map((link) => (
-          <Link to={link.toLowerCase()} className="nav-link" key={link}>
-            {link}
-          </Link>
-        ))}
-      </ul>
+      <div className="nav-other">
+        <ul className="nav-items">
+          {navLinks.map((link) => (
+            <Link to={link.toLowerCase()} className="nav-link" key={link}>
+              {link}
+            </Link>
+          ))}
+        </ul>
 
-      <IoAddOutline
-        className="navbar-add-icon pointer"
-        onClick={() => {
-          dispacth(setFormShow(!showForm));
-          dispacth(
-            setStatus({
-              error: false,
-              message: "",
-            })
-          );
-        }}
-      />
+        <IoAddOutline
+          className="navbar-add-icon pointer"
+          onClick={() => {
+            dispacth(setFormShow(!showForm));
+            dispacth(
+              setStatus({
+                error: false,
+                message: "",
+              })
+            );
+          }}
+        />
 
-      <PiWaveform className="display-top-icon" />
+        <PiWaveform className="display-top-icon" />
+      </div>
+      <CiMenuFries className="navbar-menu-icon pointer" />
     </div>
   );
 };
