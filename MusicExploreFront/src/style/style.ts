@@ -29,8 +29,13 @@ export const addSongFormStylle = css({
   borderRadius: "0.5rem",
   backgroundColor: "#fff",
   zIndex: "1000",
+
   boxShadow:
     "rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,rgba(0, 0, 0, 0.05) 0px 1px 1px 0px",
+  "@media (max-width: 440px)": {
+    width: "90%",
+    // Add more styles as needed
+  },
 });
 export const formInputs = css({
   backgroundColor: "transparent",

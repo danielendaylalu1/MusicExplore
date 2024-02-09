@@ -101,7 +101,7 @@ const AddSong = () => {
                   })
                 );
               }}
-              // required
+              required
             />
             <input
               type="text"
@@ -119,7 +119,7 @@ const AddSong = () => {
                   })
                 );
               }}
-              // required
+              required
             />
             <input
               type="text"

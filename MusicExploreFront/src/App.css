@@ -138,7 +138,7 @@ div::-webkit-scrollbar {
   width: 100%;
 }
 .search-input {
-  /* flex: 0.8; */
+  flex: 0.8;
   background-color: transparent;
   border: 1px solid #b4b4b4;
   padding: 0.5rem 1rem;
