@@ -9,7 +9,8 @@ import SongContainer from "../SongCard/SongContainer";
 import Alert from "@mui/material/Alert";
 
 const AlbumsPage = () => {
-  const { searchValue, status } = useSelector((state: RootState) => state.ui);
+  const status = useSelector((state: RootState) => state.ui.status);
+  const searchValue = useSelector((state: RootState) => state.ui.searchValue);
   const data = useSelector((state: RootState) => state.songs.albums);
 
   const filteredData = data.filter((item) =>

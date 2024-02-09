@@ -9,7 +9,8 @@ import SongContainer from "../SongCard/SongContainer";
 import Alert from "@mui/material/Alert";
 
 const ArtistsPage = () => {
-  const { searchValue, status } = useSelector((state: RootState) => state.ui);
+  const searchValue = useSelector((state: RootState) => state.ui.searchValue);
+  const status = useSelector((state: RootState) => state.ui.status);
   const data = useSelector((state: RootState) => state.songs.artists);
 
   const filteredData = data.filter((item) =>
@@ -19,7 +20,7 @@ const ArtistsPage = () => {
   useEffect(() => {
     dispatch(intializeArtistsStart(""));
   }, [dispatch]);
-  // console.log("artists page runs", data);
+
   if (status.error) {
     return <Alert severity="error">{status.message}</Alert>;
   }

@@ -4,7 +4,7 @@ import { IoAddOutline } from "react-icons/io5";
 import { PiWaveform } from "react-icons/pi";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import { setFormShow } from "../store/uiSlice";
+import { setFormShow, setStatus } from "../store/uiSlice";
 
 const Navbar = () => {
   const navLinks = ["Albums", "Artists", "Genres"];
@@ -27,7 +27,12 @@ const Navbar = () => {
         className="navbar-add-icon pointer"
         onClick={() => {
           dispacth(setFormShow(!showForm));
-          // setShowForm(!showForm);
+          dispacth(
+            setStatus({
+              error: false,
+              message: "",
+            })
+          );
         }}
       />
 

@@ -7,6 +7,12 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+app.use((req, res, next) => {
+  req.setTimeout(5000); // sets the server-side timeout for the request
+  res.setTimeout(5000); // sets the server-side timeout for the response
+  next();
+});
 // app.use((req, res, _next) => {
 //   req.setTimeout(5000);
 //   res.setTimeout(5000);

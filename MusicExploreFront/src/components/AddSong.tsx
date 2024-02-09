@@ -31,9 +31,12 @@ const AddSong = () => {
   );
   const status = useSelector((state: RootState) => state.ui.status);
   const isLoading = useSelector((state: RootState) => state.ui.isLoading);
+  // console.log("add page");
 
   // const [stat, setStat] = useState(status);
-
+  if (!showForm) {
+    return;
+  }
   return createPortal(
     <div css={addSongStyle}>
       <div
@@ -66,7 +69,7 @@ const AddSong = () => {
           }
           setTimeout(() => {
             dispatch(setStatus({ error: false, message: "" }));
-          }, 3000);
+          }, 5000);
         }}
       >
         <h3 css={addSongHeader}>Add a Song</h3>

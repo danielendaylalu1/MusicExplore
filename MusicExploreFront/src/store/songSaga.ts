@@ -1,4 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
+import { AxiosError } from "axios";
 import {
   create,
   deleter,
@@ -59,9 +60,49 @@ function* songsGeterSaga() {
     yield put(intializeSongs(songs));
     yield put(loadingToggler(false));
     yield put(initializeSongDisplay(songs[0]));
-  } catch (error) {
+  } catch (error: unknown) {
     yield put(loadingToggler(false));
-    yield put(setStatus({ error: true, message: "error while loading songs" }));
+
+    if (typeof error === "object" && error !== null && "response" in error) {
+      const axiosError = error as AxiosError;
+      if (axiosError.response) {
+        switch (axiosError.response.status) {
+          case 404:
+            // Not Found error
+            console.log(
+              "Not Found error message-->",
+              axiosError.response.data.error
+            );
+            yield put(
+              setStatus({
+                error: true,
+                message: "The requested resource could not be found",
+              })
+            );
+            break;
+          // Unknown error
+          default:
+            console.log(
+              "Unknown error message-->",
+              axiosError.response.data.error
+            );
+            yield put(
+              setStatus({ error: true, message: "An unknown error occurred" })
+            );
+        }
+      } else {
+        // Network error
+        console.log("Network error message-->", axiosError.message);
+        yield put(
+          setStatus({ error: true, message: "A network error occurred" })
+        );
+      }
+    } else {
+      console.log("Unexpected error-->", error);
+      yield put(
+        setStatus({ error: true, message: "An unexpected error occurred" })
+      );
+    }
   }
 }
 
@@ -83,9 +124,49 @@ function* singleSongGeterSaga(action: PayloadAction<string>) {
       })
     );
     yield put(loadingToggler(false));
-  } catch (e) {
+  } catch (error: unknown) {
     yield put(loadingToggler(false));
-    yield put(setStatus({ error: true, message: "error while loading song" }));
+
+    if (typeof error === "object" && error !== null && "response" in error) {
+      const axiosError = error as AxiosError;
+      if (axiosError.response) {
+        switch (axiosError.response.status) {
+          case 404:
+            // Not Found error
+            console.log(
+              "Not Found error message-->",
+              axiosError.response.data.error
+            );
+            yield put(
+              setStatus({
+                error: true,
+                message: "The requested resource could not be found",
+              })
+            );
+            break;
+          // Unknown error
+          default:
+            console.log(
+              "Unknown error message-->",
+              axiosError.response.data.error
+            );
+            yield put(
+              setStatus({ error: true, message: "An unknown error occurred" })
+            );
+        }
+      } else {
+        // Network error
+        console.log("Network error message-->", axiosError.message);
+        yield put(
+          setStatus({ error: true, message: "A network error occurred" })
+        );
+      }
+    } else {
+      console.log("Unexpected error-->", error);
+      yield put(
+        setStatus({ error: true, message: "An unexpected error occurred" })
+      );
+    }
   }
 }
 
@@ -111,15 +192,56 @@ function* songCreatorSaga(action: PayloadAction<SongForCreate>) {
     );
 
     yield put(resetUpdateFormData());
-  } catch (error) {
+  } catch (error: unknown) {
     yield put(loadingToggler(false));
 
-    yield put(
-      setStatus({
-        error: true,
-        message: "faild to create a song",
-      })
-    );
+    if (typeof error === "object" && error !== null && "response" in error) {
+      const axiosError = error as AxiosError;
+      if (axiosError.response) {
+        switch (axiosError.response.status) {
+          case 400: {
+            const errorMessage = axiosError.response.data.error.join(", ");
+            console.log("Validation error message-->", errorMessage);
+            yield put(setStatus({ error: true, message: errorMessage }));
+            break;
+          }
+          // Validation error
+
+          case 404:
+            // Not Found error
+            console.log(
+              "Not Found error message-->",
+              axiosError.response.data.error
+            );
+            yield put(
+              setStatus({
+                error: true,
+                message: "The requested resource could not be found",
+              })
+            );
+            break;
+          default:
+            console.log(
+              "Unknown error message-->",
+              axiosError.response.data.error
+            );
+            yield put(
+              setStatus({ error: true, message: "An unknown error occurred" })
+            );
+        }
+      } else {
+        // Network error
+        console.log("Network error message-->", axiosError.message);
+        yield put(
+          setStatus({ error: true, message: "A network error occurred" })
+        );
+      }
+    } else {
+      console.log("Unexpected error-->", error);
+      yield put(
+        setStatus({ error: true, message: "An unexpected error occurred" })
+      );
+    }
   }
 }
 
@@ -137,10 +259,56 @@ function* songUpdaterSaga(action: PayloadAction<SongForUpdate>) {
     yield put(updateSong(song));
     yield put(loadingToggler(false));
     yield put(resetUpdateFormData());
-  } catch (e) {
+  } catch (error: unknown) {
     yield put(loadingToggler(false));
-    yield put(setStatus({ error: true, message: "Failed to update song" }));
-    console.error(e);
+
+    if (typeof error === "object" && error !== null && "response" in error) {
+      const axiosError = error as AxiosError;
+      if (axiosError.response) {
+        switch (axiosError.response.status) {
+          case 400: {
+            const errorMessage = axiosError.response.data.error.join(", ");
+            console.log("Validation error message-->", errorMessage);
+            yield put(setStatus({ error: true, message: errorMessage }));
+            break;
+          }
+          // Validation error
+
+          case 404:
+            // Not Found error
+            console.log(
+              "Not Found error message-->",
+              axiosError.response.data.error
+            );
+            yield put(
+              setStatus({
+                error: true,
+                message: "The requested resource could not be found",
+              })
+            );
+            break;
+          default:
+            console.log(
+              "Unknown error message-->",
+              axiosError.response.data.error
+            );
+            yield put(
+              setStatus({ error: true, message: "An unknown error occurred" })
+            );
+        }
+      } else {
+        // Network error
+        console.log("Network error message-->", axiosError.message);
+        yield put(
+          setStatus({ error: true, message: "A network error occurred" })
+        );
+      }
+    } else {
+      console.log("Unexpected error-->", error);
+      yield put(
+        setStatus({ error: true, message: "An unexpected error occurred" })
+      );
+    }
   }
 }
 
@@ -156,10 +324,48 @@ function* songDeletorSaga(action: PayloadAction<string>) {
     const song: Message = yield call(() => deleter(action.payload));
     console.log("songs data", song, action.payload);
     yield put(deleteSong(action.payload));
-  } catch (e) {
+  } catch (error: unknown) {
     yield put(loadingToggler(false));
-    yield put(setStatus({ error: true, message: "Failed to delete song" }));
-    console.error(e);
+
+    if (typeof error === "object" && error !== null && "response" in error) {
+      const axiosError = error as AxiosError;
+      if (axiosError.response) {
+        switch (axiosError.response.status) {
+          case 404:
+            // Not Found error
+            console.log(
+              "Not Found error message-->",
+              axiosError.response.data.error
+            );
+            yield put(
+              setStatus({
+                error: true,
+                message: "The requested resource could not be found",
+              })
+            );
+            break;
+          default:
+            console.log(
+              "Unknown error message-->",
+              axiosError.response.data.error
+            );
+            yield put(
+              setStatus({ error: true, message: "An unknown error occurred" })
+            );
+        }
+      } else {
+        // Network error
+        console.log("Network error message-->", axiosError.message);
+        yield put(
+          setStatus({ error: true, message: "A network error occurred" })
+        );
+      }
+    } else {
+      console.log("Unexpected error-->", error);
+      yield put(
+        setStatus({ error: true, message: "An unexpected error occurred" })
+      );
+    }
   }
 }
 
@@ -178,10 +384,48 @@ function* albumGeterSaga(action: PayloadAction<string>) {
     yield put(intializeAlbums(albums));
     yield put(loadingToggler(false));
     yield put(initializeSongDisplay(albums[0].songs[0]));
-  } catch (e) {
+  } catch (error: unknown) {
     yield put(loadingToggler(false));
-    yield put(setStatus({ error: true, message: "Failed to fetch albums" }));
-    console.error(e);
+
+    if (typeof error === "object" && error !== null && "response" in error) {
+      const axiosError = error as AxiosError;
+      if (axiosError.response) {
+        switch (axiosError.response.status) {
+          case 404:
+            // Not Found error
+            console.log(
+              "Not Found error message-->",
+              axiosError.response.data.error
+            );
+            yield put(
+              setStatus({
+                error: true,
+                message: "The requested resource could not be found",
+              })
+            );
+            break;
+          default:
+            console.log(
+              "Unknown error message-->",
+              axiosError.response.data.error
+            );
+            yield put(
+              setStatus({ error: true, message: "An unknown error occurred" })
+            );
+        }
+      } else {
+        // Network error
+        console.log("Network error message-->", axiosError.message);
+        yield put(
+          setStatus({ error: true, message: "A network error occurred" })
+        );
+      }
+    } else {
+      console.log("Unexpected error-->", error);
+      yield put(
+        setStatus({ error: true, message: "An unexpected error occurred" })
+      );
+    }
   }
 }
 
@@ -200,10 +444,48 @@ function* artistsGeterSaga(action: PayloadAction<string>) {
     yield put(intializeArtists(artists));
     yield put(loadingToggler(false));
     yield put(initializeSongDisplay(artists[0].songs[0]));
-  } catch (e) {
+  } catch (error: unknown) {
     yield put(loadingToggler(false));
-    yield put(setStatus({ error: true, message: "Failed to fetch artists" }));
-    console.error(e);
+
+    if (typeof error === "object" && error !== null && "response" in error) {
+      const axiosError = error as AxiosError;
+      if (axiosError.response) {
+        switch (axiosError.response.status) {
+          case 404:
+            // Not Found error
+            console.log(
+              "Not Found error message-->",
+              axiosError.response.data.error
+            );
+            yield put(
+              setStatus({
+                error: true,
+                message: "The requested resource could not be found",
+              })
+            );
+            break;
+          default:
+            console.log(
+              "Unknown error message-->",
+              axiosError.response.data.error
+            );
+            yield put(
+              setStatus({ error: true, message: "An unknown error occurred" })
+            );
+        }
+      } else {
+        // Network error
+        console.log("Network error message-->", axiosError.message);
+        yield put(
+          setStatus({ error: true, message: "A network error occurred" })
+        );
+      }
+    } else {
+      console.log("Unexpected error-->", error);
+      yield put(
+        setStatus({ error: true, message: "An unexpected error occurred" })
+      );
+    }
   }
 }
 
@@ -222,10 +504,48 @@ function* genresGeterSaga(action: PayloadAction<string>) {
     yield put(intializeGenres(genres));
     yield put(loadingToggler(false));
     yield put(initializeSongDisplay(genres[0].songs[0]));
-  } catch (e) {
+  } catch (error: unknown) {
     yield put(loadingToggler(false));
-    yield put(setStatus({ error: true, message: "Failed to fecth genres" }));
-    console.error(e);
+
+    if (typeof error === "object" && error !== null && "response" in error) {
+      const axiosError = error as AxiosError;
+      if (axiosError.response) {
+        switch (axiosError.response.status) {
+          case 404:
+            // Not Found error
+            console.log(
+              "Not Found error message-->",
+              axiosError.response.data.error
+            );
+            yield put(
+              setStatus({
+                error: true,
+                message: "The requested resource could not be found",
+              })
+            );
+            break;
+          default:
+            console.log(
+              "Unknown error message-->",
+              axiosError.response.data.error
+            );
+            yield put(
+              setStatus({ error: true, message: "An unknown error occurred" })
+            );
+        }
+      } else {
+        // Network error
+        console.log("Network error message-->", axiosError.message);
+        yield put(
+          setStatus({ error: true, message: "A network error occurred" })
+        );
+      }
+    } else {
+      console.log("Unexpected error-->", error);
+      yield put(
+        setStatus({ error: true, message: "An unexpected error occurred" })
+      );
+    }
   }
 }
 

@@ -9,7 +9,8 @@ import SongContainer from "../SongCard/SongContainer";
 import Alert from "@mui/material/Alert";
 
 const GenresPage = () => {
-  const { searchValue, status } = useSelector((state: RootState) => state.ui);
+  const status = useSelector((state: RootState) => state.ui.status);
+  const searchValue = useSelector((state: RootState) => state.ui.searchValue);
   const data = useSelector((state: RootState) => state.songs.genres);
 
   const filteredData = data.filter((item) =>
@@ -19,13 +20,12 @@ const GenresPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(intializeGenresStart(""));
-    // console.log("genres efeccccccccccct page runs");
   }, [dispatch]);
 
   if (status.error) {
     return <Alert severity="error">{status.message}</Alert>;
   }
-  // console.log("genres page runs", data);
+
   return (
     <div className="songs">
       <div className="songs-container">

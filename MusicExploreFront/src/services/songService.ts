@@ -17,8 +17,16 @@ const config = {
 };
 
 export const getSongs = async (): Promise<AllSongs> => {
+  // try {
   const songs = await axios.get("http://localhost:3000/songs");
   return songs.data;
+  // } catch (error) {
+  //   if (axios.isAxiosError(error)) {
+  //     return handleAxiosError(error);
+  //   } else {
+  //     return Promise.reject(error);
+  //   }
+  // }
 };
 export const getSong = async (id?: string): Promise<Song> => {
   const song = await axios.get(`http://localhost:3000/songs/${id}`);
