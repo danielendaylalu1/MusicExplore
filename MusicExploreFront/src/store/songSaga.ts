@@ -236,6 +236,9 @@ function* songUpdaterSaga(action: PayloadAction<SongForUpdate>) {
     // console.log("songs data", song);
     yield put(updateSong(song));
     yield put(loadingToggler(false));
+    yield put(
+      setStatus({ error: false, message: "Song updated successfully" })
+    );
     yield put(resetUpdateFormData());
   } catch (error: unknown) {
     yield put(loadingToggler(false));

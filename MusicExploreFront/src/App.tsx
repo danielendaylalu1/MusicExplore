@@ -10,10 +10,13 @@ import AddSong from "./components/AddSong";
 // import { useSelector } from "react-redux";
 // import { RootState } from "./store/store";
 import DisplayPage from "./components/pages/DisplayPage";
+import { useSelector } from "react-redux";
+import { RootState } from "./store/store";
 
 function App() {
   // const songDisplay = useSelector((state: RootState) => state.songDisplay);
-  // const status = useSelector((state:RootState))
+  // const status = useSelector((state:RootState)=> state.s)
+  const showDisplay = useSelector((state: RootState) => state.ui.showDisplay);
 
   console.log("app page runs---");
 
@@ -24,10 +27,11 @@ function App() {
         <Navbar />
         <div className="outlet p-3 bg-light-gray">
           <SearchBar />
-
           <Outlet />
         </div>
-        <div className="display p-3 bg-white">
+        <div
+          className={`display p-3 bg-white ${showDisplay && "show-display"}`}
+        >
           <div className="display-icon-wrapper">
             <PiWaveform className="display-top-icon" />
           </div>

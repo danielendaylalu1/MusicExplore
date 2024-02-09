@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { initializeSongDisplay } from "../../store/songDisplaySlice";
 import { Song } from "../../types";
 import { ARTIST, GENRE, ALBUM } from "../../utils";
+import { setShowDisplay } from "../../store/uiSlice";
 
 interface DetailProps {
   song: Song;
@@ -12,11 +13,14 @@ interface DetailProps {
 }
 
 const SongCardDetail: FC<DetailProps> = ({ song, section }) => {
-  const diaptch = useDispatch();
+  const dispatch = useDispatch();
   return (
     <div
       className="song-card-left"
-      onClick={() => diaptch(initializeSongDisplay(song))}
+      onClick={() => {
+        dispatch(initializeSongDisplay(song));
+        dispatch(setShowDisplay(true));
+      }}
     >
       <img src={speakerIcon} alt="speaker icon" className="song-card-icon" />
       <div className="song-card-detail">

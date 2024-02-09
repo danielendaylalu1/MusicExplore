@@ -15,6 +15,7 @@ interface UiState {
   updateFormData: UpdateForm;
   showForm: boolean;
   status: Status;
+  showDisplay: boolean;
 }
 const initialState: UiState = {
   isLoading: false,
@@ -34,6 +35,7 @@ const initialState: UiState = {
     },
     type: "Create",
   },
+  showDisplay: true,
 };
 
 const uiSlice = createSlice({
@@ -81,6 +83,11 @@ const uiSlice = createSlice({
       // console.log("state-->", state, "action-->", action.payload);
       return state;
     },
+    setShowDisplay(state, action: PayloadAction<boolean>) {
+      state = { ...state, showDisplay: action.payload };
+      // console.log("state-->", state, "action-->", action.payload);
+      return state;
+    },
   },
 });
 
@@ -92,6 +99,7 @@ export const {
   setUpdateFormData,
   resetUpdateFormData,
   setStatus,
+  setShowDisplay,
 } = uiSlice.actions;
 
 export default uiSlice.reducer;
