@@ -42,6 +42,7 @@ import {
   loadingToggler,
   resetUpdateFormData,
   searchValueHandler,
+  setStatus,
   setUpdateFormData,
   setUpdateFormDataStart,
 } from "./uiSlice";
@@ -49,6 +50,7 @@ import {
 // songFetcher saga -------- songFetcher saga
 function* songsGeterSaga() {
   try {
+    yield put(setStatus({ error: false, message: "" }));
     yield put(searchValueHandler(""));
     yield put(loadingToggler(true));
     const songs: AllSongs = yield call(getSongs);
@@ -59,7 +61,7 @@ function* songsGeterSaga() {
     yield put(initializeSongDisplay(songs[0]));
   } catch (error) {
     yield put(loadingToggler(false));
-    console.error("error-->", error);
+    yield put(setStatus({ error: true, message: "error while loading songs" }));
   }
 }
 
@@ -70,6 +72,7 @@ export function* songsSaga() {
 // singlSongFetcher saga -------- songFetcher saga
 function* singleSongGeterSaga(action: PayloadAction<string>) {
   try {
+    yield put(setStatus({ error: false, message: "" }));
     yield put(loadingToggler(true));
     const song: Song = yield call(() => getSong(action.payload));
     // console.log("dipatch runs");
@@ -82,7 +85,7 @@ function* singleSongGeterSaga(action: PayloadAction<string>) {
     yield put(loadingToggler(false));
   } catch (e) {
     yield put(loadingToggler(false));
-    console.error(e);
+    yield put(setStatus({ error: true, message: "error while loading song" }));
   }
 }
 
@@ -93,16 +96,30 @@ export function* singleSongSaga() {
 // songCreater saga -------- songCreater saga
 function* songCreatorSaga(action: PayloadAction<SongForCreate>) {
   try {
+    yield put(setStatus({ error: false, message: "" }));
     yield put(loadingToggler(true));
     const song: Song = yield call(() => create(action.payload));
     // console.log("songs data", song);
     yield put(createSong(song));
 
     yield put(loadingToggler(false));
+    yield put(
+      setStatus({
+        error: false,
+        message: "song created succesfully",
+      })
+    );
+
     yield put(resetUpdateFormData());
-  } catch (e) {
+  } catch (error) {
     yield put(loadingToggler(false));
-    console.error(e);
+
+    yield put(
+      setStatus({
+        error: true,
+        message: "faild to create a song",
+      })
+    );
   }
 }
 
@@ -113,6 +130,7 @@ export function* songCreateSaga() {
 // songUpdater saga -------- songUpdater saga
 function* songUpdaterSaga(action: PayloadAction<SongForUpdate>) {
   try {
+    yield put(setStatus({ error: false, message: "" }));
     yield put(loadingToggler(true));
     const song: Song = yield call(() => update(action.payload));
     // console.log("songs data", song);
@@ -121,6 +139,7 @@ function* songUpdaterSaga(action: PayloadAction<SongForUpdate>) {
     yield put(resetUpdateFormData());
   } catch (e) {
     yield put(loadingToggler(false));
+    yield put(setStatus({ error: true, message: "Failed to update song" }));
     console.error(e);
   }
 }
@@ -132,12 +151,14 @@ export function* songUpdateSaga() {
 // songDeleter saga -------- songDeleter saga
 function* songDeletorSaga(action: PayloadAction<string>) {
   try {
+    yield put(setStatus({ error: false, message: "" }));
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const song: Message = yield call(() => deleter(action.payload));
-    // console.log("songs data", song, action.payload);
+    console.log("songs data", song, action.payload);
     yield put(deleteSong(action.payload));
   } catch (e) {
     yield put(loadingToggler(false));
+    yield put(setStatus({ error: true, message: "Failed to delete song" }));
     console.error(e);
   }
 }
@@ -149,6 +170,7 @@ export function* songDeleteSaga() {
 // albumFetcher saga -------- albumFetcher saga
 function* albumGeterSaga(action: PayloadAction<string>) {
   try {
+    yield put(setStatus({ error: false, message: "" }));
     yield put(searchValueHandler(""));
     yield put(loadingToggler(true));
     const albums: AllAlbums = yield call(() => getAlbums(action.payload));
@@ -158,6 +180,7 @@ function* albumGeterSaga(action: PayloadAction<string>) {
     yield put(initializeSongDisplay(albums[0].songs[0]));
   } catch (e) {
     yield put(loadingToggler(false));
+    yield put(setStatus({ error: true, message: "Failed to fetch albums" }));
     console.error(e);
   }
 }
@@ -169,6 +192,7 @@ export function* albumsSaga() {
 // artistFetcher saga -------- artistFetcher saga
 function* artistsGeterSaga(action: PayloadAction<string>) {
   try {
+    yield put(setStatus({ error: false, message: "" }));
     yield put(searchValueHandler(""));
     yield put(loadingToggler(true));
     const artists: AllArtists = yield call(() => getArtists(action.payload));
@@ -178,6 +202,7 @@ function* artistsGeterSaga(action: PayloadAction<string>) {
     yield put(initializeSongDisplay(artists[0].songs[0]));
   } catch (e) {
     yield put(loadingToggler(false));
+    yield put(setStatus({ error: true, message: "Failed to fetch artists" }));
     console.error(e);
   }
 }
@@ -189,6 +214,7 @@ export function* artistsSaga() {
 // genreFetcher saga -------- genreFetcher saga
 function* genresGeterSaga(action: PayloadAction<string>) {
   try {
+    yield put(setStatus({ error: false, message: "" }));
     yield put(searchValueHandler(""));
     yield put(loadingToggler(true));
     const genres: AllGenres = yield call(() => getGenres(action.payload));
@@ -198,6 +224,7 @@ function* genresGeterSaga(action: PayloadAction<string>) {
     yield put(initializeSongDisplay(genres[0].songs[0]));
   } catch (e) {
     yield put(loadingToggler(false));
+    yield put(setStatus({ error: true, message: "Failed to fecth genres" }));
     console.error(e);
   }
 }

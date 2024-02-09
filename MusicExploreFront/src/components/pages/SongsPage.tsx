@@ -5,9 +5,10 @@ import { intializeSongsStart } from "../../store/songSlice";
 import { RootState } from "../../store/store";
 import SongCardDetail from "../SongCard/SongCardDetail";
 import SongContainer from "../SongCard/SongContainer";
+import Alert from "@mui/material/Alert";
 
 const SongsPage = () => {
-  const searchValue = useSelector((state: RootState) => state.ui.searchValue);
+  const { searchValue, status } = useSelector((state: RootState) => state.ui);
   // const [search, setSearch] = useState(searchValue);
   const data = useSelector((state: RootState) => state.songs.songs);
 
@@ -19,6 +20,10 @@ const SongsPage = () => {
   useEffect(() => {
     dispatch(intializeSongsStart());
   }, [dispatch]);
+
+  if (status.error) {
+    return <Alert severity="error">{status.message}</Alert>;
+  }
 
   return (
     <div className="songs">

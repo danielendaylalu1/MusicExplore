@@ -13,6 +13,7 @@ import { RootState } from "./store/store";
 function App() {
   const showForm = useSelector((state: RootState) => state.ui.showForm);
   const songDisplay = useSelector((state: RootState) => state.songDisplay);
+  // const status = useSelector((state:RootState))
 
   return (
     <div className="app">
@@ -21,6 +22,7 @@ function App() {
         <Navbar />
         <div className="outlet p-3 bg-light-gray">
           <SearchBar />
+
           <Outlet />
         </div>
         <div className="display p-3 bg-white">

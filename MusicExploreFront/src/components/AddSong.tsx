@@ -1,9 +1,11 @@
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
+import Alert from "@mui/material/Alert";
 import {
   resetUpdateFormData,
   setFormShow,
+  setStatus,
   setUpdateFormData,
 } from "../store/uiSlice";
 
@@ -17,14 +19,20 @@ import {
   formBtn,
   formInputs,
 } from "../style/style";
+// import { useState } from "react";
+// import { useState } from "react";
 
 const AddSong = () => {
   const showForm = useSelector((state: RootState) => state.ui.showForm);
+  // const [message, setMessage] = useState("");
   const dispatch = useDispatch();
   const updateSongFormData = useSelector(
     (state: RootState) => state.ui.updateFormData
   );
+  const status = useSelector((state: RootState) => state.ui.status);
   const isLoading = useSelector((state: RootState) => state.ui.isLoading);
+
+  // const [stat, setStat] = useState(status);
 
   return createPortal(
     <div css={addSongStyle}>
@@ -56,9 +64,20 @@ const AddSong = () => {
               })
             );
           }
+          setTimeout(() => {
+            dispatch(setStatus({ error: false, message: "" }));
+          }, 3000);
         }}
       >
         <h3 css={addSongHeader}>Add a Song</h3>
+        {status.error
+          ? status.message !== "" && (
+              <Alert severity="error">{status.message}</Alert>
+            )
+          : status.message !== "" && (
+              <Alert severity="success">{status.message}</Alert>
+            )}
+
         {isLoading ? (
           <Spinner />
         ) : (

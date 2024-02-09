@@ -8,10 +8,10 @@ interface SongContainerProps {
 }
 
 const SongContainer: FC<SongContainerProps> = ({ songCard }) => {
-  const ui = useSelector((state: RootState) => state.ui);
+  const isLoading = useSelector((state: RootState) => state.ui.isLoading);
   return (
     <div className="songs-container">
-      {ui.isLoading ? <Spinner /> : <>{songCard}</>}
+      {isLoading ? <Spinner /> : <>{songCard}</>}
     </div>
   );
 };

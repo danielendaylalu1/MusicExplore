@@ -6,9 +6,10 @@ import { RootState } from "../../store/store";
 import SongCardDetail from "../SongCard/SongCardDetail";
 import { GENRE } from "../../utils";
 import SongContainer from "../SongCard/SongContainer";
+import Alert from "@mui/material/Alert";
 
 const GenresPage = () => {
-  const searchValue = useSelector((state: RootState) => state.ui.searchValue);
+  const { searchValue, status } = useSelector((state: RootState) => state.ui);
   const data = useSelector((state: RootState) => state.songs.genres);
 
   const filteredData = data.filter((item) =>
@@ -20,6 +21,10 @@ const GenresPage = () => {
     dispatch(intializeGenresStart(""));
     // console.log("genres efeccccccccccct page runs");
   }, [dispatch]);
+
+  if (status.error) {
+    return <Alert severity="error">{status.message}</Alert>;
+  }
   // console.log("genres page runs", data);
   return (
     <div className="songs">

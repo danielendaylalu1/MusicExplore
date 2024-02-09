@@ -15,11 +15,10 @@ app.use(express.json());
 const errorHandler = (err, _req, res, _next) => {
   console.log(err);
   if (err.name === "ValidationError") {
-    const firstErrorKey = Object.keys(err.errors);
-    const errorMessage = err.errors[firstErrorKey].message;
+    const errorMessages = Object.values(err.errors).map((e) => e.message);
     res.status(400).json({
       message: "Validation Error",
-      error: errorMessage,
+      error: errorMessages,
     });
   }
   if (err instanceof mongoose.MongooseError) {

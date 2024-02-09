@@ -5,18 +5,25 @@ interface UpdateForm {
   song: Song;
   type: string;
 }
+interface Status {
+  error: boolean;
+  message: string;
+}
 interface UiState {
   isLoading: boolean;
   searchValue: string;
   updateFormData: UpdateForm;
   showForm: boolean;
-  error: string;
+  status: Status;
 }
 const initialState: UiState = {
   isLoading: false,
   searchValue: "",
   showForm: false,
-  error: "",
+  status: {
+    error: false,
+    message: "",
+  },
   updateFormData: {
     song: {
       title: "",
@@ -69,9 +76,9 @@ const uiSlice = createSlice({
       state = { ...state, showForm: action.payload };
       return state;
     },
-    setError(state, action: PayloadAction<string>) {
-      state = { ...state, error: action.payload };
-      console.log("state-->", state, "action-->", action.payload);
+    setStatus(state, action: PayloadAction<Status>) {
+      state = { ...state, status: action.payload };
+      // console.log("state-->", state, "action-->", action.payload);
       return state;
     },
   },
@@ -84,6 +91,7 @@ export const {
   setUpdateFormDataStart,
   setUpdateFormData,
   resetUpdateFormData,
+  setStatus,
 } = uiSlice.actions;
 
 export default uiSlice.reducer;

@@ -6,9 +6,10 @@ import { RootState } from "../../store/store";
 import SongCardDetail from "../SongCard/SongCardDetail";
 import { ALBUM } from "../../utils";
 import SongContainer from "../SongCard/SongContainer";
+import Alert from "@mui/material/Alert";
 
 const AlbumsPage = () => {
-  const searchValue = useSelector((state: RootState) => state.ui.searchValue);
+  const { searchValue, status } = useSelector((state: RootState) => state.ui);
   const data = useSelector((state: RootState) => state.songs.albums);
 
   const filteredData = data.filter((item) =>
@@ -18,6 +19,10 @@ const AlbumsPage = () => {
   useEffect(() => {
     dispatch(intializeAlbumsStart(""));
   }, [dispatch]);
+
+  if (status.error) {
+    return <Alert severity="error">{status.message}</Alert>;
+  }
 
   return (
     <div className="songs">
