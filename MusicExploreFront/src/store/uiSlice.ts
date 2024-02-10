@@ -35,7 +35,7 @@ const initialState: UiState = {
     },
     type: "Create",
   },
-  showDisplay: true,
+  showDisplay: false,
 };
 
 const uiSlice = createSlice({

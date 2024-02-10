@@ -426,6 +426,7 @@ div::-webkit-scrollbar {
     padding: 1rem 0.5rem;
   }
   .search-bar {
+    /* padding: 1rem; */
     flex-direction: column;
   }
 }

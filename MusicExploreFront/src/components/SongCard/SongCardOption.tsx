@@ -10,7 +10,7 @@ import {
   intializeAlbumsStart,
   intializeArtistsStart,
   intializeGenresStart,
-  intializeSongsStart,
+  // intializeSongsStart,
 } from "../../store/songSlice";
 import { ALBUM, ARTIST, GENRE } from "../../utils";
 import { RootState } from "../../store/store";
@@ -77,7 +77,7 @@ const SongCardOption: FC<OptionProps> = ({
                     dispatch(intializeGenresStart(""));
                   } else {
                     console.log("section", section);
-                    dispatch(intializeSongsStart());
+                    // dispatch(intializeSongsStart());
                   }
                 }}
               >
