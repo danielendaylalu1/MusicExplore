@@ -9,6 +9,7 @@ interface Status {
   error: boolean;
   message: string;
 }
+
 interface UiState {
   isLoading: boolean;
   searchValue: string;
@@ -16,6 +17,7 @@ interface UiState {
   showForm: boolean;
   status: Status;
   showDisplay: boolean;
+  searchVal: string;
 }
 const initialState: UiState = {
   isLoading: false,
@@ -36,6 +38,7 @@ const initialState: UiState = {
     type: "Create",
   },
   showDisplay: false,
+  searchVal: "songs",
 };
 
 const uiSlice = createSlice({
@@ -88,6 +91,11 @@ const uiSlice = createSlice({
       // console.log("state-->", state, "action-->", action.payload);
       return state;
     },
+    setSearchVal(state, action: PayloadAction<string>) {
+      state.searchVal = action.payload;
+      console.log(state.searchVal);
+      return state;
+    },
   },
 });
 
@@ -100,6 +108,7 @@ export const {
   resetUpdateFormData,
   setStatus,
   setShowDisplay,
+  setSearchVal,
 } = uiSlice.actions;
 
 export default uiSlice.reducer;
