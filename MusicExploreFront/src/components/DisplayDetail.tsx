@@ -4,7 +4,7 @@ import { FC } from "react";
 // import { SongForCreate } from "../types";
 import { SongDisplay } from "../store/songDisplaySlice";
 import SongCard from "./SongCard/SongCard";
-import SongCardDetail from "./SongCard/SongCardDetail";
+// import SongCardDetail from "./SongCard/SongCardDetail";
 import { Song } from "../types";
 
 interface DisplayDetailProps {
@@ -13,12 +13,12 @@ interface DisplayDetailProps {
 
 export interface Detail {
   header: string;
-  detail: string | undefined;
+  detail: string | undefined | null;
 }
 
 const DisplayDetail: FC<DisplayDetailProps> = ({ songDisplayData }) => {
   let details: Detail[] | null = null;
-  let songs: Song[] | undefined = [];
+  let songs: Song[] | undefined | null = [];
   if (songDisplayData.section === "Song") {
     details = [
       {
@@ -42,30 +42,30 @@ const DisplayDetail: FC<DisplayDetailProps> = ({ songDisplayData }) => {
     details = [
       {
         header: "Album",
-        detail: songDisplayData.album?.album.name,
+        detail: songDisplayData.album?.song.album.name,
       },
       {
         header: "Artist",
-        detail: songDisplayData.album?.album.artist,
+        detail: songDisplayData.album?.song.album.artist,
       },
     ];
-    songs = songDisplayData.album?.songs;
+    songs = songDisplayData.album?.song.songs;
   } else if (songDisplayData.section === "Artist") {
     details = [
       {
         header: "Artist",
-        detail: songDisplayData.artist?.artist,
+        detail: songDisplayData.artist?.song.artist,
       },
     ];
-    songs = songDisplayData.artist?.songs;
+    songs = songDisplayData.artist?.song.songs;
   } else if (songDisplayData.section === "Genre") {
     details = [
       {
         header: "Genre",
-        detail: songDisplayData.genre?.genre,
+        detail: songDisplayData.genre?.song.genre,
       },
     ];
-    songs = songDisplayData.genre?.songs;
+    songs = songDisplayData.genre?.song.songs;
   }
 
   return (
@@ -88,7 +88,8 @@ const DisplayDetail: FC<DisplayDetailProps> = ({ songDisplayData }) => {
               return (
                 <SongCard
                   key={item.id}
-                  header={<SongCardDetail song={item} section="Song" />}
+                  song={item}
+                  // header={<SongCardDetail song={item} section="Song" />}
                   isSong={true}
                   songID={item.id}
                   section="song"

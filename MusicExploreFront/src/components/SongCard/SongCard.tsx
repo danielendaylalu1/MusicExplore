@@ -1,11 +1,19 @@
-import { FC, ReactNode, useState } from "react";
+import { FC, useState } from "react";
 import SongCardOption from "./SongCardOption";
 import SongCardDetail from "./SongCardDetail";
 import { Song } from "../../types";
+import { useDispatch } from "react-redux";
+import {
+  setAlbumTypeDisplay,
+  setArtistTypeDisplay,
+  setGenreTypeDisplay,
+  setSongTypeDisplay,
+} from "../../store/songDisplaySlice";
 
 export interface songPageProps {
-  header: ReactNode;
+  // header: ReactNode;
   isSong: boolean;
+  song: Song;
   songs?: Song[];
   showList?: boolean;
   songID?: string;
@@ -13,21 +21,74 @@ export interface songPageProps {
 }
 
 const SongCard: FC<songPageProps> = ({
-  header,
+  // header,
   isSong,
   songs,
   songID,
   section,
+  song,
 }) => {
   const [showList, setShowList] = useState(false);
+  const dispatch = useDispatch();
 
   const showListHandler = (showList: boolean) => {
     setShowList(!showList);
   };
   return (
     <div className="song-card-wrapper">
-      <div className="song-card">
-        {header}
+      <div
+        className="song-card"
+        onClick={() => {
+          switch (section) {
+            case "Song":
+              dispatch(
+                setSongTypeDisplay({
+                  section,
+                  song,
+                })
+              );
+              break;
+            case "Album":
+              dispatch(
+                setAlbumTypeDisplay({
+                  section,
+                  song: {
+                    album: {
+                      name: song.album,
+                      artist: song.artist,
+                    },
+                    songs: songs,
+                  },
+                })
+              );
+              break;
+            case "Artist":
+              dispatch(
+                setArtistTypeDisplay({
+                  section,
+                  song: {
+                    artist: song.artist,
+                    songs: songs,
+                  },
+                })
+              );
+              break;
+
+            case "Genre":
+              dispatch(
+                setGenreTypeDisplay({
+                  section,
+                  song: {
+                    genre: song.genre,
+                    songs: songs,
+                  },
+                })
+              );
+              break;
+          }
+        }}
+      >
+        <SongCardDetail song={song} section={section} />
         <SongCardOption
           isSong={isSong}
           songID={songID}
@@ -38,13 +99,23 @@ const SongCard: FC<songPageProps> = ({
       </div>
       {showList && (
         <ul className="songs-list-card">
-          {songs?.map((song) => (
-            <div key={song.id}>
-              <li className="song-list pointer">
-                <SongCardDetail song={song} section="song" />
+          {songs?.map((item) => (
+            <div key={item.id}>
+              <li
+                className="song-list pointer"
+                onClick={() => {
+                  dispatch(
+                    setSongTypeDisplay({
+                      section: "Song",
+                      song: item,
+                    })
+                  );
+                }}
+              >
+                <SongCardDetail song={item} section="song" />
                 <SongCardOption
                   isSong={true}
-                  songID={song.id}
+                  songID={item.id}
                   section={section}
                 />
               </li>

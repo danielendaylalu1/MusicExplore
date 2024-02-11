@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Song, Album, Artist, Genre } from "../types";
+import { Song } from "../types";
 
 export interface SongTypeDisplay {
   section: string;
@@ -7,22 +7,34 @@ export interface SongTypeDisplay {
 }
 export interface AlbumTypeDisplay {
   section: string;
-  song: Album;
+  song: {
+    album: {
+      name: string | undefined | null;
+      artist: string | undefined | null;
+    };
+    songs: Song[] | undefined | null;
+  };
 }
 export interface ArtistTypeDisplay {
   section: string;
-  song: Artist;
+  song: {
+    artist: string;
+    songs: Song[] | undefined;
+  };
 }
 export interface GenreTypeDisplay {
   section: string;
-  song: Genre;
+  song: {
+    genre: string | undefined;
+    songs: Song[] | undefined;
+  };
 }
 export interface SongDisplay {
   section: string;
   song: Song | null;
-  album: Album | null;
-  artist: Artist | null;
-  genre: Genre | null;
+  album: AlbumTypeDisplay | null;
+  artist: ArtistTypeDisplay | null;
+  genre: GenreTypeDisplay | null;
 }
 
 const initialState: SongDisplay = {
@@ -43,13 +55,14 @@ const songDisplaySlice = createSlice({
         section: action.payload.section,
         song: action.payload.song,
       };
+      console.log(state, "state========");
       return state;
     },
     setAlbumTypeDisplay(state, action: PayloadAction<AlbumTypeDisplay>) {
       state = {
         ...state,
         section: action.payload.section,
-        album: action.payload.song,
+        album: { section: action.payload.section, song: action.payload.song },
       };
       return state;
     },
@@ -57,7 +70,7 @@ const songDisplaySlice = createSlice({
       state = {
         ...state,
         section: action.payload.section,
-        artist: action.payload.song,
+        artist: { section: action.payload.section, song: action.payload.song },
       };
       return state;
     },
@@ -65,7 +78,7 @@ const songDisplaySlice = createSlice({
       state = {
         ...state,
         section: action.payload.section,
-        genre: action.payload.song,
+        genre: { section: action.payload.section, song: action.payload.song },
       };
       return state;
     },

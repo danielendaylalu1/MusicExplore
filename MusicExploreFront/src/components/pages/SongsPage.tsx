@@ -3,7 +3,7 @@ import SongCard from "../SongCard/SongCard";
 import { useDispatch, useSelector } from "react-redux";
 import { intializeSongsStart } from "../../store/songSlice";
 import { RootState } from "../../store/store";
-import SongCardDetail from "../SongCard/SongCardDetail";
+// import SongCardDetail from "../SongCard/SongCardDetail";
 import SongContainer from "../SongCard/SongContainer";
 import Alert from "@mui/material/Alert";
 import { setSearchVal } from "../../store/uiSlice";
@@ -44,10 +44,11 @@ const SongsPage = () => {
           songCard={filteredData.map((item) => (
             <SongCard
               key={item.id}
-              header={<SongCardDetail song={item} section="Song" />}
+              song={item}
+              // header={<SongCardDetail song={item} section="Song" />}
               isSong={true}
               songID={item.id}
-              section="song"
+              section="Song"
             />
           ))}
         />
