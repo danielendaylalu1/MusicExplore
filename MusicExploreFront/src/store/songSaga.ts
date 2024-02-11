@@ -39,7 +39,12 @@ import {
 } from "./songSlice";
 
 import { put, call, takeEvery, all, fork } from "redux-saga/effects";
-import { initializeSongDisplay } from "./songDisplaySlice";
+import {
+  setAlbumTypeDisplay,
+  setArtistTypeDisplay,
+  setSongTypeDisplay,
+  setGenreTypeDisplay,
+} from "./songDisplaySlice";
 import {
   loadingToggler,
   resetUpdateFormData,
@@ -58,7 +63,12 @@ function* songsGeterSaga() {
     const songs: AllSongs = yield call(getSongs);
     yield put(intializeSongs(songs));
     yield put(loadingToggler(false));
-    yield put(initializeSongDisplay(songs[0]));
+    yield put(
+      setSongTypeDisplay({
+        section: "Song",
+        song: songs[0],
+      })
+    );
   } catch (error: unknown) {
     console.log("new error log", error);
     yield put(loadingToggler(false));
@@ -347,7 +357,12 @@ function* albumGeterSaga(action: PayloadAction<string>) {
     // console.log("albums data", albums);
     yield put(intializeAlbums(albums));
     yield put(loadingToggler(false));
-    yield put(initializeSongDisplay(albums[0].songs[0]));
+    yield put(
+      setAlbumTypeDisplay({
+        section: "Album",
+        song: albums[0],
+      })
+    );
   } catch (error: unknown) {
     yield put(loadingToggler(false));
 
@@ -399,7 +414,12 @@ function* artistsGeterSaga(action: PayloadAction<string>) {
     // console.log("genres data", artists);
     yield put(intializeArtists(artists));
     yield put(loadingToggler(false));
-    yield put(initializeSongDisplay(artists[0].songs[0]));
+    yield put(
+      setArtistTypeDisplay({
+        section: "Artist",
+        song: artists[0],
+      })
+    );
   } catch (error: unknown) {
     yield put(loadingToggler(false));
 
@@ -451,7 +471,12 @@ function* genresGeterSaga(action: PayloadAction<string>) {
     // console.log("genres data", genres);
     yield put(intializeGenres(genres));
     yield put(loadingToggler(false));
-    yield put(initializeSongDisplay(genres[0].songs[0]));
+    yield put(
+      setGenreTypeDisplay({
+        section: "Genre",
+        song: genres[0],
+      })
+    );
   } catch (error: unknown) {
     yield put(loadingToggler(false));
 

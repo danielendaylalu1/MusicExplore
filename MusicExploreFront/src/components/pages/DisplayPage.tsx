@@ -17,7 +17,7 @@ const DisplayPage = () => {
         onClick={() => dispacth(setShowDisplay(false))}
       />
       <DisplayHeader />
-      <DisplayDetail song={songDisplay} />
+      <DisplayDetail songDisplayData={songDisplay} />
     </>
   );
 };

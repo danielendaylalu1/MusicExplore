@@ -271,7 +271,7 @@ div::-webkit-scrollbar {
 
 /* display section  */
 .display {
-  /* flex: 0.4; */
+  flex: 0.4;
   display: flex;
   flex-direction: column;
   gap: 4rem;
@@ -352,7 +352,7 @@ div::-webkit-scrollbar {
     transform: translate(-50%, -50%);
     max-width: 500px;
     width: 95%;
-    height: 85%;
+    max-height: 85%;
     border-radius: 1rem;
     border: 1px solid #b4b4b4;
     display: none;
