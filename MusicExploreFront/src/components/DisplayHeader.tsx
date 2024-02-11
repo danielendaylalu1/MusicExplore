@@ -1,6 +1,4 @@
-// import React from "react";
 import speakerIcon from "../assets/speaker-icon.png";
-// import { BsThreeDots } from "react-icons/bs";
 
 const DisplayHeader = () => {
   return (

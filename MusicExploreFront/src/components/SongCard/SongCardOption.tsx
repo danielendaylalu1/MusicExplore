@@ -1,7 +1,6 @@
 // import React from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { CiCircleList } from "react-icons/ci";
-// import { RootState } from "../../store/store";
 
 import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,13 +9,11 @@ import {
   intializeAlbumsStart,
   intializeArtistsStart,
   intializeGenresStart,
-  // intializeSongsStart,
+  intializeSongsStart,
 } from "../../store/songSlice";
 import { ALBUM, ARTIST, GENRE } from "../../utils";
 import { RootState } from "../../store/store";
 import { setFormShow, setUpdateFormDataStart } from "../../store/uiSlice";
-// import { getSong } from "../../services/songService";
-// import { AllSongs, Song } from "../../types";
 
 interface OptionProps {
   isSong: boolean;
@@ -33,11 +30,9 @@ const SongCardOption: FC<OptionProps> = ({
   songID,
   section,
 }) => {
-  // const songs = useSelector((state: RootState) => state.songs);
   const dispatch = useDispatch();
   const [showOptions, setShowOptions] = useState(false);
   const showForm = useSelector((state: RootState) => state.ui.showForm);
-  // const data = useSelector((state: RootState) => state.songs.songs);
 
   return (
     <>
@@ -64,20 +59,17 @@ const SongCardOption: FC<OptionProps> = ({
                 onClick={() => {
                   songID && dispatch(deleteSongStart(songID));
                   if (section === ARTIST) {
-                    // console.log(section);
-                    console.log("section", section);
+                    // console.log("section", section);
                     dispatch(intializeArtistsStart(""));
                   } else if (section === ALBUM) {
-                    // console.log(section);
-                    console.log("section", section);
+                    // console.log("section", section);
                     dispatch(intializeAlbumsStart(""));
                   } else if (section === GENRE) {
-                    // console.log(section);
-                    console.log("section", section);
+                    // console.log("section", section);
                     dispatch(intializeGenresStart(""));
                   } else {
-                    console.log("section", section);
-                    // dispatch(intializeSongsStart());
+                    // console.log("section", section);
+                    dispatch(intializeSongsStart());
                   }
                 }}
               >

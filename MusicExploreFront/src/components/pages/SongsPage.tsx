@@ -10,7 +10,6 @@ import Alert from "@mui/material/Alert";
 const SongsPage = () => {
   const status = useSelector((state: RootState) => state.ui.status);
   const searchValue = useSelector((state: RootState) => state.ui.searchValue);
-  // const [search, setSearch] = useState(searchValue);
   const data = useSelector((state: RootState) => state.songs.songs);
 
   const filteredData = data.filter((item) =>

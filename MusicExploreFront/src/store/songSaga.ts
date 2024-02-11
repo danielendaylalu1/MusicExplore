@@ -56,12 +56,11 @@ function* songsGeterSaga() {
     yield put(searchValueHandler(""));
     yield put(loadingToggler(true));
     const songs: AllSongs = yield call(getSongs);
-
-    // console.log("songs data", songs);
     yield put(intializeSongs(songs));
     yield put(loadingToggler(false));
     yield put(initializeSongDisplay(songs[0]));
   } catch (error: unknown) {
+    console.log("new error log", error);
     yield put(loadingToggler(false));
 
     if (typeof error === "object" && error !== null && "response" in error) {

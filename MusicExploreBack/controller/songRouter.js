@@ -8,22 +8,18 @@ const router = express.Router();
 router.get("/", async (_req, res, next) => {
   try {
     const songs = await Song.find({});
-    console.log(songs);
+    // console.log(songs);
     return res.status(200).json(songs);
   } catch (error) {
     console.log(error);
     next(error);
-
-    // res.status(500).json({
-    //   error: error.message,
-    // });
   }
 });
 // all albums GET api
 router.get("/albums", async (req, res, next) => {
   try {
     let { name } = req.query;
-    console.log(name, req.query);
+    // console.log(name, req.query);
     if (name === undefined && Object.keys(req.query).length > 0) {
       return res.status(400).json({
         error: "Query parametr 'name' is required",
@@ -69,16 +65,13 @@ router.get("/albums", async (req, res, next) => {
     return res.status(200).json(albums);
   } catch (error) {
     next(error);
-    // res.status(500).json({
-    //   error: error.message,
-    // });
   }
 });
 // all genres GET api
 router.get("/genres", async (req, res, next) => {
   try {
     let { name } = req.query;
-    console.log(name);
+    // console.log(name);
     if (name === undefined && Object.keys(req.query).length > 0) {
       return res.status(400).json({
         error: "Query parametr 'name' is required",
@@ -108,9 +101,6 @@ router.get("/genres", async (req, res, next) => {
     return res.status(200).json(genres);
   } catch (error) {
     next(error);
-    // res.status(500).json({
-    //   error: error.message,
-    // });
   }
 });
 // all artists GET api
@@ -122,7 +112,7 @@ router.get("/artists", async (req, res, next) => {
         error: "Query parametr 'name' is required",
       });
     }
-    console.log(name);
+    // console.log(name);
     let matchingCondition = name
       ? { $match: { artist: { $regex: new RegExp(`^${name}$`, "i") } } }
       : { $match: { artist: { $ne: "" } } };
@@ -151,9 +141,6 @@ router.get("/artists", async (req, res, next) => {
     return res.status(200).json(artists);
   } catch (error) {
     next(error);
-    // res.status(500).json({
-    //   error: error.message,
-    // });
   }
 });
 // single songs GET api
@@ -163,29 +150,23 @@ router.get("/:id", async (req, res, next) => {
     // console.log(id);
 
     const song = await Song.findById(id);
-    console.log(song);
+    // console.log(song);
     return res.status(200).json(song);
   } catch (error) {
     next(error);
-    // res.status(500).json({
-    //   error: error.message,
-    // });
   }
 });
 // song POST api
 router.post("/", async (req, res, next) => {
   try {
     const data = req.body;
-    console.log(data);
+    // console.log(data);
     const newSong = new Song(data);
     const song = await newSong.save(data);
-    console.log(song);
+    // console.log(song);
     res.status(201).json(song);
   } catch (error) {
     next(error);
-    // res.status(500).json({
-    //   error: error.message,
-    // });
   }
 });
 // song PUT api
@@ -198,13 +179,10 @@ router.put("/:id", async (req, res, next) => {
       runValidators: true,
       context: "query",
     });
-    console.log(updatedsong);
+    // console.log(updatedsong);
     res.status(201).json(updatedsong);
   } catch (error) {
     next(error);
-    // res.status(500).json({
-    //   error: error.message,
-    // });
   }
 });
 // songs delete api

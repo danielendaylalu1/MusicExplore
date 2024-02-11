@@ -9,17 +9,13 @@ app.use(cors());
 app.use(express.json());
 
 app.use((req, res, next) => {
-  req.setTimeout(5000); // sets the server-side timeout for the request
-  res.setTimeout(5000); // sets the server-side timeout for the response
+  req.setTimeout(5000);
+  res.setTimeout(5000);
   next();
 });
-// app.use((req, res, _next) => {
-//   req.setTimeout(5000);
-//   res.setTimeout(5000);
-// });
 
 const errorHandler = (err, _req, res, _next) => {
-  console.log(err);
+  // console.log(err);
   if (err.name === "ValidationError") {
     const errorMessages = Object.values(err.errors).map((e) => e.message);
     res.status(400).json({

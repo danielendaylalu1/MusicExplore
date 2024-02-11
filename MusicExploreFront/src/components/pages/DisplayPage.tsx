@@ -1,6 +1,5 @@
 // import React from "react";
 
-// import { useState } from "react";
 import DisplayDetail from "../DisplayDetail";
 import DisplayHeader from "../DisplayHeader";
 import { RootState } from "../../store/store";

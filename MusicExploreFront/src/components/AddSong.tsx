@@ -19,12 +19,9 @@ import {
   formBtn,
   formInputs,
 } from "../style/style";
-// import { useState } from "react";
-// import { useState } from "react";
 
 const AddSong = () => {
   const showForm = useSelector((state: RootState) => state.ui.showForm);
-  // const [message, setMessage] = useState("");
   const dispatch = useDispatch();
   const updateSongFormData = useSelector(
     (state: RootState) => state.ui.updateFormData

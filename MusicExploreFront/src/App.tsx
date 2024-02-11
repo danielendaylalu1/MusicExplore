@@ -3,22 +3,19 @@ import "./App.css";
 import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import SearchBar from "./components/SearchBar";
-// import DisplayHeader from "./components/DisplayHeader";
+
 import { PiWaveform } from "react-icons/pi";
-// import DisplayDetail from "./components/DisplayDetail";
+
 import AddSong from "./components/AddSong";
-// import { useSelector } from "react-redux";
-// import { RootState } from "./store/store";
+
 import DisplayPage from "./components/pages/DisplayPage";
 import { useSelector } from "react-redux";
 import { RootState } from "./store/store";
 
 function App() {
-  // const songDisplay = useSelector((state: RootState) => state.songDisplay);
-  // const status = useSelector((state:RootState)=> state.s)
   const showDisplay = useSelector((state: RootState) => state.ui.showDisplay);
 
-  console.log("app page runs---");
+  // console.log("app page runs---");
 
   return (
     <div className="app">
