@@ -1,7 +1,11 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Select, { StylesConfig } from "react-select";
-// import { RootState } from "../store/store";
+import { RootState } from "../store/store";
 import { setSearchVal } from "../store/uiSlice";
+// import { useEffect, useState } from "react";
+// import { useEffect } from "react";
+// import { useLocation } from "react-router-dom";
+// import { useEffect } from "react";
 
 interface Options {
   value: string;
@@ -29,27 +33,32 @@ interface Options {
   label: string;
 }
 
-const options: Options[] = [
-  { value: "songs", label: "All" },
-  { value: "albums", label: "Albums" },
-  { value: "genres", label: "Aenres" },
-  { value: "artists", label: "Artists" },
-  // other options...
-];
-
 const SearchOptions = () => {
-  // const searchVal = useSelector((state: RootState) => state.ui.searchVal);
+  const searchVal = useSelector((state: RootState) => state.ui.searchVal);
+  // const [ref, setRef] = useState();
   const dispatch = useDispatch();
-  const handleChane = (option) => {
-    dispatch(setSearchVal(option.value));
+  const options: Options[] = [
+    { value: "songs", label: "songs" },
+    { value: "albums", label: "albums" },
+    { value: "artists", label: "artists" },
+    { value: "genres", label: "genres" },
+
+    // other options...
+  ];
+  const handleChange = (option: Options | null) => {
+    dispatch(setSearchVal(option?.value));
   };
-  console.log(options);
+
+  const selectedOption = options.find((option) => option.value === searchVal);
+
+  console.log(selectedOption);
   return (
     <Select
       options={options}
-      defaultValue={options[0]}
+      value={selectedOption}
+      // defaultValue={selectedOption}
       styles={customStyles}
-      onChange={handleChane}
+      onChange={handleChange}
     />
   );
 };

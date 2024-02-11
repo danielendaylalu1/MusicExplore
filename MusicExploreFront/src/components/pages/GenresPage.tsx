@@ -7,6 +7,7 @@ import SongCardDetail from "../SongCard/SongCardDetail";
 import { GENRE } from "../../utils";
 import SongContainer from "../SongCard/SongContainer";
 import Alert from "@mui/material/Alert";
+import { setSearchVal } from "../../store/uiSlice";
 
 const GenresPage = () => {
   const status = useSelector((state: RootState) => state.ui.status);
@@ -20,6 +21,7 @@ const GenresPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(intializeGenresStart(""));
+    dispatch(setSearchVal("genres"));
   }, [dispatch]);
 
   if (status.error) {

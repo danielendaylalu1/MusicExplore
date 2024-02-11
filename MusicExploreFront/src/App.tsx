@@ -15,7 +15,7 @@ import { RootState } from "./store/store";
 function App() {
   const showDisplay = useSelector((state: RootState) => state.ui.showDisplay);
 
-  // console.log("app page runs---");
+  console.log("app page runs---");
 
   return (
     <div className="app">

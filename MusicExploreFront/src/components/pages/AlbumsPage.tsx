@@ -7,6 +7,7 @@ import SongCardDetail from "../SongCard/SongCardDetail";
 import { ALBUM } from "../../utils";
 import SongContainer from "../SongCard/SongContainer";
 import Alert from "@mui/material/Alert";
+import { setSearchVal } from "../../store/uiSlice";
 
 const AlbumsPage = () => {
   const status = useSelector((state: RootState) => state.ui.status);
@@ -19,6 +20,8 @@ const AlbumsPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(intializeAlbumsStart(""));
+    dispatch(setSearchVal("albums"));
+    // dispatch()
   }, [dispatch]);
 
   if (status.error) {

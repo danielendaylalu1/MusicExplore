@@ -6,19 +6,31 @@ import { RootState } from "../../store/store";
 import SongCardDetail from "../SongCard/SongCardDetail";
 import SongContainer from "../SongCard/SongContainer";
 import Alert from "@mui/material/Alert";
+import { setSearchVal } from "../../store/uiSlice";
 
 const SongsPage = () => {
   const status = useSelector((state: RootState) => state.ui.status);
   const searchValue = useSelector((state: RootState) => state.ui.searchValue);
   const data = useSelector((state: RootState) => state.songs.songs);
+  const searchVal = useSelector((state: RootState) => state.ui.searchVal);
 
-  const filteredData = data.filter((item) =>
-    item.title.toLowerCase().includes(searchValue)
-  );
+  const filteredData = data.filter((item) => {
+    if (searchVal === "albums") {
+      return item.album?.toLowerCase().includes(searchValue);
+    }
+    if (searchVal === "artists") {
+      return item.artist?.toLowerCase().includes(searchValue);
+    }
+    if (searchVal === "genres") {
+      return item.genre?.toLowerCase().includes(searchValue);
+    }
+    return item.title.toLowerCase().includes(searchValue);
+  });
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(intializeSongsStart());
+    dispatch(setSearchVal("songs"));
   }, [dispatch]);
 
   if (status.error) {

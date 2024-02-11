@@ -17,7 +17,7 @@ interface UiState {
   showForm: boolean;
   status: Status;
   showDisplay: boolean;
-  searchVal: string;
+  searchVal: string | null | undefined;
 }
 const initialState: UiState = {
   isLoading: false,
@@ -91,7 +91,7 @@ const uiSlice = createSlice({
       // console.log("state-->", state, "action-->", action.payload);
       return state;
     },
-    setSearchVal(state, action: PayloadAction<string>) {
+    setSearchVal(state, action: PayloadAction<string | null | undefined>) {
       state.searchVal = action.payload;
       console.log(state.searchVal);
       return state;
