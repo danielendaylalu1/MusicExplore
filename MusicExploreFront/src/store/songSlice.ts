@@ -55,13 +55,13 @@ const songSlice = createSlice({
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     createSongStart: (state, _action: PayloadAction<SongForCreate>) => state,
     createSong: (state, action: PayloadAction<Song>) => {
-      state.songs = state.songs.concat(action.payload);
+      state.songs.songs = state.songs.songs.concat(action.payload);
       return state;
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     updateSongStart: (state, _action: PayloadAction<SongForUpdate>) => state,
     updateSong: (state, action: PayloadAction<Song>) => {
-      state.songs = state.songs.map((song) =>
+      state.songs.songs = state.songs.songs.map((song) =>
         song.id === action.payload.id ? action.payload : song
       );
       return state;
@@ -69,7 +69,9 @@ const songSlice = createSlice({
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     deleteSongStart: (state, _action: PayloadAction<string>) => state,
     deleteSong: (state, action: PayloadAction<string>) => {
-      state.songs = state.songs.filter((song) => song.id !== action.payload);
+      state.songs.songs = state.songs.songs.filter(
+        (song) => song.id !== action.payload
+      );
       return state;
     },
   },
