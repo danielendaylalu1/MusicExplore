@@ -39,7 +39,7 @@ const AlbumsPage = () => {
               key={item.songs[0].id}
               song={item.songs[0]}
               isSong={false}
-              songs={item.songs}
+              songs={item}
               section={ALBUM}
             />
           ))}

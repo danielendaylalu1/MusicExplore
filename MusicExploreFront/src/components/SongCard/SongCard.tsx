@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import SongCardOption from "./SongCardOption";
 import SongCardDetail from "./SongCardDetail";
-import { Song } from "../../types";
+import { Song, Statistic } from "../../types";
 import { useDispatch } from "react-redux";
 import {
   setAlbumTypeDisplay,
@@ -14,7 +14,10 @@ export interface songPageProps {
   // header: ReactNode;
   isSong: boolean;
   song: Song;
-  songs?: Song[];
+  songs?: {
+    songs: Song[];
+    statistic: Statistic;
+  };
   showList?: boolean;
   songID?: string;
   section: string;
@@ -59,7 +62,8 @@ const SongCard: FC<songPageProps> = ({
                       name: song.album,
                       artist: song.artist,
                     },
-                    songs: songs,
+                    songs: songs?.songs,
+                    statistic: songs?.statistic,
                     // statistic
                   },
                 })
@@ -71,7 +75,8 @@ const SongCard: FC<songPageProps> = ({
                   section,
                   song: {
                     artist: song.artist,
-                    songs: songs,
+                    songs: songs?.songs,
+                    statistic: songs?.statistic,
                   },
                 })
               );
@@ -83,7 +88,8 @@ const SongCard: FC<songPageProps> = ({
                   section,
                   song: {
                     genre: song.genre,
-                    songs: songs,
+                    songs: songs?.songs,
+                    statistic: songs?.statistic,
                   },
                 })
               );
@@ -102,7 +108,7 @@ const SongCard: FC<songPageProps> = ({
       </div>
       {showList && (
         <ul className="songs-list-card">
-          {songs?.map((item) => (
+          {songs?.songs?.map((item) => (
             <div key={item.id}>
               <li
                 className="song-list pointer"

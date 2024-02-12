@@ -13,7 +13,7 @@ export interface AlbumTypeDisplay {
       artist: string | undefined | null;
     };
     songs: Song[] | undefined | null;
-    statistic: Statistic;
+    statistic: Statistic | undefined;
   };
 }
 export interface ArtistTypeDisplay {
@@ -21,7 +21,7 @@ export interface ArtistTypeDisplay {
   song: {
     artist: string;
     songs: Song[] | undefined;
-    statistic: Statistic;
+    statistic: Statistic | undefined;
   };
 }
 export interface GenreTypeDisplay {
@@ -29,7 +29,7 @@ export interface GenreTypeDisplay {
   song: {
     genre: string | undefined;
     songs: Song[] | undefined;
-    statistic: Statistic;
+    statistic: Statistic | undefined;
   };
 }
 export interface SongDisplay {

@@ -1,11 +1,13 @@
 // import React from "react";
 
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 // import { SongForCreate } from "../types";
 import { SongDisplay } from "../store/songDisplaySlice";
 import SongCard from "./SongCard/SongCard";
 // import SongCardDetail from "./SongCard/SongCardDetail";
 import { Song } from "../types";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 interface DisplayDetailProps {
   songDisplayData: SongDisplay;
@@ -15,11 +17,43 @@ export interface Detail {
   header: string;
   detail: string | undefined | null;
 }
+export interface initialStat {
+  songCount: number | undefined;
+  albumCount?: number | undefined;
+}
 
 const DisplayDetail: FC<DisplayDetailProps> = ({ songDisplayData }) => {
+  const { albums, artists, genres } = useSelector(
+    (state: RootState) => state.songs
+  );
   let details: Detail[] | null = null;
-  let songs: Song[] | undefined | null = [];
-  // let stats;
+  let allsongs: Song[] | undefined | null = [];
+  const initialStat: initialStat = {
+    songCount: 0,
+    albumCount: 0,
+  };
+  const [stats, setStats] = useState(initialStat);
+  useEffect(() => {
+    if (songDisplayData.section === "Album") {
+      const song = albums.albums.filter((item) => {
+        return item.album.name === songDisplayData.album?.song.album.name;
+      });
+      // stats = song[0].statistic
+      setStats(song[0].statistic);
+      console.log(song, "songgggggggggggggggg");
+    } else if (songDisplayData.section === "Artist") {
+      const song = artists.artists.filter((item) => {
+        return item.artist === songDisplayData.artist?.song.artist;
+      });
+      setStats(song[0].statistic);
+    } else if (songDisplayData.section === "Genre") {
+      const song = genres.genres.filter((item) => {
+        return item.genre === songDisplayData.genre?.song.genre;
+      });
+      setStats(song[0].statistic);
+    }
+  }, []);
+
   if (songDisplayData.section === "Song") {
     details = [
       {
@@ -50,7 +84,7 @@ const DisplayDetail: FC<DisplayDetailProps> = ({ songDisplayData }) => {
         detail: songDisplayData.album?.song.album.artist,
       },
     ];
-    songs = songDisplayData.album?.song.songs;
+    allsongs = songDisplayData.album?.song.songs;
   } else if (songDisplayData.section === "Artist") {
     details = [
       {
@@ -58,7 +92,7 @@ const DisplayDetail: FC<DisplayDetailProps> = ({ songDisplayData }) => {
         detail: songDisplayData.artist?.song.artist,
       },
     ];
-    songs = songDisplayData.artist?.song.songs;
+    allsongs = songDisplayData.artist?.song.songs;
   } else if (songDisplayData.section === "Genre") {
     details = [
       {
@@ -66,10 +100,10 @@ const DisplayDetail: FC<DisplayDetailProps> = ({ songDisplayData }) => {
         detail: songDisplayData.genre?.song.genre,
       },
     ];
-    songs = songDisplayData.genre?.song.songs;
+    allsongs = songDisplayData.genre?.song.songs;
   }
 
-  console.log(songDisplayData, "dispalyyyy");
+  console.log(songDisplayData.album?.song.statistic, "dispalyyyy");
 
   return (
     <div className="display-detail">
@@ -87,14 +121,23 @@ const DisplayDetail: FC<DisplayDetailProps> = ({ songDisplayData }) => {
             );
           })}
           <hr />
-          <div className="dispaly-detail-content">
-            <h3 className="detail-card-content-header">Total songs</h3>
-            <p className="detail-card-content-value">{3}</p>
-          </div>
+
           {songDisplayData.section !== "Song" && (
             <>
+              <div className="dispaly-detail-content">
+                <h3 className="detail-card-content-header">Total songs</h3>
+                <p className="detail-card-content-value">{stats.songCount}</p>
+              </div>
+              {songDisplayData.section === "Artist" && (
+                <div className="dispaly-detail-content">
+                  <h3 className="detail-card-content-header">Total albums</h3>
+                  <p className="detail-card-content-value">
+                    {stats?.albumCount}
+                  </p>
+                </div>
+              )}
               <h3 className="display-detail-header">songs</h3>
-              {songs?.map((item) => {
+              {allsongs?.map((item) => {
                 return (
                   <SongCard
                     key={item.id}
