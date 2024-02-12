@@ -23,6 +23,7 @@ const AlbumsPage = () => {
     dispatch(setSearchVal("albums"));
     // dispatch()
   }, [dispatch]);
+  console.log(data);
 
   if (status.error) {
     return <Alert severity="error">{status.message}</Alert>;

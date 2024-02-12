@@ -8,7 +8,8 @@ const router = express.Router();
 router.get("/", async (_req, res, next) => {
   try {
     const songs = await Song.find({});
-    // console.log(songs);
+    const statstic = await Song.countDocuments();
+    console.log("album statstic", statstic, songs);
     return res.status(200).json(songs);
   } catch (error) {
     console.log(error);
@@ -20,6 +21,9 @@ router.get("/albums", async (req, res, next) => {
   try {
     let { name } = req.query;
     // console.log(name, req.query);
+    const statstic = await Song.find({ album: { $ne: "" } }).distinct("album");
+    console.log("album statstic", statstic);
+
     if (name === undefined && Object.keys(req.query).length > 0) {
       return res.status(400).json({
         error: "Query parametr 'name' is required",
@@ -43,7 +47,10 @@ router.get("/albums", async (req, res, next) => {
       matchingCondition,
       {
         $group: {
-          _id: { name: "$album", artist: "$artist" },
+          _id: {
+            name: "$album",
+            artist: "$artist",
+          },
           songs: {
             $push: {
               id: "$_id",
@@ -55,12 +62,17 @@ router.get("/albums", async (req, res, next) => {
           },
         },
       },
+      {
+        $project: {
+          _id: 0,
+          album: "$_id",
+          songs: 1,
+          statstic: { songCount: { $size: "$songs" } },
+        },
+      },
     ]);
 
-    albums = albums.map((album) => ({
-      album: album._id,
-      songs: album.songs,
-    }));
+    console.log(albums);
 
     return res.status(200).json(albums);
   } catch (error) {
@@ -72,6 +84,8 @@ router.get("/genres", async (req, res, next) => {
   try {
     let { name } = req.query;
     // console.log(name);
+    const statstic = await Song.find({ genre: { $ne: "" } }).distinct("genre");
+    console.log("genre statstic", statstic);
     if (name === undefined && Object.keys(req.query).length > 0) {
       return res.status(400).json({
         error: "Query parametr 'name' is required",
@@ -96,8 +110,16 @@ router.get("/genres", async (req, res, next) => {
           },
         },
       },
+      {
+        $project: {
+          _id: 0,
+          genre: "$_id",
+          songs: 1,
+          statstic: { songCount: { $size: "$songs" } },
+        },
+      },
     ]);
-    genres = genres.map((genre) => ({ genre: genre._id, songs: genre.songs }));
+
     return res.status(200).json(genres);
   } catch (error) {
     next(error);
@@ -107,6 +129,8 @@ router.get("/genres", async (req, res, next) => {
 router.get("/artists", async (req, res, next) => {
   try {
     let { name } = req.query;
+
+    // console.log("artist statstic", statstic);
     if (name === undefined && Object.keys(req.query).length > 0) {
       return res.status(400).json({
         error: "Query parametr 'name' is required",
@@ -130,13 +154,26 @@ router.get("/artists", async (req, res, next) => {
               genre: "$genre",
             },
           },
+          albums: {
+            $addToSet: {
+              $cond: [{ $ne: ["$album", ""] }, "$album", "$$REMOVE"],
+            },
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          artist: "$_id",
+          songs: 1,
+          // albums: 0,
+          statstic: {
+            songCount: { $size: "$songs" },
+            albumCount: { $size: "$albums" },
+          },
         },
       },
     ]);
-    artists = artists.map((artist) => ({
-      artist: artist._id,
-      songs: artist.songs,
-    }));
 
     return res.status(200).json(artists);
   } catch (error) {

@@ -83,19 +83,24 @@ const DisplayDetail: FC<DisplayDetailProps> = ({ songDisplayData }) => {
               </div>
             );
           })}
-          {songDisplayData.section !== "Song" &&
-            songs?.map((item) => {
-              return (
-                <SongCard
-                  key={item.id}
-                  song={item}
-                  // header={<SongCardDetail song={item} section="Song" />}
-                  isSong={true}
-                  songID={item.id}
-                  section="song"
-                />
-              );
-            })}
+
+          {songDisplayData.section !== "Song" && (
+            <>
+              <h3 className="display-detail-header">songs</h3>
+              {songs?.map((item) => {
+                return (
+                  <SongCard
+                    key={item.id}
+                    song={item}
+                    // header={<SongCardDetail song={item} section="Song" />}
+                    isSong={true}
+                    songID={item.id}
+                    section="song"
+                  />
+                );
+              })}
+            </>
+          )}
         </>
       </div>
     </div>

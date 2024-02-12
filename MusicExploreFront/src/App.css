@@ -344,7 +344,7 @@ div::-webkit-scrollbar {
   display: none;
 }
 
-@media only screen and (max-width: 968px) {
+@media only screen and (max-width: 1080px) {
   .display {
     position: absolute;
     top: 50%;
