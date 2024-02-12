@@ -14,7 +14,7 @@ const GenresPage = () => {
   const searchValue = useSelector((state: RootState) => state.ui.searchValue);
   const data = useSelector((state: RootState) => state.songs.genres);
 
-  const filteredData = data.filter((item) =>
+  const filteredData = data.genres.filter((item) =>
     item.genre.toLowerCase().includes(searchValue)
   );
 
@@ -31,6 +31,7 @@ const GenresPage = () => {
   return (
     <div className="songs">
       <div className="songs-container">
+        <p>{data.count} Total Genres</p>
         <SongContainer
           songCard={filteredData.map((item) => (
             <SongCard

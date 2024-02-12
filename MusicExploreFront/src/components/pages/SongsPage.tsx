@@ -14,7 +14,7 @@ const SongsPage = () => {
   const data = useSelector((state: RootState) => state.songs.songs);
   const searchVal = useSelector((state: RootState) => state.ui.searchVal);
 
-  const filteredData = data.filter((item) => {
+  const filteredData = data.songs.filter((item) => {
     if (searchVal === "albums") {
       return item.album?.toLowerCase().includes(searchValue);
     }
@@ -40,6 +40,7 @@ const SongsPage = () => {
   return (
     <div className="songs">
       <div className="songs-container">
+        <p>{data.count} Total Songs</p>
         <SongContainer
           songCard={filteredData.map((item) => (
             <SongCard

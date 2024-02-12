@@ -19,6 +19,7 @@ export interface Detail {
 const DisplayDetail: FC<DisplayDetailProps> = ({ songDisplayData }) => {
   let details: Detail[] | null = null;
   let songs: Song[] | undefined | null = [];
+  // let stats;
   if (songDisplayData.section === "Song") {
     details = [
       {
@@ -68,6 +69,8 @@ const DisplayDetail: FC<DisplayDetailProps> = ({ songDisplayData }) => {
     songs = songDisplayData.genre?.song.songs;
   }
 
+  console.log(songDisplayData, "dispalyyyy");
+
   return (
     <div className="display-detail">
       <h3 className="display-detail-header">
@@ -83,7 +86,11 @@ const DisplayDetail: FC<DisplayDetailProps> = ({ songDisplayData }) => {
               </div>
             );
           })}
-
+          <hr />
+          <div className="dispaly-detail-content">
+            <h3 className="detail-card-content-header">Total songs</h3>
+            <p className="detail-card-content-value">{3}</p>
+          </div>
           {songDisplayData.section !== "Song" && (
             <>
               <h3 className="display-detail-header">songs</h3>

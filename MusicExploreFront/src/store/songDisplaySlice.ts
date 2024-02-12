@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Song } from "../types";
+import { Song, Statistic } from "../types";
 
 export interface SongTypeDisplay {
   section: string;
@@ -13,6 +13,7 @@ export interface AlbumTypeDisplay {
       artist: string | undefined | null;
     };
     songs: Song[] | undefined | null;
+    statistic: Statistic;
   };
 }
 export interface ArtistTypeDisplay {
@@ -20,6 +21,7 @@ export interface ArtistTypeDisplay {
   song: {
     artist: string;
     songs: Song[] | undefined;
+    statistic: Statistic;
   };
 }
 export interface GenreTypeDisplay {
@@ -27,6 +29,7 @@ export interface GenreTypeDisplay {
   song: {
     genre: string | undefined;
     songs: Song[] | undefined;
+    statistic: Statistic;
   };
 }
 export interface SongDisplay {

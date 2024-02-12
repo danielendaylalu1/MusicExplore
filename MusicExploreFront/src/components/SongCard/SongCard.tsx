@@ -34,6 +34,8 @@ const SongCard: FC<songPageProps> = ({
   const showListHandler = (showList: boolean) => {
     setShowList(!showList);
   };
+
+  console.log("new console", song, section, songs);
   return (
     <div className="song-card-wrapper">
       <div
@@ -58,6 +60,7 @@ const SongCard: FC<songPageProps> = ({
                       artist: song.artist,
                     },
                     songs: songs,
+                    // statistic
                   },
                 })
               );

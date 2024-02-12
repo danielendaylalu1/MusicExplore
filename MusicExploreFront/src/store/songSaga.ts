@@ -66,7 +66,7 @@ function* songsGeterSaga() {
     yield put(
       setSongTypeDisplay({
         section: "Song",
-        song: songs[0],
+        song: songs.songs[0],
       })
     );
   } catch (error: unknown) {
@@ -360,7 +360,7 @@ function* albumGeterSaga(action: PayloadAction<string>) {
     yield put(
       setAlbumTypeDisplay({
         section: "Album",
-        song: albums[0],
+        song: albums.albums[0],
       })
     );
   } catch (error: unknown) {
@@ -417,7 +417,7 @@ function* artistsGeterSaga(action: PayloadAction<string>) {
     yield put(
       setArtistTypeDisplay({
         section: "Artist",
-        song: artists[0],
+        song: artists.artists[0],
       })
     );
   } catch (error: unknown) {
@@ -474,7 +474,7 @@ function* genresGeterSaga(action: PayloadAction<string>) {
     yield put(
       setGenreTypeDisplay({
         section: "Genre",
-        song: genres[0],
+        song: genres.genres[0],
       })
     );
   } catch (error: unknown) {
