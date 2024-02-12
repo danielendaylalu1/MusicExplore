@@ -18,10 +18,22 @@ export interface InitialState {
 }
 
 const initialState: InitialState = {
-  songs: [],
-  artists: [],
-  albums: [],
-  genres: [],
+  songs: {
+    songs: [],
+    count: 0,
+  },
+  albums: {
+    albums: [],
+    count: 0,
+  },
+  artists: {
+    artists: [],
+    count: 0,
+  },
+  genres: {
+    genres: [],
+    count: 0,
+  },
 };
 
 const songSlice = createSlice({

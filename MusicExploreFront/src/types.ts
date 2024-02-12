@@ -6,7 +6,7 @@ export interface Song {
   album?: string;
   id: string;
 }
-export interface Statstic {
+export interface Statistic {
   songCount: number;
   albumCount?: number;
 }
@@ -21,27 +21,39 @@ export interface AlbumDetail {
 }
 export interface Songs {
   songs: Song[];
-  statstic: Statstic;
+  count: number;
 }
 export interface Album {
   album: AlbumDetail;
   songs: Song[];
-  statstic: Statstic;
+  statistic: Statistic;
+}
+export interface Albums {
+  albums: Album[];
+  count: number;
 }
 export interface Artist {
   artist: string;
   songs: Song[];
-  statstic: Statstic;
+  statistic: Statistic;
+}
+export interface Artists {
+  artists: Artist[];
+  count: number;
 }
 export interface Genre {
   genre: string;
   songs: Song[];
-  statstic: Statstic;
+  statistic: Statistic;
+}
+export interface Genres {
+  genres: Genre[];
+  count: number;
 }
 export type AllSongs = Songs;
-export type AllAlbums = Album[];
-export type AllArtists = Artist[];
-export type AllGenres = Genre[];
+export type AllAlbums = Albums;
+export type AllArtists = Artists;
+export type AllGenres = Genres;
 
 export interface Message {
   message: string;

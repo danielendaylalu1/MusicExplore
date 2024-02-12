@@ -10,6 +10,8 @@ router.get("/", async (_req, res, next) => {
     const songs = await Song.find({});
     const songsCount = await Song.countDocuments();
 
+    console.log(songs, "-------", songsCount, "-------");
+
     return res.status(200).json({
       count: songsCount,
       songs,
@@ -71,11 +73,12 @@ router.get("/albums", async (req, res, next) => {
         },
       },
     ]);
-    const songsCount = await Song.countDocuments({ album: { $ne: "" } });
+    const songsCount = await Song.distinct("album");
     console.log(albums);
+    console.log(albums, "-------", songsCount.lcountDocumentsength, "-------");
 
     return res.status(200).json({
-      count: songsCount,
+      count: songsCount.length,
       albums,
     });
   } catch (error) {
@@ -122,10 +125,12 @@ router.get("/genres", async (req, res, next) => {
         },
       },
     ]);
-    const songsCount = await Song.countDocuments({ genre: { $ne: "" } });
+    const songsCount = await Song.distinct("genre");
+
+    console.log(genres, "-------", songsCount.length, "-------");
 
     return res.status(200).json({
-      count: songsCount,
+      count: songsCount.length,
       genres,
     });
   } catch (error) {
@@ -181,10 +186,12 @@ router.get("/artists", async (req, res, next) => {
         },
       },
     ]);
-    const songsCount = await Song.countDocuments({ artist: { $ne: "" } });
+    const songsCount = await Song.distinct("artist");
+
+    console.log(artists, "-------", songsCount.length, "-------");
 
     return res.status(200).json({
-      count: songsCount,
+      count: songsCount.length,
       artists,
     });
   } catch (error) {
