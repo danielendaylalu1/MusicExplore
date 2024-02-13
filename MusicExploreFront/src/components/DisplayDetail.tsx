@@ -1,10 +1,8 @@
 // import React from "react";
 
 import { FC } from "react";
-// import { SongForCreate } from "../types";
 import { SongDisplay } from "../store/songDisplaySlice";
 import SongCard from "./SongCard/SongCard";
-// import SongCardDetail from "./SongCard/SongCardDetail";
 import { Song } from "../types";
 
 interface DisplayDetailProps {
@@ -25,7 +23,7 @@ const DisplayDetail: FC<DisplayDetailProps> = ({ songDisplayData }) => {
   let details: Detail[] | null = null;
   let allsongs: Song[] | undefined | null = [];
 
-  let stats: Stats | null = null;
+  let stats: Stats | null | undefined = null;
 
   if (songDisplayData.section === "Song") {
     details = [
@@ -58,9 +56,7 @@ const DisplayDetail: FC<DisplayDetailProps> = ({ songDisplayData }) => {
       },
     ];
     allsongs = songDisplayData.album?.song.songs;
-    stats = {
-      songCount: songDisplayData.album?.song.songs?.length,
-    };
+    stats = songDisplayData.album?.song.statistic;
   } else if (songDisplayData.section === "Artist") {
     details = [
       {
@@ -69,12 +65,7 @@ const DisplayDetail: FC<DisplayDetailProps> = ({ songDisplayData }) => {
       },
     ];
     allsongs = songDisplayData.artist?.song.songs;
-    stats = {
-      songCount: songDisplayData.artist?.song.songs?.length,
-      albumCount: songDisplayData.album?.song.songs?.filter(
-        (item) => item.album !== ""
-      ).length,
-    };
+    stats = songDisplayData.artist?.song.statistic;
   } else if (songDisplayData.section === "Genre") {
     details = [
       {
@@ -83,12 +74,8 @@ const DisplayDetail: FC<DisplayDetailProps> = ({ songDisplayData }) => {
       },
     ];
     allsongs = songDisplayData.genre?.song.songs;
-    stats = {
-      songCount: songDisplayData.genre?.song.songs?.length,
-    };
+    stats = songDisplayData.genre?.song.statistic;
   }
-
-  console.log(songDisplayData.album?.song.statistic, "dispalyyyy");
 
   return (
     <div className="display-detail">
@@ -127,7 +114,6 @@ const DisplayDetail: FC<DisplayDetailProps> = ({ songDisplayData }) => {
                   <SongCard
                     key={item.id}
                     song={item}
-                    // header={<SongCardDetail song={item} section="Song" />}
                     isSong={true}
                     songID={item.id}
                     section="song"

@@ -58,7 +58,7 @@ const songDisplaySlice = createSlice({
         section: action.payload.section,
         song: action.payload.song,
       };
-      console.log(state, "state========");
+
       return state;
     },
     setAlbumTypeDisplay(state, action: PayloadAction<AlbumTypeDisplay>) {

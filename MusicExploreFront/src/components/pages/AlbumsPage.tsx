@@ -3,7 +3,6 @@ import SongCard from "../SongCard/SongCard";
 import { useDispatch, useSelector } from "react-redux";
 import { intializeAlbumsStart } from "../../store/songSlice";
 import { RootState } from "../../store/store";
-// import SongCardDetail from "../SongCard/SongCardDetail";
 import { ALBUM } from "../../utils";
 import SongContainer from "../SongCard/SongContainer";
 import Alert from "@mui/material/Alert";
@@ -21,9 +20,7 @@ const AlbumsPage = () => {
   useEffect(() => {
     dispatch(intializeAlbumsStart(""));
     dispatch(setSearchVal("albums"));
-    // dispatch()
   }, [dispatch]);
-  console.log(data);
 
   if (status.error) {
     return <Alert severity="error">{status.message}</Alert>;
@@ -32,7 +29,7 @@ const AlbumsPage = () => {
   return (
     <div className="songs">
       <div className="songs-container">
-        <p>{data.count} Total Albums</p>
+        <p className="stat-text">{data.count} Total Albums</p>
         <SongContainer
           songCard={filteredData.map((item) => (
             <SongCard

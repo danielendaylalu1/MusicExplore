@@ -3,7 +3,6 @@ import SongCard from "../SongCard/SongCard";
 import { useDispatch, useSelector } from "react-redux";
 import { intializeSongsStart } from "../../store/songSlice";
 import { RootState } from "../../store/store";
-// import SongCardDetail from "../SongCard/SongCardDetail";
 import SongContainer from "../SongCard/SongContainer";
 import Alert from "@mui/material/Alert";
 import { setSearchVal } from "../../store/uiSlice";
@@ -40,7 +39,7 @@ const SongsPage = () => {
   return (
     <div className="songs">
       <div className="songs-container">
-        <p>{data.count} Total Songs</p>
+        <p className="stat-text">{data.count} Total Songs</p>
         <SongContainer
           songCard={filteredData.map((item) => (
             <SongCard

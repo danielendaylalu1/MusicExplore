@@ -11,7 +11,6 @@ import {
 } from "../../store/songDisplaySlice";
 
 export interface songPageProps {
-  // header: ReactNode;
   isSong: boolean;
   song: Song;
   songs?: {
@@ -24,7 +23,6 @@ export interface songPageProps {
 }
 
 const SongCard: FC<songPageProps> = ({
-  // header,
   isSong,
   songs,
   songID,
@@ -38,7 +36,6 @@ const SongCard: FC<songPageProps> = ({
     setShowList(!showList);
   };
 
-  console.log("new console", song, section, songs);
   return (
     <div className="song-card-wrapper">
       <div

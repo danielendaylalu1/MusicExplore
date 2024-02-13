@@ -65,6 +65,9 @@
 div::-webkit-scrollbar {
   width: 0 !important;
 }
+.stat-text {
+  color: #009688;
+}
 
 .app {
   background-color: rgb(202, 201, 201);

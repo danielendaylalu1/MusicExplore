@@ -15,7 +15,6 @@ app.use((req, res, next) => {
 });
 
 const errorHandler = (err, _req, res, _next) => {
-  // console.log(err);
   if (err.name === "ValidationError") {
     const errorMessages = Object.values(err.errors).map((e) => e.message);
     res.status(400).json({

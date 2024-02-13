@@ -10,14 +10,11 @@ router.get("/", async (_req, res, next) => {
     const songs = await Song.find({});
     const songsCount = await Song.countDocuments();
 
-    console.log(songs, "-------", songsCount, "-------");
-
     return res.status(200).json({
       count: songsCount,
       songs,
     });
   } catch (error) {
-    console.log(error);
     next(error);
   }
 });
@@ -69,13 +66,11 @@ router.get("/albums", async (req, res, next) => {
           _id: 0,
           album: "$_id",
           songs: 1,
-          statstic: { songCount: { $size: "$songs" } },
+          statistic: { songCount: { $size: "$songs" } },
         },
       },
     ]);
     const songsCount = await Song.distinct("album");
-    console.log(albums);
-    console.log(albums, "-------", songsCount.lcountDocumentsength, "-------");
 
     return res.status(200).json({
       count: songsCount.length,
@@ -89,9 +84,9 @@ router.get("/albums", async (req, res, next) => {
 router.get("/genres", async (req, res, next) => {
   try {
     let { name } = req.query;
-    // console.log(name);
+
     const statstic = await Song.find({ genre: { $ne: "" } }).distinct("genre");
-    console.log("genre statstic", statstic);
+
     if (name === undefined && Object.keys(req.query).length > 0) {
       return res.status(400).json({
         error: "Query parametr 'name' is required",
@@ -121,13 +116,11 @@ router.get("/genres", async (req, res, next) => {
           _id: 0,
           genre: "$_id",
           songs: 1,
-          statstic: { songCount: { $size: "$songs" } },
+          statistic: { songCount: { $size: "$songs" } },
         },
       },
     ]);
     const songsCount = await Song.distinct("genre");
-
-    console.log(genres, "-------", songsCount.length, "-------");
 
     return res.status(200).json({
       count: songsCount.length,
@@ -142,13 +135,12 @@ router.get("/artists", async (req, res, next) => {
   try {
     let { name } = req.query;
 
-    // console.log("artist statstic", statstic);
     if (name === undefined && Object.keys(req.query).length > 0) {
       return res.status(400).json({
         error: "Query parametr 'name' is required",
       });
     }
-    // console.log(name);
+
     let matchingCondition = name
       ? { $match: { artist: { $regex: new RegExp(`^${name}$`, "i") } } }
       : { $match: { artist: { $ne: "" } } };
@@ -179,7 +171,7 @@ router.get("/artists", async (req, res, next) => {
           artist: "$_id",
           songs: 1,
           // albums: 0,
-          statstic: {
+          statistic: {
             songCount: { $size: "$songs" },
             albumCount: { $size: "$albums" },
           },
@@ -187,8 +179,6 @@ router.get("/artists", async (req, res, next) => {
       },
     ]);
     const songsCount = await Song.distinct("artist");
-
-    console.log(artists, "-------", songsCount.length, "-------");
 
     return res.status(200).json({
       count: songsCount.length,
@@ -202,10 +192,9 @@ router.get("/artists", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    // console.log(id);
 
     const song = await Song.findById(id);
-    // console.log(song);
+
     return res.status(200).json(song);
   } catch (error) {
     next(error);
@@ -215,10 +204,10 @@ router.get("/:id", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const data = req.body;
-    // console.log(data);
+
     const newSong = new Song(data);
     const song = await newSong.save(data);
-    // console.log(song);
+
     res.status(201).json(song);
   } catch (error) {
     next(error);
@@ -234,7 +223,7 @@ router.put("/:id", async (req, res, next) => {
       runValidators: true,
       context: "query",
     });
-    // console.log(updatedsong);
+
     res.status(201).json(updatedsong);
   } catch (error) {
     next(error);
@@ -250,9 +239,6 @@ router.delete("/:id", async (req, res, next) => {
     });
   } catch (error) {
     next(error);
-    // res.status(500).json({
-    //   error: error.message,
-    // });
   }
 });
 

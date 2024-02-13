@@ -83,17 +83,14 @@ const uiSlice = createSlice({
     },
     setStatus(state, action: PayloadAction<Status>) {
       state = { ...state, status: action.payload };
-      // console.log("state-->", state, "action-->", action.payload);
       return state;
     },
     setShowDisplay(state, action: PayloadAction<boolean>) {
       state = { ...state, showDisplay: action.payload };
-      // console.log("state-->", state, "action-->", action.payload);
       return state;
     },
     setSearchVal(state, action: PayloadAction<string | null | undefined>) {
       state.searchVal = action.payload;
-      console.log(state.searchVal);
       return state;
     },
   },

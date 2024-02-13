@@ -59,16 +59,12 @@ const SongCardOption: FC<OptionProps> = ({
                 onClick={() => {
                   songID && dispatch(deleteSongStart(songID));
                   if (section === ARTIST) {
-                    // console.log("section", section);
                     dispatch(intializeArtistsStart(""));
                   } else if (section === ALBUM) {
-                    // console.log("section", section);
                     dispatch(intializeAlbumsStart(""));
                   } else if (section === GENRE) {
-                    // console.log("section", section);
                     dispatch(intializeGenresStart(""));
                   } else {
-                    // console.log("section", section);
                     dispatch(intializeSongsStart());
                   }
                 }}
@@ -82,7 +78,6 @@ const SongCardOption: FC<OptionProps> = ({
         <div
           className="song-card-right"
           onClick={() => {
-            // console.log("clicked");
             if (setShowList && showList !== undefined) {
               setShowList(showList);
             }

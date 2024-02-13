@@ -9,7 +9,13 @@ import {
   setUpdateFormData,
 } from "../store/uiSlice";
 
-import { createSongStart, updateSongStart } from "../store/songSlice";
+import {
+  createSongStart,
+  intializeAlbumsStart,
+  intializeArtistsStart,
+  intializeGenresStart,
+  updateSongStart,
+} from "../store/songSlice";
 import Spinner from "./Spinner";
 
 import {
@@ -19,6 +25,7 @@ import {
   formBtn,
   formInputs,
 } from "../style/style";
+import { useLocation } from "react-router-dom";
 
 const AddSong = () => {
   const showForm = useSelector((state: RootState) => state.ui.showForm);
@@ -28,9 +35,25 @@ const AddSong = () => {
   );
   const status = useSelector((state: RootState) => state.ui.status);
   const isLoading = useSelector((state: RootState) => state.ui.isLoading);
-  // console.log("add page");
 
-  // const [stat, setStat] = useState(status);
+  const path = useLocation();
+
+  const refresher = () => {
+    switch (path.pathname) {
+      case "/artists":
+        dispatch(intializeArtistsStart(""));
+        break;
+      case "/albums":
+        dispatch(intializeAlbumsStart(""));
+        break;
+      case "/genres":
+        dispatch(intializeGenresStart(""));
+        break;
+    }
+  };
+
+  // console.log(path);
+
   if (!showForm) {
     return;
   }
@@ -67,6 +90,8 @@ const AddSong = () => {
           setTimeout(() => {
             dispatch(setStatus({ error: false, message: "" }));
           }, 5000);
+
+          refresher();
         }}
       >
         <h3 css={addSongHeader}>Add a Song</h3>

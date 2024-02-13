@@ -2,7 +2,6 @@
 import { FC } from "react";
 import speakerIcon from "../../assets/speaker-icon.png";
 import { useDispatch } from "react-redux";
-// import { initializeSongDisplay } from "../../store/songDisplaySlice";
 import { Song } from "../../types";
 import { ARTIST, GENRE, ALBUM } from "../../utils";
 import { setShowDisplay } from "../../store/uiSlice";
@@ -18,7 +17,6 @@ const SongCardDetail: FC<DetailProps> = ({ song, section }) => {
     <div
       className="song-card-left"
       onClick={() => {
-        // dispatch(initializeSongDisplay(song));
         dispatch(setShowDisplay(true));
       }}
     >
