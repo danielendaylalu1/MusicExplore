@@ -14,6 +14,8 @@ const GenresPage = () => {
   const searchValue = useSelector((state: RootState) => state.ui.searchValue);
   const data = useSelector((state: RootState) => state.songs.genres);
 
+  console.log(data);
+
   const filteredData = data.genres.filter((item) =>
     item.genre.toLowerCase().includes(searchValue)
   );

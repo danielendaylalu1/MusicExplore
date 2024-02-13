@@ -6,6 +6,7 @@ import { RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { IoMdClose } from "react-icons/io";
 import { setShowDisplay } from "../../store/uiSlice";
+import { displayCloseIcon, pointer } from "../../style/style";
 
 const DisplayPage = () => {
   const songDisplay = useSelector((state: RootState) => state.songDisplay);
@@ -14,6 +15,7 @@ const DisplayPage = () => {
     <>
       <IoMdClose
         className="display-close-icon pointer"
+        css={[displayCloseIcon, pointer]}
         onClick={() => dispacth(setShowDisplay(false))}
       />
       <DisplayHeader />

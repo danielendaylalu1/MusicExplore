@@ -9,6 +9,7 @@ import { CiMenuFries } from "react-icons/ci";
 import { useState } from "react";
 import {
   bgWhite,
+  displayTopIcon,
   navBarAddIcon,
   navBarHeaderStyle,
   navBarMenuIcon,
@@ -72,7 +73,7 @@ const Navbar = () => {
         />
 
         <PiWaveform
-          className="display-top-icon"
+          css={displayTopIcon}
           onClick={() => {
             setShowMobileNav(false);
           }}
