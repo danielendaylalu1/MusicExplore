@@ -8,6 +8,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use((req, res, next) => {
+  req.setTimeout(20000);
+  res.setTimeout(20000);
+  next();
+});
+
 const errorHandler = (err, _req, res, _next) => {
   if (err.name === "ValidationError") {
     const errorMessages = Object.values(err.errors).map((e) => e.message);

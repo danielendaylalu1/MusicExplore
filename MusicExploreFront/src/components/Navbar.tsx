@@ -73,7 +73,7 @@ const Navbar = () => {
         />
 
         <PiWaveform
-          css={displayTopIcon}
+          css={[displayTopIcon, pointer]}
           onClick={() => {
             setShowMobileNav(false);
           }}
