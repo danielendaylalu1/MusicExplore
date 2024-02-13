@@ -19,7 +19,6 @@ const config = {
 };
 
 export const getSongs = async (): Promise<AllSongs> => {
-  // try {
   const songs = await axios.get(`${BASE_URI}`);
   return songs.data;
 };
