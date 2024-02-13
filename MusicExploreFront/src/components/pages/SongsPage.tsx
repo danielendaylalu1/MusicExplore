@@ -6,6 +6,7 @@ import { RootState } from "../../store/store";
 import SongContainer from "../SongCard/SongContainer";
 import Alert from "@mui/material/Alert";
 import { setSearchVal } from "../../store/uiSlice";
+import Songs from "../Songs";
 
 const SongsPage = () => {
   const status = useSelector((state: RootState) => state.ui.status);
@@ -37,9 +38,9 @@ const SongsPage = () => {
   }
 
   return (
-    <div className="songs">
-      <div className="songs-container">
-        <p className="stat-text">{data.count} Total Songs</p>
+    <Songs
+      count={`${data.count} Total Songs`}
+      songContainer={
         <SongContainer
           songCard={filteredData.map((item) => (
             <SongCard
@@ -51,8 +52,8 @@ const SongsPage = () => {
             />
           ))}
         />
-      </div>
-    </div>
+      }
+    />
   );
 };
 

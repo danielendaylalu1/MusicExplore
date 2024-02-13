@@ -5,6 +5,17 @@ import { useDispatch } from "react-redux";
 import { Song } from "../../types";
 import { ARTIST, GENRE, ALBUM } from "../../utils";
 import { setShowDisplay } from "../../store/uiSlice";
+import {
+  itemHover,
+  pointer,
+  songCardArtist,
+  songCardDetail,
+  songCardIcon,
+  songCardLeft,
+  songCardTitle,
+  songCardType,
+  textGreen,
+} from "../../style/style";
 
 interface DetailProps {
   song: Song;
@@ -15,14 +26,14 @@ const SongCardDetail: FC<DetailProps> = ({ song, section }) => {
   const dispatch = useDispatch();
   return (
     <div
-      className="song-card-left"
+      css={songCardLeft}
       onClick={() => {
         dispatch(setShowDisplay(true));
       }}
     >
-      <img src={speakerIcon} alt="speaker icon" className="song-card-icon" />
-      <div className="song-card-detail">
-        <h3 className="song-card-title item-hover pointer">
+      <img src={speakerIcon} alt="speaker icon" css={songCardIcon} />
+      <div css={songCardDetail}>
+        <h3 css={[songCardTitle, pointer, itemHover]}>
           {section === GENRE
             ? song.genre
             : section === ARTIST
@@ -31,7 +42,7 @@ const SongCardDetail: FC<DetailProps> = ({ song, section }) => {
             ? song.album
             : song.title}
         </h3>
-        <p className="song-card-artist item-hover pointer">
+        <p css={[songCardArtist, pointer, itemHover]}>
           {section === GENRE
             ? song.genre
             : section === ARTIST
@@ -40,7 +51,7 @@ const SongCardDetail: FC<DetailProps> = ({ song, section }) => {
             ? song.artist
             : song.artist}
         </p>
-        <p className="song-card-type pointer">{section}</p>
+        <p css={[songCardType, pointer, textGreen]}>{section}</p>
       </div>
     </div>
   );

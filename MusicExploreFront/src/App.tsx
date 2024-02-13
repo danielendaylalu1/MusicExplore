@@ -8,16 +8,23 @@ import AddSong from "./components/AddSong";
 import DisplayPage from "./components/pages/DisplayPage";
 import { useSelector } from "react-redux";
 import { RootState } from "./store/store";
+import {
+  appStyle,
+  bgLightGray,
+  containerStyle,
+  outletStyle,
+  p3,
+} from "./style/style";
 
 function App() {
   const showDisplay = useSelector((state: RootState) => state.ui.showDisplay);
 
   return (
-    <div className="app">
+    <div css={appStyle}>
       <AddSong />
-      <div className="container">
+      <div css={containerStyle}>
         <Navbar />
-        <div className="outlet p-3 bg-light-gray">
+        <div css={[outletStyle, p3, bgLightGray]}>
           <SearchBar />
           <Outlet />
         </div>

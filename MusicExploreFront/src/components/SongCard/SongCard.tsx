@@ -9,6 +9,14 @@ import {
   setGenreTypeDisplay,
   setSongTypeDisplay,
 } from "../../store/songDisplaySlice";
+import {
+  pointer,
+  songCardStyle,
+  songCardWrapper,
+  songList,
+  songsListCard,
+  w100,
+} from "../../style/style";
 
 export interface songPageProps {
   isSong: boolean;
@@ -37,9 +45,9 @@ const SongCard: FC<songPageProps> = ({
   };
 
   return (
-    <div className="song-card-wrapper">
+    <div css={[songCardWrapper, w100]}>
       <div
-        className="song-card"
+        css={[songCardStyle, w100]}
         onClick={() => {
           switch (section) {
             case "Song":
@@ -104,11 +112,11 @@ const SongCard: FC<songPageProps> = ({
         />
       </div>
       {showList && (
-        <ul className="songs-list-card">
+        <ul css={[songsListCard, w100]}>
           {songs?.songs?.map((item) => (
             <div key={item.id}>
               <li
-                className="song-list pointer"
+                css={[songList, pointer]}
                 onClick={() => {
                   dispatch(
                     setSongTypeDisplay({

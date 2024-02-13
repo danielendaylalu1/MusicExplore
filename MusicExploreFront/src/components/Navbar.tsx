@@ -7,6 +7,22 @@ import { RootState } from "../store/store";
 import { setFormShow, setStatus } from "../store/uiSlice";
 import { CiMenuFries } from "react-icons/ci";
 import { useState } from "react";
+import {
+  bgWhite,
+  navBarAddIcon,
+  navBarHeaderStyle,
+  navBarMenuIcon,
+  navBarMobile,
+  navBarStyle,
+  navItems,
+  navLink,
+  p3,
+  pointer,
+  showNavBarMobile,
+  textGreen,
+} from "../style/style";
+
+// import { bgWhite, navBarStyle } from "../style/style";
 
 const Navbar = () => {
   const navLinks = ["Albums", "Artists", "Genres"];
@@ -14,9 +30,9 @@ const Navbar = () => {
   const dispacth = useDispatch();
   const [showMobileNav, setShowMobileNav] = useState(false);
   return (
-    <div className="navbar p-3 bg-white">
+    <div css={[navBarStyle, p3, bgWhite]}>
       <Link
-        className="navbar-header"
+        css={[navBarHeaderStyle, textGreen]}
         to="/"
         onClick={() => {
           setShowMobileNav(false);
@@ -24,12 +40,12 @@ const Navbar = () => {
       >
         Music_Explore
       </Link>
-      <div className={`nav-other ${showMobileNav && "show-nav-other"}`}>
-        <ul className="nav-items">
+      <div css={[navBarMobile, showMobileNav && showNavBarMobile]}>
+        <ul css={[navItems]}>
           {navLinks.map((link) => (
             <Link
               to={link.toLowerCase()}
-              className="nav-link"
+              css={navLink}
               key={link}
               onClick={() => {
                 setShowMobileNav(false);
@@ -41,7 +57,7 @@ const Navbar = () => {
         </ul>
 
         <IoAddOutline
-          className="navbar-add-icon pointer"
+          css={navBarAddIcon}
           onClick={() => {
             setShowMobileNav(false);
 
@@ -63,7 +79,7 @@ const Navbar = () => {
         />
       </div>
       <CiMenuFries
-        className="navbar-menu-icon pointer"
+        css={[navBarMenuIcon, pointer]}
         onClick={() => {
           setShowMobileNav(!showMobileNav);
         }}

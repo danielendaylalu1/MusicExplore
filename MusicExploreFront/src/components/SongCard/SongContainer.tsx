@@ -2,6 +2,7 @@ import { FC, ReactNode } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import Spinner from "../Spinner";
+import { songsContainerStyle, w100 } from "../../style/style";
 
 interface SongContainerProps {
   songCard: ReactNode;
@@ -10,7 +11,7 @@ interface SongContainerProps {
 const SongContainer: FC<SongContainerProps> = ({ songCard }) => {
   const isLoading = useSelector((state: RootState) => state.ui.isLoading);
   return (
-    <div className="songs-container">
+    <div css={[songsContainerStyle, w100]}>
       {isLoading ? <Spinner /> : <>{songCard}</>}
     </div>
   );

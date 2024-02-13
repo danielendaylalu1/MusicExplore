@@ -14,6 +14,14 @@ import {
 import { ALBUM, ARTIST, GENRE } from "../../utils";
 import { RootState } from "../../store/store";
 import { setFormShow, setUpdateFormDataStart } from "../../store/uiSlice";
+import {
+  pointer,
+  songCardDelete,
+  songCardEdit,
+  songCardEditors,
+  songCardRight,
+  songCardUpdate,
+} from "../../style/style";
 
 interface OptionProps {
   isSong: boolean;
@@ -37,16 +45,16 @@ const SongCardOption: FC<OptionProps> = ({
   return (
     <>
       {isSong ? (
-        <div className="song-card-right">
+        <div css={songCardRight}>
           <BsThreeDots
-            className="three-dots pointer"
+            style={{ fontSize: "1.5rem" }}
             onClick={() => setShowOptions(!showOptions)}
           />
 
           {showOptions && (
-            <div className="song-card-editors">
+            <div css={songCardEditors}>
               <p
-                className="song-card-edit song-card-update pointer"
+                css={[songCardEdit, songCardUpdate, pointer]}
                 onClick={() => {
                   songID && dispatch(setUpdateFormDataStart(songID));
                   dispatch(setFormShow(!showForm));
@@ -55,7 +63,7 @@ const SongCardOption: FC<OptionProps> = ({
                 Edit
               </p>
               <p
-                className="song-card-edit song-card-delete pointer"
+                css={[songCardEdit, songCardDelete, pointer]}
                 onClick={() => {
                   songID && dispatch(deleteSongStart(songID));
                   if (section === ARTIST) {
@@ -76,14 +84,14 @@ const SongCardOption: FC<OptionProps> = ({
         </div>
       ) : (
         <div
-          className="song-card-right"
+          css={songCardRight}
           onClick={() => {
             if (setShowList && showList !== undefined) {
               setShowList(showList);
             }
           }}
         >
-          <p className="song-card-edit song-card-update pointer">
+          <p css={[songCardEdit, songCardUpdate, pointer]}>
             List <CiCircleList style={{ fontSize: "1.25rem" }} />
           </p>
         </div>
