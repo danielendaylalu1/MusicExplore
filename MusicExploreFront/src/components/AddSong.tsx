@@ -52,8 +52,6 @@ const AddSong = () => {
     }
   };
 
-  // console.log(path);
-
   if (!showForm) {
     return;
   }
