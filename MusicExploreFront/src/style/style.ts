@@ -271,6 +271,107 @@ export const songCardDelete = css({
   color: "#c62828",
 });
 
+export const displayStyle = css({
+  flex: "0.4",
+  display: "flex",
+  flexDirection: "column",
+  gap: "4rem",
+  overflowY: "scroll",
+  "@media (max-width: 1080px)": {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    maxWidth: "500px",
+    width: "95%",
+    maxHeight: "85%",
+    borderRadius: "1rem",
+    border: "1px solid #b4b4b4",
+    display: "none",
+  },
+});
+
+export const showDisplayStyle = css({
+  "@media (max-width: 1080px)": {
+    display: "flex",
+    flexDirection: "column",
+    gap: "1.5rem",
+  },
+});
+export const displayIconWrapper = css({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+});
+export const displayTopIcon = css({
+  fontSize: "2.5rem !important",
+  color: "#009688",
+});
+
+export const displayCardLeft = css({
+  display: "flex",
+  alignItems: "center",
+  gap: "1.5rem",
+});
+export const displayCardIcon = css({
+  width: "90px",
+  height: "90px",
+});
+export const displayCardDetail = css({
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.5rem",
+});
+export const displayCardTitle = css({
+  fontSize: "1.65rem",
+});
+export const displayCardArtist = css({
+  fontSize: "1.25rem",
+});
+export const displayCardType = css({
+  fontSize: "1rem",
+  color: "#009688",
+});
+export const displayDetail = css({
+  boxShadow:
+    "rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px",
+  padding: "1.5rem",
+  borderRadius: "0.5rem",
+  display: "flex",
+  flexDirection: "column",
+  gap: "2rem",
+});
+export const displayDetailHeader = css({
+  color: "#009688",
+});
+export const displayDetailCard = css({
+  display: "flex",
+  flexDirection: "column",
+  gap: "2rem",
+});
+export const displayDetailContent = css({
+  display: "flex",
+  justifyContent: "space-between",
+  padding: "0 0.5rem",
+});
+export const detailCardContentHeader = css({
+  fontSize: "1rem",
+});
+export const detailCardContentValue = css({
+  fontSize: "0.8rem",
+});
+export const displayCloseIcon = css({
+  display: "none",
+  "@media (max-width: 1080px)": {
+    display: "block",
+    position: "absolute",
+    right: "1rem",
+    top: "1rem",
+    fontSize: "1.5rem !important",
+    color: "#c62828",
+  },
+});
+
 export const addSongStyle = css({
   display: "flex",
   flexDirection: "column",
@@ -285,6 +386,7 @@ export const addSongStyle = css({
   left: "0",
   zIndex: "100",
 });
+
 export const addSongHeader = css({
   color: "#009688",
   textAlign: "center",

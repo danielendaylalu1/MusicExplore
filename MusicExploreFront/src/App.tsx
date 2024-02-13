@@ -11,9 +11,14 @@ import { RootState } from "./store/store";
 import {
   appStyle,
   bgLightGray,
+  bgWhite,
   containerStyle,
+  displayIconWrapper,
+  displayStyle,
+  displayTopIcon,
   outletStyle,
   p3,
+  showDisplayStyle,
 } from "./style/style";
 
 function App() {
@@ -28,11 +33,9 @@ function App() {
           <SearchBar />
           <Outlet />
         </div>
-        <div
-          className={`display p-3 bg-white ${showDisplay && "show-display"}`}
-        >
-          <div className="display-icon-wrapper">
-            <PiWaveform className="display-top-icon" />
+        <div css={[displayStyle, p3, bgWhite, showDisplay && showDisplayStyle]}>
+          <div css={displayIconWrapper}>
+            <PiWaveform css={displayTopIcon} />
           </div>
           <DisplayPage />
         </div>

@@ -4,6 +4,14 @@ import { FC } from "react";
 import { SongDisplay } from "../store/songDisplaySlice";
 import SongCard from "./SongCard/SongCard";
 import { Song } from "../types";
+import {
+  detailCardContentHeader,
+  detailCardContentValue,
+  displayDetail,
+  displayDetailCard,
+  displayDetailContent,
+  displayDetailHeader,
+} from "../style/style";
 
 interface DisplayDetailProps {
   songDisplayData: SongDisplay;
@@ -78,17 +86,15 @@ const DisplayDetail: FC<DisplayDetailProps> = ({ songDisplayData }) => {
   }
 
   return (
-    <div className="display-detail">
-      <h3 className="display-detail-header">
-        {songDisplayData.section} Detail
-      </h3>
-      <div className="display-detail-card">
+    <div css={displayDetail}>
+      <h3 css={displayDetailHeader}>{songDisplayData.section} Detail</h3>
+      <div css={displayDetailCard}>
         <>
           {details?.map((item) => {
             return (
-              <div className="dispaly-detail-content" key={item.header}>
-                <h3 className="detail-card-content-header">{item.header}</h3>
-                <p className="detail-card-content-value">{item.detail}</p>
+              <div key={item.header} css={displayDetailContent}>
+                <h3 css={detailCardContentHeader}>{item.header}</h3>
+                <p css={detailCardContentValue}>{item.detail}</p>
               </div>
             );
           })}
@@ -96,19 +102,17 @@ const DisplayDetail: FC<DisplayDetailProps> = ({ songDisplayData }) => {
 
           {songDisplayData.section !== "Song" && (
             <>
-              <div className="dispaly-detail-content">
-                <h3 className="detail-card-content-header">Total songs</h3>
-                <p className="detail-card-content-value">{stats?.songCount}</p>
+              <div css={displayDetailContent}>
+                <h3 css={detailCardContentHeader}>Total songs</h3>
+                <p css={detailCardContentValue}>{stats?.songCount}</p>
               </div>
               {songDisplayData.section === "Artist" && (
-                <div className="dispaly-detail-content">
-                  <h3 className="detail-card-content-header">Total albums</h3>
-                  <p className="detail-card-content-value">
-                    {stats?.albumCount}
-                  </p>
+                <div css={displayDetailContent}>
+                  <h3 css={detailCardContentHeader}>Total albums</h3>
+                  <p css={detailCardContentValue}>{stats?.albumCount}</p>
                 </div>
               )}
-              <h3 className="display-detail-header">songs</h3>
+              <h3 css={displayDetailHeader}>songs</h3>
               {allsongs?.map((item) => {
                 return (
                   <SongCard
