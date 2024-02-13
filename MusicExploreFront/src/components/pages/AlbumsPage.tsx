@@ -15,7 +15,7 @@ const AlbumsPage = () => {
   const data = useSelector((state: RootState) => state.songs.albums);
 
   const filteredData = data.albums.filter((item) =>
-    item.album.name.toLowerCase().includes(searchValue)
+    item.album.name.toLowerCase().includes(searchValue.toLowerCase())
   );
   const dispatch = useDispatch();
   useEffect(() => {

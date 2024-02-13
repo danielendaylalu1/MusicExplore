@@ -16,15 +16,15 @@ const SongsPage = () => {
 
   const filteredData = data.songs.filter((item) => {
     if (searchVal === "albums") {
-      return item.album?.toLowerCase().includes(searchValue);
+      return item.album?.toLowerCase().includes(searchValue.toLowerCase());
     }
     if (searchVal === "artists") {
-      return item.artist?.toLowerCase().includes(searchValue);
+      return item.artist?.toLowerCase().includes(searchValue.toLowerCase());
     }
     if (searchVal === "genres") {
-      return item.genre?.toLowerCase().includes(searchValue);
+      return item.genre?.toLowerCase().includes(searchValue.toLowerCase());
     }
-    return item.title.toLowerCase().includes(searchValue);
+    return item.title.toLowerCase().includes(searchValue.toLowerCase());
   });
 
   const dispatch = useDispatch();

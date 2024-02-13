@@ -15,7 +15,7 @@ const ArtistsPage = () => {
   const data = useSelector((state: RootState) => state.songs.artists);
 
   const filteredData = data.artists.filter((item) =>
-    item.artist.toLowerCase().includes(searchValue)
+    item.artist.toLowerCase().includes(searchValue.toLowerCase())
   );
   const dispatch = useDispatch();
   useEffect(() => {
