@@ -1,4 +1,4 @@
-import { createPortal } from "react-dom";
+import { createPortal, render } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import Alert from "@mui/material/Alert";
@@ -89,8 +89,9 @@ const AddSong = () => {
           setTimeout(() => {
             dispatch(setStatus({ error: false, message: "" }));
           }, 5000);
-
-          refresher();
+          setTimeout(() => {
+            refresher();
+          }, 1000);
         }}
       >
         <h3 css={addSongHeader}>Add a Song</h3>
