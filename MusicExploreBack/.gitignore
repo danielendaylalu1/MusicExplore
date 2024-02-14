@@ -27,5 +27,3 @@ env
 *.sln
 *.sw?
 
-# related to docker
-docker-compose.yml
