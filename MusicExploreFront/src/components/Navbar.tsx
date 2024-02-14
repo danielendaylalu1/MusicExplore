@@ -58,7 +58,7 @@ const Navbar = () => {
         </ul>
 
         <IoAddOutline
-          css={navBarAddIcon}
+          css={[navBarAddIcon, pointer]}
           onClick={() => {
             setShowMobileNav(false);
 
