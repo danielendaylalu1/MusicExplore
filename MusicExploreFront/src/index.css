@@ -15,3 +15,9 @@ a {
   color: rgb(24, 24, 24);
   text-decoration: none;
 }
+a,
+a:active,
+a:focus {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  outline: none !important;
+}

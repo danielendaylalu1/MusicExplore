@@ -46,27 +46,9 @@
   }
 }
 /* spinner------- end  */
-.p-3 {
-  padding: 3rem 2rem;
-}
 
-.bg-white {
-  background-color: #fff;
-}
-.bg-light-gray {
-  background-color: #f0f0f0;
-}
-.item-hover:hover {
-  border-bottom: 1px solid #009688;
-}
-.pointer {
-  cursor: pointer;
-}
 div::-webkit-scrollbar {
   width: 0 !important;
-}
-.stat-text {
-  color: #009688;
 }
 
 /* display section  */

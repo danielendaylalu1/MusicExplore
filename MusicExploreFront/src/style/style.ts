@@ -254,6 +254,7 @@ export const songCardEditors = css({
   border: "1px solid #b4b4b4",
   borderRadius: "0.5rem",
   zIndex: "10",
+  right: "0",
 });
 
 export const songCardEdit = css({

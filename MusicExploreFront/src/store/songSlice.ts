@@ -81,6 +81,7 @@ const songSlice = createSlice({
     createSongStart: (state, _action: PayloadAction<CreateSong>) => state,
     createSong: (state, action: PayloadAction<Song>) => {
       state.songs.songs = state.songs.songs.concat(action.payload);
+      state.songs.count = state.songs.count + 1;
       return state;
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -97,6 +98,7 @@ const songSlice = createSlice({
       state.songs.songs = state.songs.songs.filter(
         (song) => song.id !== action.payload
       );
+      state.songs.count = state.songs.count - 1;
       return state;
     },
   },
