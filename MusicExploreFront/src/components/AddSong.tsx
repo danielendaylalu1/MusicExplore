@@ -9,13 +9,7 @@ import {
   setUpdateFormData,
 } from "../store/uiSlice";
 
-import {
-  createSongStart,
-  intializeAlbumsStart,
-  intializeArtistsStart,
-  intializeGenresStart,
-  updateSongStart,
-} from "../store/songSlice";
+import { createSongStart, updateSongStart } from "../store/songSlice";
 import Spinner from "./Spinner";
 
 import {
@@ -37,20 +31,19 @@ const AddSong = () => {
   const isLoading = useSelector((state: RootState) => state.ui.isLoading);
 
   const path = useLocation();
+  let route: string = "";
 
-  const refresher = () => {
-    switch (path.pathname) {
-      case "/artists":
-        dispatch(intializeArtistsStart(""));
-        break;
-      case "/albums":
-        dispatch(intializeAlbumsStart(""));
-        break;
-      case "/genres":
-        dispatch(intializeGenresStart(""));
-        break;
-    }
-  };
+  switch (path.pathname) {
+    case "/artists":
+      route = "artists";
+      break;
+    case "/albums":
+      route = "albums";
+      break;
+    case "/genres":
+      route = "genres";
+      break;
+  }
 
   if (!showForm) {
     return;
@@ -71,26 +64,29 @@ const AddSong = () => {
           if (updateSongFormData.type === "Create") {
             dispatch(
               createSongStart({
-                title: updateSongFormData.song.title,
-                artist: updateSongFormData.song.artist,
-                album: updateSongFormData.song.album,
-                genre: updateSongFormData.song.genre,
+                songForCreate: {
+                  title: updateSongFormData.song.title,
+                  artist: updateSongFormData.song.artist,
+                  album: updateSongFormData.song.album,
+                  genre: updateSongFormData.song.genre,
+                },
+                route: route,
               })
             );
           } else {
             dispatch(
               updateSongStart({
-                song: updateSongFormData.song,
-                id: updateSongFormData.song.id,
+                songForUpdate: {
+                  song: updateSongFormData.song,
+                  id: updateSongFormData.song.id,
+                },
+                route: route,
               })
             );
           }
           setTimeout(() => {
             dispatch(setStatus({ error: false, message: "" }));
           }, 5000);
-          setTimeout(() => {
-            refresher();
-          }, 1000);
         }}
       >
         <h3 css={addSongHeader}>Add a Song</h3>

@@ -17,8 +17,6 @@ import {
   AllSongs,
   AxiosErrorWithResponse,
   Song,
-  SongForCreate,
-  SongForUpdate,
 } from "../types";
 import {
   intializeSongs,
@@ -35,6 +33,9 @@ import {
   createSongStart,
   updateSongStart,
   deleteSongStart,
+  CreateSong,
+  UpdateSong,
+  DeleteSong,
 } from "./songSlice";
 
 import { put, call, takeEvery, all, fork } from "redux-saga/effects";
@@ -152,14 +153,19 @@ export function* singleSongSaga() {
 }
 
 // songCreater saga -------- songCreater saga
-function* songCreatorSaga(action: PayloadAction<SongForCreate>) {
+function* songCreatorSaga(action: PayloadAction<CreateSong>) {
   try {
-    yield put(setStatus({ error: false, message: "" }));
-    yield put(loadingToggler(true));
-    const song: Song = yield call(() => create(action.payload));
+    // yield put(setStatus({ error: false, message: "" }));
+    const song: Song = yield call(() => create(action.payload.songForCreate));
     yield put(createSong(song));
-
-    yield put(loadingToggler(false));
+    if (action.payload.route === "albums") {
+      yield put(intializeAlbumsStart(""));
+    } else if (action.payload.route === "artists") {
+      yield put(intializeArtistsStart(""));
+    } else if (action.payload.route === "genres") {
+      yield put(intializeGenresStart(""));
+    }
+    // yield put(loadingToggler(false));
     yield put(
       setStatus({
         error: false,
@@ -210,14 +216,21 @@ export function* songCreateSaga() {
 }
 
 // songUpdater saga -------- songUpdater saga
-function* songUpdaterSaga(action: PayloadAction<SongForUpdate>) {
+function* songUpdaterSaga(action: PayloadAction<UpdateSong>) {
   try {
-    yield put(setStatus({ error: false, message: "" }));
-    yield put(loadingToggler(true));
-    const song: Song = yield call(() => update(action.payload));
+    // yield put(setStatus({ error: false, message: "" }));
+    // yield put(loadingToggler(true));
+    const song: Song = yield call(() => update(action.payload.songForUpdate));
 
     yield put(updateSong(song));
-    yield put(loadingToggler(false));
+    if (action.payload.route === "albums") {
+      yield put(intializeAlbumsStart(""));
+    } else if (action.payload.route === "artists") {
+      yield put(intializeArtistsStart(""));
+    } else if (action.payload.route === "genres") {
+      yield put(intializeGenresStart(""));
+    }
+    // yield put(loadingToggler(false));
     yield put(
       setStatus({ error: false, message: "Song updated successfully" })
     );
@@ -264,13 +277,19 @@ export function* songUpdateSaga() {
 }
 
 // songDeleter saga -------- songDeleter saga
-function* songDeletorSaga(action: PayloadAction<string>) {
+function* songDeletorSaga(action: PayloadAction<DeleteSong>) {
   try {
-    yield put(setStatus({ error: false, message: "" }));
+    // yield put(setStatus({ error: false, message: "" }));
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    yield call(() => deleter(action.payload));
-
-    yield put(deleteSong(action.payload));
+    yield call(() => deleter(action.payload.songId));
+    yield put(deleteSong(action.payload.songId));
+    if (action.payload.route === "albums") {
+      yield put(intializeAlbumsStart(""));
+    } else if (action.payload.route === "artists") {
+      yield put(intializeArtistsStart(""));
+    } else if (action.payload.route === "genres") {
+      yield put(intializeGenresStart(""));
+    }
   } catch (error: unknown) {
     yield put(loadingToggler(false));
 

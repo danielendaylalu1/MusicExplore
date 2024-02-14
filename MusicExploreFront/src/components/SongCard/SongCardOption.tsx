@@ -4,14 +4,8 @@ import { CiCircleList } from "react-icons/ci";
 
 import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteSongStart,
-  intializeAlbumsStart,
-  intializeArtistsStart,
-  intializeGenresStart,
-  intializeSongsStart,
-} from "../../store/songSlice";
-import { ALBUM, ARTIST, GENRE } from "../../utils";
+import { deleteSongStart } from "../../store/songSlice";
+
 import { RootState } from "../../store/store";
 import { setFormShow, setUpdateFormDataStart } from "../../store/uiSlice";
 import {
@@ -22,6 +16,8 @@ import {
   songCardRight,
   songCardUpdate,
 } from "../../style/style";
+
+import { useLocation } from "react-router-dom";
 
 interface OptionProps {
   isSong: boolean;
@@ -36,11 +32,25 @@ const SongCardOption: FC<OptionProps> = ({
   showList,
   setShowList,
   songID,
-  section,
 }) => {
   const dispatch = useDispatch();
   const [showOptions, setShowOptions] = useState(false);
   const showForm = useSelector((state: RootState) => state.ui.showForm);
+
+  const path = useLocation();
+  let route: string = "";
+
+  switch (path.pathname) {
+    case "/artists":
+      route = "artists";
+      break;
+    case "/albums":
+      route = "albums";
+      break;
+    case "/genres":
+      route = "genres";
+      break;
+  }
 
   return (
     <>
@@ -65,18 +75,13 @@ const SongCardOption: FC<OptionProps> = ({
               <p
                 css={[songCardEdit, songCardDelete, pointer]}
                 onClick={() => {
-                  songID && dispatch(deleteSongStart(songID));
-                  setTimeout(() => {
-                    if (section === ARTIST) {
-                      dispatch(intializeArtistsStart(""));
-                    } else if (section === ALBUM) {
-                      dispatch(intializeAlbumsStart(""));
-                    } else if (section === GENRE) {
-                      dispatch(intializeGenresStart(""));
-                    } else {
-                      dispatch(intializeSongsStart());
-                    }
-                  }, 1000);
+                  songID &&
+                    dispatch(
+                      deleteSongStart({
+                        songId: songID,
+                        route: route,
+                      })
+                    );
                 }}
               >
                 Delete

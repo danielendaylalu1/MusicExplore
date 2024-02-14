@@ -17,6 +17,19 @@ export interface InitialState {
   genres: AllGenres;
 }
 
+export interface CreateSong {
+  songForCreate: SongForCreate;
+  route: string;
+}
+export interface UpdateSong {
+  songForUpdate: SongForUpdate;
+  route: string;
+}
+export interface DeleteSong {
+  songId: string;
+  route: string;
+}
+
 const initialState: InitialState = {
   songs: {
     songs: [],
@@ -65,13 +78,13 @@ const songSlice = createSlice({
     },
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    createSongStart: (state, _action: PayloadAction<SongForCreate>) => state,
+    createSongStart: (state, _action: PayloadAction<CreateSong>) => state,
     createSong: (state, action: PayloadAction<Song>) => {
       state.songs.songs = state.songs.songs.concat(action.payload);
       return state;
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    updateSongStart: (state, _action: PayloadAction<SongForUpdate>) => state,
+    updateSongStart: (state, _action: PayloadAction<UpdateSong>) => state,
     updateSong: (state, action: PayloadAction<Song>) => {
       state.songs.songs = state.songs.songs.map((song) =>
         song.id === action.payload.id ? action.payload : song
@@ -79,7 +92,7 @@ const songSlice = createSlice({
       return state;
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    deleteSongStart: (state, _action: PayloadAction<string>) => state,
+    deleteSongStart: (state, _action: PayloadAction<DeleteSong>) => state,
     deleteSong: (state, action: PayloadAction<string>) => {
       state.songs.songs = state.songs.songs.filter(
         (song) => song.id !== action.payload
