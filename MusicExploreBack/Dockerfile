@@ -1,10 +1,12 @@
 FROM node:slim
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
-RUN npm install 
+RUN npm install
 
-COPY . ./
+COPY . .
 
-CMD [ "npm", "start" ]
+EXPOSE 3000
+
+CMD ["npm", "start"]

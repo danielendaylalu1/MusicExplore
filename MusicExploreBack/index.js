@@ -48,7 +48,7 @@ const errorHandler = (err, _req, res, _next) => {
 app.use("/songs", songRouter);
 app.use(errorHandler);
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, (req, res) => {
   console.log(`server started on port ${PORT}`);

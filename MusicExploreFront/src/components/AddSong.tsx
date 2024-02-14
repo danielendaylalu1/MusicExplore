@@ -89,7 +89,9 @@ const AddSong = () => {
           }, 5000);
         }}
       >
-        <h3 css={addSongHeader}>Add a Song</h3>
+        <h3 css={addSongHeader}>
+          {updateSongFormData.type === "Create" ? "Add song" : "Update song"}
+        </h3>
         {status.error
           ? status.message !== "" && (
               <Alert severity="error">{status.message}</Alert>
