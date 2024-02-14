@@ -253,7 +253,7 @@ export const songCardEditors = css({
   padding: "0.25rem 1rem",
   border: "1px solid #b4b4b4",
   borderRadius: "0.5rem",
-  zIndex: "10",
+  zIndex: "2",
   right: "0",
 });
 
@@ -297,6 +297,7 @@ export const showDisplayStyle = css({
     display: "flex",
     flexDirection: "column",
     gap: "1.5rem",
+    zIndex: "4",
   },
 });
 export const displayIconWrapper = css({
