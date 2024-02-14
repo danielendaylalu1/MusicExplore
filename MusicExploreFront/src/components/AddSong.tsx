@@ -1,4 +1,4 @@
-import { createPortal, render } from "react-dom";
+import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import Alert from "@mui/material/Alert";
