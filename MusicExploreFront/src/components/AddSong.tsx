@@ -37,7 +37,6 @@ const AddSong = () => {
   const isLoading = useSelector((state: RootState) => state.ui.isLoading);
 
   const path = useLocation();
-  console.log(path.pathname);
 
   const refresher = () => {
     switch (path.pathname) {

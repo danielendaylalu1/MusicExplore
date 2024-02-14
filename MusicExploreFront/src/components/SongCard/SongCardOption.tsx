@@ -66,15 +66,17 @@ const SongCardOption: FC<OptionProps> = ({
                 css={[songCardEdit, songCardDelete, pointer]}
                 onClick={() => {
                   songID && dispatch(deleteSongStart(songID));
-                  if (section === ARTIST) {
-                    dispatch(intializeArtistsStart(""));
-                  } else if (section === ALBUM) {
-                    dispatch(intializeAlbumsStart(""));
-                  } else if (section === GENRE) {
-                    dispatch(intializeGenresStart(""));
-                  } else {
-                    dispatch(intializeSongsStart());
-                  }
+                  setTimeout(() => {
+                    if (section === ARTIST) {
+                      dispatch(intializeArtistsStart(""));
+                    } else if (section === ALBUM) {
+                      dispatch(intializeAlbumsStart(""));
+                    } else if (section === GENRE) {
+                      dispatch(intializeGenresStart(""));
+                    } else {
+                      dispatch(intializeSongsStart());
+                    }
+                  }, 1000);
                 }}
               >
                 Delete
