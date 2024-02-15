@@ -115,6 +115,7 @@ export const navBarAddIcon = {
   backgroundColor: "#009688",
   padding: "0.45rem",
   borderRadius: "100%",
+  alignSelf: "center",
 };
 
 export const navBarMenuIcon = css({
