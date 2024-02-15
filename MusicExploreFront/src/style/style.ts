@@ -83,7 +83,7 @@ export const navBarMobile = css({
     top: "4rem",
     left: "-100%",
     width: "100%",
-    height: "70vh",
+    height: "90vh",
     zIndex: "10000",
     padding: "3rem",
     opacity: "0.9",
@@ -116,6 +116,9 @@ export const navBarAddIcon = {
   padding: "0.45rem",
   borderRadius: "100%",
   alignSelf: "center",
+  "@media (max-width:660px)": {
+    alignSelf: "flex-start",
+  },
 };
 
 export const navBarMenuIcon = css({
