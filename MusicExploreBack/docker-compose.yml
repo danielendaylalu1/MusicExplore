@@ -1,7 +1,13 @@
+version: "3"
 services:
   music-explore:
     build: .
     ports:
       - "3000:3000"
+    image: music-explore-back:v1.0
     environment:
-      - DATABASE_URL=${DATABASE_URL}
+      - DATABASE_URL=mongodb://mongo:27017/songs
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"

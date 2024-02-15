@@ -7,7 +7,9 @@ RUN npm install
 
 COPY . .
 
-
 EXPOSE 3000
 
-CMD ["npm", "start"]
+ENV DOCKER=true
+ENV DATABASE_URL=mongodb://mongo:27017/songs
+
+CMD [ "npm", "start" ]

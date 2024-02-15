@@ -37,7 +37,15 @@ const errorHandler = (err, _req, res, _next) => {
 
 (async () => {
   try {
-    const url = process.env.DATABASE_URL;
+    let url = "mongodb://localhost:27017/songs";
+
+    if (process.env.DATABASE_URL) {
+      url = process.env.DATABASE_URL;
+    }
+    if (process.env.DOCKER) {
+      url = "mongodb://mongo:27017/songs";
+    }
+
     await mongoose.connect(url);
     console.log("connected to database");
   } catch (error) {
