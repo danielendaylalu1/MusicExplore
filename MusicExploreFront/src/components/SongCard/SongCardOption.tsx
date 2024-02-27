@@ -59,6 +59,7 @@ const SongCardOption: FC<OptionProps> = ({
           <BsThreeDots
             style={{ fontSize: "1.5rem" }}
             onClick={() => setShowOptions(!showOptions)}
+            css={pointer}
           />
 
           {showOptions && (
