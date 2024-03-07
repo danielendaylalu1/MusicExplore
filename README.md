@@ -2,7 +2,7 @@
 
 This is a test project for Addis Software.
 
-You can view the live version here.
+You can view the live version here https://music-explore-eight.vercel.app/.
 
 ## Tools Used
 
