@@ -26,3 +26,15 @@ Express.js
 Mongoose
 
 MongoDb Atlas
+
+Run the Project
+
+clone the Repository
+
+cd MusicBackend 
+
+run "docker-compose up"
+
+cd MusicFrontend
+
+run "npm run dev"
