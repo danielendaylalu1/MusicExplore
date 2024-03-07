@@ -28,4 +28,5 @@ To run the project, follow these steps:
 2. Navigate to the backend directory with `cd MusicBackend`.
 3. Run the backend with Docker using the command `docker-compose up`.
 4. Navigate to the frontend directory with `cd MusicFrontend`.
-5. Start the frontend with the command `npm run dev`.
+5. Download dependencies with `npm i`.
+6. Start the frontend with the command `npm run dev`.
