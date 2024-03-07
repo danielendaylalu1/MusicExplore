@@ -10,7 +10,7 @@ import {
   SongForCreate,
 } from "../types";
 
-const BASE_URI = import.meta.env.VITE_BASE_URI;
+const BASE_URI = import.meta.env.VITE_BASE_URI || "http://localhost:3000/songs";
 
 const config = {
   headers: {

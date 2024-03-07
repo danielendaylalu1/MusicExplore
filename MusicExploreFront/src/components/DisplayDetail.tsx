@@ -56,33 +56,33 @@ const DisplayDetail: FC<DisplayDetailProps> = ({ songDisplayData }) => {
     details = [
       {
         header: "Album",
-        detail: songDisplayData.album?.song.album.name,
+        detail: songDisplayData.album?.song?.album.name,
       },
       {
         header: "Artist",
-        detail: songDisplayData.album?.song.album.artist,
+        detail: songDisplayData.album?.song?.album.artist,
       },
     ];
-    allsongs = songDisplayData.album?.song.songs;
-    stats = songDisplayData.album?.song.statistic;
+    allsongs = songDisplayData.album?.song?.songs;
+    stats = songDisplayData.album?.song?.statistic;
   } else if (songDisplayData.section === "Artist") {
     details = [
       {
         header: "Artist",
-        detail: songDisplayData.artist?.song.artist,
+        detail: songDisplayData.artist?.song?.artist,
       },
     ];
-    allsongs = songDisplayData.artist?.song.songs;
-    stats = songDisplayData.artist?.song.statistic;
+    allsongs = songDisplayData.artist?.song?.songs;
+    stats = songDisplayData.artist?.song?.statistic;
   } else if (songDisplayData.section === "Genre") {
     details = [
       {
         header: "Genre",
-        detail: songDisplayData.genre?.song.genre,
+        detail: songDisplayData.genre?.song?.genre,
       },
     ];
-    allsongs = songDisplayData.genre?.song.songs;
-    stats = songDisplayData.genre?.song.statistic;
+    allsongs = songDisplayData.genre?.song?.songs;
+    stats = songDisplayData.genre?.song?.statistic;
   }
 
   return (

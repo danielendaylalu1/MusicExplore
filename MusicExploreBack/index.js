@@ -41,10 +41,13 @@ const errorHandler = (err, _req, res, _next) => {
 
     if (process.env.DATABASE_URL) {
       url = process.env.DATABASE_URL;
+      // console.log("mongo atlas", url);
     }
     if (process.env.DOCKER_COMPOSE) {
       url = "mongodb://mongo:27017/songs";
+      // console.log("docker", url);
     }
+    // console.log("local", url);
 
     await mongoose.connect(url);
     console.log("connected to database");
