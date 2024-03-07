@@ -1,40 +1,31 @@
-Music-Explore
+# Music-Explore
 
-Test Project for Addis Software
+This is a test project for Addis Software.
 
-Live link https://music-explore-eight.vercel.app/
+You can view the live version here.
 
-Tools Used Frontend
+## Tools Used
 
-React
+### Frontend
 
+- **React**
+- **Redux-Toolkit**
+- **Redux-Saga**
+- **Emotion**
+- **React Router v6**
 
-Redux-Toolkit
+### Backend
 
-Redux-Saga
+- **Express.js**
+- **Mongoose**
+- **MongoDB Atlas**
 
-Emotion
+## Run the Project
 
-React Router v6
+To run the project, follow these steps:
 
-
-Tools Used Bckend
-
-
-Express.js
-
-Mongoose
-
-MongoDb Atlas
-
-Run the Project
-
-clone the Repository
-
-cd MusicBackend 
-
-run "docker-compose up"
-
-cd MusicFrontend
-
-run "npm run dev"
+1. Clone the repository.
+2. Navigate to the backend directory with `cd MusicBackend`.
+3. Run the backend with Docker using the command `docker-compose up`.
+4. Navigate to the frontend directory with `cd MusicFrontend`.
+5. Start the frontend with the command `npm run dev`.
