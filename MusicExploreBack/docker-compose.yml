@@ -6,7 +6,7 @@ services:
       - "3000:3000"
     image: music-explore-back:v1.0
     environment:
-      - DATABASE_URL=mongodb://mongo:27017/songs
+      - DOCKER_COMPOSE=true
   mongo:
     image: mongo
     ports:

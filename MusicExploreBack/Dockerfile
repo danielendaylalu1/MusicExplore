@@ -9,7 +9,4 @@ COPY . .
 
 EXPOSE 3000
 
-ENV DOCKER=true
-ENV DATABASE_URL=mongodb://mongo:27017/songs
-
 CMD [ "npm", "start" ]
