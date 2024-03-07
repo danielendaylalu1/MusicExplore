@@ -14,7 +14,7 @@ const ArtistsPage = () => {
   const status = useSelector((state: RootState) => state.ui.status);
   const data = useSelector((state: RootState) => state.songs.artists);
 
-  const filteredData = data.artists.filter((item) =>
+  const filteredData = data.artists?.filter((item) =>
     item.artist.toLowerCase().includes(searchValue.toLowerCase())
   );
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const ArtistsPage = () => {
       count={`${data.count} Total Artists`}
       songContainer={
         <SongContainer
-          songCard={filteredData.map((item) => (
+          songCard={filteredData?.map((item) => (
             <SongCard
               key={item.artist}
               song={item.songs[0]}

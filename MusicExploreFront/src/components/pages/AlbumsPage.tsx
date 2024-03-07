@@ -14,7 +14,7 @@ const AlbumsPage = () => {
   const searchValue = useSelector((state: RootState) => state.ui.searchValue);
   const data = useSelector((state: RootState) => state.songs.albums);
 
-  const filteredData = data.albums.filter((item) =>
+  const filteredData = data.albums?.filter((item) =>
     item.album.name.toLowerCase().includes(searchValue.toLowerCase())
   );
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const AlbumsPage = () => {
       count={`${data.count} Total albums`}
       songContainer={
         <SongContainer
-          songCard={filteredData.map((item) => (
+          songCard={filteredData?.map((item) => (
             <SongCard
               key={item.songs[0].id}
               song={item.songs[0]}
